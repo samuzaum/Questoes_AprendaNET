@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sistemas Numéricos - Lista — Problema 6</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 360px; text-align: center; margin: 0 4px; }
+    .option { display: block; margin: 10px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+    .hint { display:inline-block; margin-left:8px; font-size: 0.95em; color:#444; }
+    .hint button { background:#eee; border:1px solid #ccc; border-radius:6px; padding:2px 8px; cursor:pointer; }
+    .hint span { display:none; margin-left:6px; }
+    .imgwrap img { max-width: 520px; border: 1px solid #ddd; border-radius: 6px; padding: 4px; }
+    small { color:#444; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao5.html">🔹 Ir para Problema 5</a> |
+  <a href="questao7.html">🔹 Ir para Problema 7</a>
+</p>
+
+<h3>Problema 6:</h3>
+
+<p><strong>1 – ENEM 2024</strong></p>
+<p><strong>Questão 1</strong></p>
+
+<p>
+  Muitas pessoas ainda se espantam com o fato de um passageiro sair ileso de um acidente de carro enquanto o veículo sofre grande deformação. Os carros modernos contam com zonas de deformação (<em>crumple zones</em>) justamente para aumentar a segurança dos ocupantes, além de cintos e airbags.
+</p>
+
+<!-- Imagem do enunciado (deixe comentado mesmo sem o arquivo) -->
+<!-- <div class="imgwrap"><img src="crumple_zone_car.png" alt="Carro com zonas de deformação, airbags e cintos de segurança"></div> -->
+
+<p>
+  Considerando o carro, seus ocupantes e o muro como um sistema isolado, o <em>crumple zone</em> aumenta a segurança dos passageiros porque, durante uma colisão, a deformação da estrutura do carro
+</p>
+
+<!-- SOLUÇÃO (INTERATIVA) ANTES DAS ALTERNATIVAS -->
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) O que acontece com o <u>tempo de interação</u> colisão-carro quando há zona deformável?</strong><br>
+  <input onchange="checkWord(this,'aumenta|maior tempo|tempo de colisao maior|colisao dura mais')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>Lembre do “amassar”: o contato se prolonga.</span>
+  </span>
+</p>
+
+<p><strong>2) Usando <em>Impulso</em> (F·Δt = Δp), se Δp do sistema é o mesmo, o que ocorre com a <u>força média</u> ao aumentar Δt?</strong><br>
+  <input onchange="checkWord(this,'diminui|menor forca media|reduz a forca nos ocupantes')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>Com a mesma variação de momento, aumentar o tempo reduz F.</span>
+  </span>
+</p>
+
+<p><strong>3) Parte da energia do movimento se transforma em quê, por causa da deformação controlada da carroceria?</strong><br>
+  <input onchange="checkWord(this,'deformacao|deformação da carroceria|calor e som|energia de deformacao|absorvida pela estrutura')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>A energia não some: é convertida em deformação (e dissipações) fora dos ocupantes.</span>
+  </span>
+</p>
+
+<!-- ALTERNATIVAS -->
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')">
+  <span class="circle">A</span>
+  aciona os airbags do veículo.
+</div>
+<div class="option" onclick="checkAnswer('B')">
+  <span class="circle">B</span>
+  absorve a energia cinética do sistema.
+</div>
+<div class="option" onclick="checkAnswer('C')">
+  <span class="circle">C</span>
+  consome a quantidade de movimento do sistema.
+</div>
+<div class="option" onclick="checkAnswer('D')">
+  <span class="circle">D</span>
+  cria uma barreira de proteção para seus ocupantes.
+</div>
+<div class="option" onclick="checkAnswer('E')">
+  <span class="circle">E</span>
+  diminui a velocidade do centro de massa do sistema.
+</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // normalização para ignorar acentos
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+
+  // verificação por palavras-chave
+  function checkWord(input, patterns) {
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')) {
+      input.nextElementSibling.remove();
+    }
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    const ok = opts.some(p => text.includes(p));
+    if (ok) {
+      input.style.backgroundColor = "#c6f6c6";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">✅</span>');
+    } else {
+      input.style.backgroundColor = "#fdd";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">❌</span>');
+    }
+  }
+
+  // botão Mostrar dica
+  function toggleHint(btn){
+    const span = btn.nextElementSibling;
+    span.style.display = span.style.display === 'inline' ? 'none' : 'inline';
+  }
+
+  // gabarito
+  function checkAnswer(letter) {
+    const correct = 'B';
+    const message = document.getElementById('message');
+    if (letter === correct) {
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

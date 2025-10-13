@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Física — Lista 03 — Problema 19 (ENEM)</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 260px; text-align: center; margin: 0 4px; }
+    .option { display: block; margin: 10px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao18.html">🔹 Ir para Problema 18</a> |
+  <a href="questao20.html">🔹 Ir para Problema 20</a>
+</p>
+
+<h3>Problema 19:</h3>
+
+<p><strong>119. (ENEM 2010)</strong></p>
+
+<p>
+Observe a tabela técnica de uma torneira elétrica.  
+O modelo de maior potência foi projetado para 220 V, mas foi conectado por engano a uma rede de 127 V,  
+operando em sua potência máxima (5,5 kW em 220 V).  
+Qual será a potência aproximada dissipada pela torneira?
+</p>
+
+<p><img src="extra_29.png" alt="Tabela técnica da torneira elétrica"></p>
+
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) Mantendo a resistência constante, a potência varia com:</strong>  
+  <input onchange="checkWord(this,'v^2|quadrado da tensao|lei de ohm')">  
+</p>
+
+<p><strong>2) Fórmula aplicada: </strong>  
+  <input onchange="checkWord(this,'p\'=p*(127/220)^2|5,5*(127/220)^2|1830 w|1,83 kw')">  
+</p>
+
+<p><strong>3) O valor aproximado obtido é:</strong>  
+  <input onchange="checkWord(this,'1830 w|1,83 kw|aprox 1830')">  
+</p>
+
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')">
+  <span class="circle">A</span>
+  1.830 W
+</div>
+<div class="option" onclick="checkAnswer('B')">
+  <span class="circle">B</span>
+  2.500 W
+</div>
+<div class="option" onclick="checkAnswer('C')">
+  <span class="circle">C</span>
+  3.200 W
+</div>
+<div class="option" onclick="checkAnswer('D')">
+  <span class="circle">D</span>
+  4.300 W
+</div>
+<div class="option" onclick="checkAnswer('E')">
+  <span class="circle">E</span>
+  5.500 W
+</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // normalização para tolerar acentos/maiúsculas
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+  function paint(input, ok){
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')){
+      input.nextElementSibling.remove();
+    }
+    input.style.backgroundColor = ok ? "#c6f6c6" : "#fdd";
+    input.insertAdjacentHTML("afterend", `<span class="feedback">${ok ? '✅' : '❌'}</span>`);
+  }
+  function checkWord(input, patterns){
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    paint(input, opts.some(p => text.includes(p)));
+  }
+
+  // gabarito
+  function checkAnswer(letter){
+    const correct = 'A';
+    const message = document.getElementById('message');
+    if (letter === correct){
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

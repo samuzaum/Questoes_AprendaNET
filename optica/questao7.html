@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Óptica — Lista 03 — Problema 7 (ENEM 2012)</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 220px; text-align: center; margin: 0 4px; }
+    .option { display: block; margin: 10px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+    small { color: #444; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao6.html">🔹 Ir para Problema 6</a> |
+  <a href="questao8.html">🔹 Ir para Problema 8</a>
+</p>
+
+<h3>Problema 7 (ENEM 2012):</h3>
+
+<p>
+Alguns povos indígenas pescam com lanças. Para fisgar um peixe em um lago de águas
+tranquilas, o índio deve mirar <em>abaixo</em> da posição em que enxerga o peixe.
+Por quê?
+</p>
+
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) Fenômeno na passagem água → ar:</strong></p>
+<p>
+  Nome do fenômeno:
+  <input placeholder="digite aqui" onchange="checkWord(this,'refracao|refração')">
+  <small>(palavra única)</small>
+</p>
+
+<p><strong>2) Qual meio é mais “refringente” (índice maior)?</strong></p>
+<p>
+  <input placeholder="digite aqui" onchange="checkWord(this,'agua|água')">
+  <small>(água ou ar?)</small>
+</p>
+
+<p><strong>3) Regra de desvio ao ir do mais para o menos refringente:</strong></p>
+<p>
+  O raio emergente se
+  <input placeholder="digite aqui" onchange="checkWord(this,'afasta|afasta-se')">
+  da normal.
+</p>
+
+<p><strong>4) Posição aparente do peixe (vista de fora):</strong></p>
+<p>
+  A imagem do peixe parece estar
+  <input placeholder="digite aqui" onchange="checkWord(this,'acima|mais acima')">
+  da posição real. Por isso o pescador deve mirar
+  <input placeholder="digite aqui" onchange="checkWord(this,'abaixo|mais abaixo')">.
+</p>
+
+<hr>
+
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')">
+  <span class="circle">A</span>
+  refletidos pelo peixe não descrevem trajetória retilínea no interior da água.
+</div>
+<div class="option" onclick="checkAnswer('B')">
+  <span class="circle">B</span>
+  emitidos pelos olhos do índio desviam sua trajetória quando passam do ar para a água.
+</div>
+<div class="option" onclick="checkAnswer('C')">
+  <span class="circle">C</span>
+  espalhados pelo peixe são refletidos pela superfície da água.
+</div>
+<div class="option" onclick="checkAnswer('D')">
+  <span class="circle">D</span>
+  emitidos pelos olhos do índio são espalhados pela superfície da água.
+</div>
+<div class="option" onclick="checkAnswer('E')">
+  <span class="circle">E</span>
+  refletidos pelo peixe desviam sua trajetória quando passam da água para o ar.
+</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // ===== helpers (sem revelar gabarito na interface) =====
+  function paint(input, ok){
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')){
+      input.nextElementSibling.remove();
+    }
+    input.style.backgroundColor = ok ? "#c6f6c6" : "#fdd";
+    input.insertAdjacentHTML("afterend", `<span class="feedback">${ok ? '✅' : '❌'}</span>`);
+  }
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+  function checkWord(input, patterns){
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    paint(input, opts.some(p => text.includes(p)));
+  }
+
+  // gabarito fica só aqui no JS
+  function checkAnswer(letter){
+    const correct = 'E';
+    const message = document.getElementById('message');
+    if (letter === correct){
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

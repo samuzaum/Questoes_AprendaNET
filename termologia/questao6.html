@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Física — Lista 03 — Problema 6 (ENEM)</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 360px; text-align: center; margin: 0 4px; }
+    .option { display: block; margin: 10px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+    figure { margin: 12px 0; }
+    figcaption { font-size: .95rem; font-style: italic; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao5.html">🔹 Ir para Problema 5</a> |
+  <a href="questao7.html">🔹 Ir para Problema 7</a>
+</p>
+
+<h3>Problema 6:</h3>
+
+<p><strong>138. (Enem 2013)</strong></p>
+
+<p>
+Em um experimento foram utilizadas duas garrafas PET, uma pintada de branco e a outra de preto, acopladas cada uma a um termômetro.  
+No ponto médio da distância entre as garrafas, foi mantida acesa, durante alguns minutos, uma lâmpada incandescente.  
+Em seguida a lâmpada foi desligada. Durante o experimento, foram monitoradas as temperaturas das garrafas:  
+(a) enquanto a lâmpada permanecia acesa e  
+(b) após a lâmpada ser desligada e atingirem equilíbrio térmico com o ambiente.  
+</p>
+
+<figure>
+  <img src="extra_41.png" alt="Enunciado/ilustração da questão 98">
+</figure>
+
+<p>
+A taxa de variação da temperatura da garrafa preta, em comparação à da branca, durante todo experimento, foi
+</p>
+
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) O que acontece durante o aquecimento com a garrafa preta?</strong>
+  <input onchange="checkWord(this,'a preta aquece mais rapido|maior absorcao de radiacao')">
+</p>
+
+<p><strong>2) O que acontece durante o resfriamento com a garrafa preta?</strong>
+  <input onchange="checkWord(this,'a preta esfria mais rapido|maior emissao de radiacao')">
+</p>
+
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')">
+  <span class="circle">A</span>
+  Igual no aquecimento e igual no resfriamento.
+</div>
+<div class="option" onclick="checkAnswer('B')">
+  <span class="circle">B</span>
+  Maior no aquecimento e igual no resfriamento.
+</div>
+<div class="option" onclick="checkAnswer('C')">
+  <span class="circle">C</span>
+  Maior no aquecimento e maior no resfriamento.
+</div>
+<div class="option" onclick="checkAnswer('D')">
+  <span class="circle">D</span>
+  Menor no aquecimento e igual no resfriamento.
+</div>
+<div class="option" onclick="checkAnswer('E')">
+  <span class="circle">E</span>
+  Menor no aquecimento e menor no resfriamento.
+</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // normalização para tolerar acentos/maiúsculas
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+  function paint(input, ok){
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')){
+      input.nextElementSibling.remove();
+    }
+    input.style.backgroundColor = ok ? "#c6f6c6" : "#fdd";
+    input.insertAdjacentHTML("afterend", `<span class="feedback">${ok ? '✅' : '❌'}</span>`);
+  }
+  function checkWord(input, patterns){
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    paint(input, opts.some(p => text.includes(p)));
+  }
+
+  // gabarito
+  function checkAnswer(letter){
+    const correct = 'C';
+    const message = document.getElementById('message');
+    if (letter === correct){
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

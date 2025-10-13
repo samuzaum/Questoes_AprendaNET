@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sistemas Numéricos - Lista 03 — Problema 4</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 240px; text-align: center; margin: 0 4px; }
+    .option { display: block; margin: 10px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+    .imgwrap img { max-width: 520px; border: 1px solid #ddd; border-radius: 6px; padding: 4px; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao3.html">🔹 Ir para Problema 3</a> |
+  <a href="questao5.html">🔹 Ir para Problema 5</a>
+</p>
+
+<h3>Problema 4:</h3>
+
+<!-- ENUNCIADO (transcrito) -->
+<p><strong>(ENEM 2011)</strong></p>
+<p>Partículas suspensas em um fluido apresentam contínua movimentação aleatória, chamado movimento browniano, causado pelos choques das partículas que compõem o fluido. A ideia de um inventor era construir uma série de palhetas, montadas sobre um eixo, que seriam postas em movimento pela agitação das partículas ao se roçarem. Como o movimento ocorreria igualmente em ambos os sentidos de rotação, o cientista concebeu um segundo elemento, um dente de engrenagem assimétrico. Assim, em escala muito pequena, esse tipo de motor poderia executar trabalho, por exemplo, puxando um pequeno peso para cima. O esquema, que já foi testado, é mostrado a seguir.</p>
+
+<div class="imgwrap">
+  <!-- Coloque a figura do enunciado na mesma pasta, se desejar -->
+  <img src="q16_browniano.png" alt="Esquema com palhetas, eixo, engrenagem e trava">
+</div>
+
+<p>A explicação para a necessidade do uso da engrenagem com trava é:</p>
+
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) Natureza dos choques das partículas do fluido:</strong>
+  <br>Os empurrões (torques) sobre as palhetas são <input onchange="checkWord(this,'aleatorios|aleatórios|casuais')"> e ocorrem <input onchange="checkWord(this,'em ambos os sentidos|para os dois lados|nos dois sentidos')">.
+</p>
+
+<p><strong>2) Consequência sem a trava:</strong>
+  <br>Sem a trava, o sistema apenas <input onchange="checkWord(this,'oscilaria|oscilaria|nao teria sentido preferencial|média nula de rotacao|média nula de rotação')"> e não produziria trabalho útil líquido.
+</p>
+
+<p><strong>3) Papel da trava (pino/“cachorro”):</strong>
+  <br>Ela <input onchange="checkWord(this,'determina o sentido do movimento|impede o retrocesso|retifica os empurroes|retifica os empurrões')">, permitindo que empurrões no sentido permitido se acumulem.
+</p>
+
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')">
+  <span class="circle">A</span>
+  O travamento do eixo para que não se solte aleatoriamente.
+</div>
+<div class="option" onclick="checkAnswer('B')">
+  <span class="circle">B</span>
+  A ação do vento, controlada pela pressão nos dentes da engrenagem.
+</div>
+<div class="option" onclick="checkAnswer('C')">
+  <span class="circle">C</span>
+  O controle do sentido de rotação e da velocidade tangencial, permitindo, inclusive, maior elevação do peso.
+</div>
+<div class="option" onclick="checkAnswer('D')">
+  <span class="circle">D</span>
+  A não determinação do movimento, devido ao caráter aleatório, cuja tendência é o equilíbrio no motor.
+</div>
+<div class="option" onclick="checkAnswer('E')">
+  <span class="circle">E</span>
+  A determinação do movimento em um único sentido, impedindo retrocessos.
+</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // validação por palavras-chave (flexível, sem LaTeX)
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+  function checkWord(input, patterns) {
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')) {
+      input.nextElementSibling.remove();
+    }
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    const ok = opts.some(p => text.includes(p));
+    if (ok) {
+      input.style.backgroundColor = "#c6f6c6";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">✅</span>');
+    } else {
+      input.style.backgroundColor = "#fdd";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">❌</span>');
+    }
+  }
+
+  // gabarito apenas aqui
+  function checkAnswer(letter) {
+    const correct = 'E';
+    const message = document.getElementById('message');
+    if (letter === correct) {
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

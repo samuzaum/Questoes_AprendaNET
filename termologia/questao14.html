@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sistemas Numéricos - Lista 03 — Problema 14</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 360px; text-align: center; margin: 0 4px; }
+    .option { display: block; margin: 10px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+    .hint { display:inline-block; margin-left:8px; font-size: 0.95em; color:#444; }
+    .hint button { background:#eee; border:1px solid #ccc; border-radius:6px; padding:2px 8px; cursor:pointer; }
+    .hint span { display:none; margin-left:6px; }
+    .imgwrap img { max-width: 520px; border: 1px solid #ddd; border-radius: 6px; padding: 4px; }
+    small { color:#444; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao13.html">🔹 Ir para Problema 13</a> |
+  <a href="questao15.html">🔹 Ir para Problema 15</a>
+</p>
+
+<h3>Problema 14:</h3>
+
+<p><strong>10 – Enem 2023</strong></p>
+<p><strong>Questão 119</strong></p>
+
+<p>
+  De acordo com a Constituição Federal, é competência dos municípios o gerenciamento dos serviços de limpeza e coleta dos resíduos urbanos (lixo). No entanto, há relatos de que parte desse lixo acaba sendo incinerado, liberando substâncias tóxicas para o ambiente e causando acidentes por explosões, principalmente quando ocorre a incineração de frascos de aerossóis (por exemplo: desodorantes, inseticidas e repelentes). A temperatura elevada provoca a vaporização de todo o conteúdo dentro desse tipo de frasco, aumentando a pressão em seu interior até culminar na explosão da embalagem.
+</p>
+<p>
+  Suponha um frasco metálico de um aerossol de capacidade igual a 100 mL, contendo 0,1 mol de produtos gasosos à temperatura de 650 °C, no momento da explosão.
+</p>
+<p>
+  Considere: <em>R</em> = 0,082 L·atm·mol<sup>−1</sup>·K<sup>−1</sup>.<br>
+  A pressão, em atm, dentro do frasco, no momento da explosão, é mais próxima de
+</p>
+
+<!-- (Sem imagem neste enunciado; manter padrão de comentar se houver) -->
+<!-- <div class="imgwrap"><img src="aerosol_explosao.png" alt="Frasco de aerossol aquecido aumentando a pressão interna"></div> -->
+
+<!-- SOLUÇÃO (INTERATIVA) ANTES DAS ALTERNATIVAS -->
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) Escreva a lei dos gases usada aqui.</strong><br>
+  <input onchange="checkWord(this,'pv=nrt|lei dos gases ideais|p v = n r t')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>Pressão × Volume está relacionado a quantidade de matéria e temperatura absoluta.</span>
+  </span>
+</p>
+
+<p><strong>2) Converta as grandezas para as unidades compatíveis com R.</strong><br>
+  <input onchange="checkWord(this,'v=0,1 l|v=0.1 l|100 ml=0,1 l|100 ml=0.1 l|t=923 k|650 c = 923 k')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>Volume em litros; temperatura em kelvin (T = °C + 273).</span>
+  </span>
+</p>
+
+<p><strong>3) Substitua em <em>P = nRT/V</em> e estime a pressão (valor aproximado).</strong><br>
+  <input onchange="checkWord(this,'~76 atm|76|aprox 76 atm|75,7|75.7')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>Use n = 0,1 mol, R = 0,082, T ≈ 923 K e V = 0,1 L.</span>
+  </span>
+</p>
+
+<!-- ALTERNATIVAS -->
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')"><span class="circle">A</span> 756.</div>
+<div class="option" onclick="checkAnswer('B')"><span class="circle">B</span> 533.</div>
+<div class="option" onclick="checkAnswer('C')"><span class="circle">C</span> 76.</div>
+<div class="option" onclick="checkAnswer('D')"><span class="circle">D</span> 53.</div>
+<div class="option" onclick="checkAnswer('E')"><span class="circle">E</span> 13.</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // normaliza/remover acentos
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+
+  // checagem de palavras-chave (tolerante a variações)
+  function checkWord(input, patterns) {
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')) {
+      input.nextElementSibling.remove();
+    }
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    const ok = opts.some(p => text.includes(p));
+    if (ok) {
+      input.style.backgroundColor = "#c6f6c6";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">✅</span>');
+    } else {
+      input.style.backgroundColor = "#fdd";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">❌</span>');
+    }
+  }
+
+  // botão Mostrar dica
+  function toggleHint(btn){
+    const span = btn.nextElementSibling;
+    span.style.display = span.style.display === 'inline' ? 'none' : 'inline';
+  }
+
+  // gabarito
+  function checkAnswer(letter) {
+    const correct = 'C';
+    const message = document.getElementById('message');
+    if (letter === correct) {
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

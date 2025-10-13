@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sistemas Numéricos - Lista 03 — Problema 31</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 360px; text-align: center; margin: 0 4px; }
+    .option { display: block; margin: 10px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+    .hint { display:inline-block; margin-left:8px; font-size: 0.95em; color:#444; }
+    .hint button { background:#eee; border:1px solid #ccc; border-radius:6px; padding:2px 8px; cursor:pointer; }
+    .hint span { display:none; margin-left:6px; }
+    .imgwrap img { max-width: 520px; border: 1px solid #ddd; border-radius: 6px; padding: 4px; }
+    small { color:#444; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao30.html">🔹 Ir para Problema 30</a> |
+  <a href="questao32.html">🔹 Ir para Problema 32</a>
+</p>
+
+<h3>Problema 31:</h3>
+
+<p><strong>11 – Enem 2023</strong></p>
+<p><strong>Questão 120</strong></p>
+
+<p>
+  O circuito com três lâmpadas incandescentes idênticas, representado na figura, consiste em uma associação mista de resistores. Cada lâmpada (<em>L</em><sub>1</sub>, <em>L</em><sub>2</sub> e <em>L</em><sub>3</sub>) é associada, em paralelo, a um resistor de resistência <em>R</em>, formando um conjunto. Esses conjuntos são associados em série, tendo todas as lâmpadas o mesmo brilho quando ligadas à fonte de energia. Após vários dias em uso, apenas a lâmpada <em>L</em><sub>2</sub> queima, enquanto as demais permanecem acesas.
+</p>
+
+<!-- Imagem do enunciado (deixar comentada mesmo sem o arquivo) -->
+<!-- <div class="imgwrap"><img src="lampadas_mista_l2_queimada.png" alt="Três conjuntos em série; cada conjunto tem lâmpada em paralelo com resistor R. L2 queimada."></div> -->
+
+<p>
+  Em relação à situação em que todas as lâmpadas funcionam, após a queima de <em>L</em><sub>2</sub>, os brilhos das lâmpadas serão
+</p>
+
+<!-- SOLUÇÃO (INTERATIVA) ANTES DAS ALTERNATIVAS -->
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) Quando <em>L</em><sub>2</sub> queima, o que muda no <u>segundo conjunto</u> (lâmpada || R)?</strong><br>
+  <input onchange="checkWord(this,'deixa de ter a lampada|apenas o resistor r|aberto na lampada|somente r no conjunto 2')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>Queimar = circuito aberto na lâmpada; o ramo do resistor continua conduzindo.</span>
+  </span>
+</p>
+
+<p><strong>2) O equivalente total (dos três conjuntos em série) aumenta ou diminui?</strong><br>
+  <input onchange="checkWord(this,'aumenta|maior resistencia equivalente|req cresce')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>Substituiu-se (R || lâmpada) por apenas R ⇒ resistência do conjunto 2 fica maior.</span>
+  </span>
+</p>
+
+<p><strong>3) O que acontece com a <u>corrente total</u> e a <u>tensão</u> em cada conjunto?</strong><br>
+  <input onchange="checkWord(this,'corrente diminui|i menor|tensao em cada conjunto diminui|queda de tensao menor nos conjuntos')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>Fonte ideal fixa: série com resistência maior ⇒ corrente menor; divisor de tensão.</span>
+  </span>
+</p>
+
+<p><strong>4) Brilho da lâmpada ~ potência <em>P</em> ∝ <em>V</em><sup>2</sup>/<em>R</em>. O brilho de <em>L</em><sub>1</sub> e <em>L</em><sub>3</sub> fica como?</strong><br>
+  <input onchange="checkWord(this,'menos intenso|menor potencia|diminui o brilho|ficam mais fracas')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>Com menor tensão sobre cada conjunto, a potência das lâmpadas restantes cai.</span>
+  </span>
+</p>
+
+<!-- ALTERNATIVAS -->
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')"><span class="circle">A</span> os mesmos.</div>
+<div class="option" onclick="checkAnswer('B')"><span class="circle">B</span> mais intenso.</div>
+<div class="option" onclick="checkAnswer('C')"><span class="circle">C</span> menos intenso.</div>
+<div class="option" onclick="checkAnswer('D')"><span class="circle">D</span> menos intenso para <em>L</em><sub>1</sub> e o mesmo para <em>L</em><sub>3</sub>.</div>
+<div class="option" onclick="checkAnswer('E')"><span class="circle">E</span> mais intenso para <em>L</em><sub>1</sub> e menos intenso para <em>L</em><sub>3</sub>.</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // normaliza/remover acentos
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+
+  // checagem de palavras-chave (tolerante a variações)
+  function checkWord(input, patterns) {
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')) {
+      input.nextElementSibling.remove();
+    }
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    const ok = opts.some(p => text.includes(p));
+    if (ok) {
+      input.style.backgroundColor = "#c6f6c6";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">✅</span>');
+    } else {
+      input.style.backgroundColor = "#fdd";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">❌</span>');
+    }
+  }
+
+  // botão Mostrar dica
+  function toggleHint(btn){
+    const span = btn.nextElementSibling;
+    span.style.display = span.style.display === 'inline' ? 'none' : 'inline';
+  }
+
+  // gabarito
+  function checkAnswer(letter) {
+    const correct = 'C';
+    const message = document.getElementById('message');
+    if (letter === correct) {
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sistemas Numéricos - Lista — Problema 37</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.65; font-size: 17px; }
+    input { width: 460px; text-align: center; margin: 6px 4px; padding: 6px 8px; font-size: 16px; }
+    .option { display: block; margin: 12px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a { text-decoration: none; background-color: #6c9ba4; color: white;
+        padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block; }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+    .hint { display:inline-block; margin-left:8px; font-size: 0.95em; color:#444; }
+    .hint button { background:#eee; border:1px solid #ccc; border-radius:6px; padding:3px 10px; cursor:pointer; }
+    .hint span { display:none; margin-left:6px; }
+    .imgwrap img { max-width: 620px; border: 1px solid #ddd; border-radius: 6px; padding: 4px; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao36.html">🔹 Ir para Problema 36</a> |
+  <a href="questao38.html">🔹 Ir para Problema 38</a>
+</p>
+
+<h3>Problema 37:</h3>
+
+<p><strong>5 – Enem 2022</strong></p>
+
+<p>
+  Uma lanterna funciona com três pilhas de resistência interna igual a 0,5&nbsp;Ω cada, ligadas em série. Quando posicionadas corretamente, devem acender a lâmpada incandescente de especificações 4,5&nbsp;W e 4,5&nbsp;V. Cada pilha na posição correta gera uma f.e.m. (força eletromotriz) de 1,5&nbsp;V. Uma pessoa, ao trocar as pilhas da lanterna, comete o equívoco de inverter a posição de uma das pilhas. Considere que as pilhas mantêm contato independentemente da posição. Com esse equívoco, qual é a intensidade de corrente que passa pela lâmpada ao se ligar a lanterna?
+</p>
+
+<!-- (Opcional) esqueminha de pilhas/lâmpada – manter comentado -->
+<!-- <div class="imgwrap"><img src="lanterna_pilhas_invertida.png" alt="Três pilhas em série, uma invertida, alimentando lâmpada de 4,5 V 4,5 W"></div> -->
+
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) Qual a resistência da lâmpada a partir das especificações 4,5&nbsp;V e 4,5&nbsp;W?</strong><br>
+  <input onchange="checkWord(this,'r=4,5|r=4.5|4,5 ohm|4.5 ohm|4,5 Ω|4.5 Ω|v^2/p=4,5')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>Use R = V²/P com V = 4,5 e P = 4,5.</span>
+  </span>
+</p>
+
+<p><strong>2) Com uma pilha invertida, qual é a f.e.m. resultante do conjunto?</strong><br>
+  <input onchange="checkWord(this,'1,5 v|1.5 v|1,5 volts|1.5 volts|uma pilha equivalente|duas menos uma')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>Somam-se 2×1,5 para frente e subtrai 1×1,5 ao contrário.</span>
+  </span>
+</p>
+
+<p><strong>3) Qual é a resistência total em série vista pela fonte?</strong><br>
+  <input onchange="checkWord(this,'r_total=4,5+1,5|6,0 ohm|6 ohm|6 Ω|R+3r|4,5+3*0,5')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>Lâmpada (R) em série com as três resistências internas (3·0,5 Ω).</span>
+  </span>
+</p>
+
+<p><strong>4) Calcule a corrente na lâmpada.</strong><br>
+  <input onchange="checkWord(this,'0,25 a|0.25 a|0,25|0.25|1,5/6')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>Lei de Ohm: I = ε / (R + 3r).</span>
+  </span>
+</p>
+
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')"><span class="circle">A</span> 0,25 A</div>
+<div class="option" onclick="checkAnswer('B')"><span class="circle">B</span> 0,33 A</div>
+<div class="option" onclick="checkAnswer('C')"><span class="circle">C</span> 0,75 A</div>
+<div class="option" onclick="checkAnswer('D')"><span class="circle">D</span> 1,00 A</div>
+<div class="option" onclick="checkAnswer('E')"><span class="circle">E</span> 1,33 A</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // normalização para ignorar acentos
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+
+  // checagem tolerante por palavras-chave
+  function checkWord(input, patterns) {
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')) {
+      input.nextElementSibling.remove();
+    }
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    const ok = opts.some(p => text.includes(p));
+    if (ok) {
+      input.style.backgroundColor = "#c6f6c6";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">✅</span>');
+    } else {
+      input.style.backgroundColor = "#fdd";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">❌</span>');
+    }
+  }
+
+  function toggleHint(btn){
+    const span = btn.nextElementSibling;
+    span.style.display = (span.style.display === 'inline') ? 'none' : 'inline';
+  }
+
+  // gabarito
+  function checkAnswer(letter) {
+    const correct = 'A';
+    const message = document.getElementById('message');
+    if (letter === correct) {
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

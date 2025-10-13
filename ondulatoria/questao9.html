@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sistemas Numéricos - Lista 03 — Problema 9</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 180px; text-align: center; margin: 0 4px; }
+    .option { display: block; margin: 10px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+    small { color: #444; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao8.html">🔹 Ir para Problema 8</a> |
+  <a href="questao10.html">🔹 Ir para Problema 10</a>
+</p>
+
+<h3>Problema 9:</h3>
+
+<!-- ENUNCIADO IDÊNTICO -->
+<p><strong>67. (Enem 2012)</strong></p>
+<p>Em um dia de chuva muito forte, constatou-se uma goteira sobre o centro de uma piscina coberta, formando um padrão de ondas circulares. Nessa situação, observou-se que caíam duas gotas a cada segundo. A distância entre duas cristas consecutivas era de 25 cm e cada uma delas se aproximava da borda da piscina com velocidade de 1,0 m/s. Após algum tempo, a chuva diminuiu e a goteira passou a cair uma vez por segundo.</p>
+<p>Com a diminuição da chuva, a distância entre as cristas e a velocidade de propagação da onda se tornaram, respectivamente,</p>
+
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) Frequências:</strong>
+  f<sub>1</sub> = <input onchange="checkExpr(this,'2')"> Hz (duas gotas/s) &nbsp; | &nbsp;
+  f<sub>2</sub> = <input onchange="checkExpr(this,'1')"> Hz
+</p>
+
+<p><strong>2) Dados iniciais:</strong>
+  λ<sub>1</sub> = <input onchange="checkExpr(this,'0.25|25/100')"> m &nbsp; (25 cm) &nbsp; | &nbsp;
+  v (no meio água) = <input onchange="checkExpr(this,'1.0|1')"> m/s
+</p>
+
+<p><strong>3) No mesmo meio, v não muda. Use v = λ·f para o novo período:</strong>
+  <br>λ<sub>2</sub> = v / f<sub>2</sub> =
+  <input onchange="checkExpr(this,'1/1|1')"> m
+  &nbsp;→&nbsp; λ<sub>2</sub> é
+  <input onchange="checkWord(this,'maior que 25 cm|maior que 0.25 m|maior')"> que 25 cm.
+</p>
+
+<p><strong>4) Portanto, marque a alternativa com “λ maior que 25 cm” e “v igual a 1,0 m/s”.</strong></p>
+
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')">
+  <span class="circle">A</span>
+  maior que 25 cm e maior que 1,0 m/s.
+</div>
+<div class="option" onclick="checkAnswer('B')">
+  <span class="circle">B</span>
+  maior que 25 cm e igual a 1,0 m/s.
+</div>
+<div class="option" onclick="checkAnswer('C')">
+  <span class="circle">C</span>
+  menor que 25 cm e menor que 1,0 m/s.
+</div>
+<div class="option" onclick="checkAnswer('D')">
+  <span class="circle">D</span>
+  menor que 25 cm e igual a 1,0 m/s.
+</div>
+<div class="option" onclick="checkAnswer('E')">
+  <span class="circle">E</span>
+  igual a 25 cm e igual a 1,0 m/s.
+</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // ---- helpers: aceita vírgula/ponto e expressões simples ----
+  function safeEval(expr){
+    const cleaned = String(expr).replace(/\s/g,'');
+    if(!/^[0-9eE+\-*/().,×^]+$/.test(cleaned)) return null;
+    const norm = cleaned.replace(/,/g,'.').replace(/×/g,'*').replace(/\^/g,'**');
+    try{
+      const v = Function('"use strict"; return ('+norm+');')();
+      return (typeof v === 'number' && Number.isFinite(v)) ? v : null;
+    }catch{ return null; }
+  }
+  function nearlyEqual(a,b,eps=1e-3){ return Math.abs(a-b) <= eps*Math.max(1,Math.abs(a),Math.abs(b)); }
+  function paint(input, ok){
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')){
+      input.nextElementSibling.remove();
+    }
+    input.style.backgroundColor = ok ? "#c6f6c6" : "#fdd";
+    input.insertAdjacentHTML("afterend", `<span class="feedback">${ok ? '✅' : '❌'}</span>`);
+  }
+  function checkExpr(input, expectedExprs){
+    const val = safeEval(input.value.trim());
+    const targets = expectedExprs.split('|').map(e => safeEval(e));
+    const ok = (val !== null) && targets.some(t => t !== null && nearlyEqual(val, t));
+    paint(input, ok);
+  }
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+  function checkWord(input, patterns){
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    paint(input, opts.some(p => text.includes(p)));
+  }
+
+  // gabarito apenas aqui
+  function checkAnswer(letter){
+    const correct = 'B';
+    const message = document.getElementById('message');
+    if (letter === correct){
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

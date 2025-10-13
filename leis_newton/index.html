@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sistemas Numéricos - Lista 03 — Problema 1</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 160px; text-align: center; margin: 0 4px; }
+    .option { display: block; margin: 10px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+    .imgwrap { margin: 10px 0; }
+    .imgwrap img { max-width: 520px; border: 1px solid #ddd; border-radius: 6px; padding: 4px; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao2.html">🔹 Ir para Problema 2</a>
+</p>
+
+<h3>Problema 1:</h3>
+
+<!-- ENUNCIADO IDÊNTICO -->
+<p><strong>13. (ENEM 2014)</strong> Um professor utiliza essa história em quadrinhos para discutir com os estudantes o movimento de satélites. Nesse sentido, pede a eles que analisem o movimento do coelhinho, considerando o módulo da velocidade constante.</p>
+
+<div class="imgwrap">
+  <!-- (opcional) coloque a tirinha na mesma pasta e troque o src abaixo -->
+  <img src="q13_tirinha.png" alt="Tirinha do coelhinho (Cebolinha)">
+</div>
+
+<p>Desprezando a existência de forças dissipativas, o vetor aceleração tangencial do coelhinho, no terceiro quadrinho, é</p>
+
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) Tipo de movimento no 3º quadrinho:</strong>
+  trajetória <input onchange="check(this,'circular')"> com velocidade de módulo
+  <input onchange="check(this,'constante|fixo|invariavel|invariável')">.
+</p>
+
+<p><strong>2) O que mede a aceleração tangencial?</strong>
+  Está associada à variação do <input onchange="check(this,'modulo da velocidade|módulo da velocidade|intensidade da velocidade')">.
+</p>
+
+<p><strong>3) Então, nesse caso, a aceleração tangencial é</strong>
+  <input onchange="check(this,'nula|zero')">.
+</p>
+
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')">
+  <span class="circle">A</span>
+  nulo.
+</div>
+<div class="option" onclick="checkAnswer('B')">
+  <span class="circle">B</span>
+  paralelo à sua velocidade linear e no mesmo sentido.
+</div>
+<div class="option" onclick="checkAnswer('C')">
+  <span class="circle">C</span>
+  paralelo à sua velocidade linear e no sentido oposto.
+</div>
+<div class="option" onclick="checkAnswer('D')">
+  <span class="circle">D</span>
+  perpendicular à sua velocidade linear e dirigido para o centro da Terra.
+</div>
+<div class="option" onclick="checkAnswer('E')">
+  <span class="circle">E</span>
+  perpendicular à sua velocidade linear e dirigido para fora da superfície da Terra.
+</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // Validação por palavras-chave (sem LaTeX)
+  function check(input, patterns) {
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')) {
+      input.nextElementSibling.remove();
+    }
+    const raw = input.value.trim().toLowerCase();
+    const opts = patterns.toLowerCase().split('|').map(s => s.trim());
+    const ok = opts.some(p => raw.includes(p));
+    if (ok) {
+      input.style.backgroundColor = "#c6f6c6";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">✅</span>');
+    } else {
+      input.style.backgroundColor = "#fdd";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">❌</span>');
+    }
+  }
+
+  // Gabarito apenas aqui
+  function checkAnswer(letter) {
+    const correct = 'A';
+    const message = document.getElementById('message');
+    if (letter === correct) {
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

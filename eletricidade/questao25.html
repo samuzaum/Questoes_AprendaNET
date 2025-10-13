@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Física — Lista 03 — Problema 25 (ENEM)</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 360px; text-align: center; margin: 0 4px; }
+    .option { display: block; margin: 10px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+    figure { margin: 12px 0; }
+    figcaption { font-size: .95rem; font-style: italic; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao24.html">🔹 Ir para Problema 24</a> |
+  <a href="questao26.html">🔹 Ir para Problema 26</a>
+</p>
+
+<h3>Problema 25:</h3>
+
+<p><strong>128. (Enem 2014)</strong></p>
+
+<p>
+O funcionamento dos geradores de usinas elétricas baseia-se no fenômeno da indução eletromagnética,
+descoberto por Michael Faraday no século XIX. Pode-se observar esse fenômeno ao se movimentar um ímã e uma espira em sentidos opostos
+com módulo da velocidade igual a <em>v</em>, induzindo uma corrente elétrica de intensidade <em>i</em>, como ilustrado na figura.
+</p>
+
+<figure>
+  <img src="extra_36.png" alt="Enunciado/ilustração da questão 128">
+</figure>
+
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) Lei que rege o fenômeno:</strong>
+  <input onchange="checkWord(this,'lei de lenz|lei de faraday-lenz|lei de faraday')">
+</p>
+
+<p><strong>2) Para obter corrente no mesmo sentido, é necessário:</strong>
+  <input onchange="checkWord(this,'inverter a polaridade do ima e mover em direcao a espira|inverter polaridade e aproximar o ima')">
+</p>
+
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')">
+  <span class="circle">A</span>
+  Esquerda e o ímã para a direita com polaridade invertida.
+</div>
+<div class="option" onclick="checkAnswer('B')">
+  <span class="circle">B</span>
+  Direita e o ímã para a esquerda com polaridade invertida.
+</div>
+<div class="option" onclick="checkAnswer('C')">
+  <span class="circle">C</span>
+  Direita e o ímã em repouso com mesma polaridade.
+</div>
+<div class="option" onclick="checkAnswer('D')">
+  <span class="circle">D</span>
+  Esquerda e manter o ímã em repouso com polaridade invertida.
+</div>
+<div class="option" onclick="checkAnswer('E')">
+  <span class="circle">E</span>
+  Esquerda e manter o ímã em repouso com mesma polaridade.
+</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // normalização para tolerar acentos/maiúsculas
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+  function paint(input, ok){
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')){
+      input.nextElementSibling.remove();
+    }
+    input.style.backgroundColor = ok ? "#c6f6c6" : "#fdd";
+    input.insertAdjacentHTML("afterend", `<span class="feedback">${ok ? '✅' : '❌'}</span>`);
+  }
+  function checkWord(input, patterns){
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    paint(input, opts.some(p => text.includes(p)));
+  }
+
+  // gabarito
+  function checkAnswer(letter){
+    const correct = 'A';
+    const message = document.getElementById('message');
+    if (letter === correct){
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

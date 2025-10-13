@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sistemas Numéricos - Lista — Problema 7</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 420px; text-align: center; margin: 0 4px; }
+    .option { display: block; margin: 10px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+    .hint { display:inline-block; margin-left:8px; font-size: 0.95em; color:#444; }
+    .hint button { background:#eee; border:1px solid #ccc; border-radius:6px; padding:2px 8px; cursor:pointer; }
+    .hint span { display:none; margin-left:6px; }
+    .imgwrap img { max-width: 520px; border: 1px solid #ddd; border-radius: 6px; padding: 4px; }
+    small { color:#444; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao6.html">🔹 Ir para Problema 6</a> |
+  <a href="questao8.html">🔹 Ir para Problema 8</a>
+</p>
+
+<h3>Problema 7:</h3>
+
+<p><strong>13 – ENEM 2024</strong></p>
+
+<p>
+  O diagrama P–V a seguir representa o <strong>ciclo de Otto</strong> de um motor de combustão interna. O trecho sombreado marcado por <em>W</em> indica o <em>trabalho útil</em> produzido no ciclo.
+</p>
+
+<!-- Figura do diagrama PV (deixe comentado mesmo sem o arquivo) -->
+<!-- <div class="imgwrap"><img src="ciclo_otto_pv.png" alt="Diagrama P–V com pontos 1-2-3-4 e área W"></div> -->
+
+<p>
+  As etapas do ciclo estão resumidas em uma tabela (admissão isotérmica/isoentrópica não; aqui: 0→1 admissão isobárica simplificada, 1→2 compressão adiabática, 2→3 adição de calor a volume constante, 3→4 <u>expansão adiabática</u>, 4→1 rejeição de calor a volume constante).
+</p>
+
+<!-- Tabela do enunciado (comente se não tiver o arquivo) -->
+<!-- <div class="imgwrap"><img src="tabela_etapas_otto.png" alt="Tabela com as etapas I a VI do ciclo de Otto"></div> -->
+
+<p><strong>Qual item (I, II, III, IV, V ou VI) corresponde ao trecho do diagrama responsável pelo trabalho indicado?</strong></p>
+
+<!-- SOLUÇÃO (INTERATIVA) ANTES DAS ALTERNATIVAS -->
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) Em que trecho ocorre a <u>expansão</u> do gás no ciclo de Otto?</strong><br>
+  <input onchange="checkWord(this,'3->4|3 a 4|expansao adiab atica|expansão adiabática|trajeto 3-4')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>Após a combustão a volume constante (2→3), o pistão desce.</span>
+  </span>
+</p>
+
+<p><strong>2) Quem realiza trabalho sobre quem nesse trecho?</strong><br>
+  <input onchange="checkWord(this,'gas sobre o piston|gás realiza trabalho|pistao recebe trabalho do gas|trabalho util do ciclo')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>Quando o gás se expande, empurra o pistão → trabalho útil.</span>
+  </span>
+</p>
+
+<p><strong>3) Na tabela do problema, qual é a identificação da etapa 3→4?</strong><br>
+  <input onchange="checkWord(this,'iv|etapa iv|4|quarta etapa do quadro')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>Procure a linha com “expansão adiabática”.</span>
+  </span>
+</p>
+
+<!-- ALTERNATIVAS -->
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')"><span class="circle">A</span> II</div>
+<div class="option" onclick="checkAnswer('B')"><span class="circle">B</span> III</div>
+<div class="option" onclick="checkAnswer('C')"><span class="circle">C</span> IV</div>
+<div class="option" onclick="checkAnswer('D')"><span class="circle">D</span> V</div>
+<div class="option" onclick="checkAnswer('E')"><span class="circle">E</span> VI</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // normalização p/ ignorar acentos
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+
+  // verificação por palavras-chave (tolerante a variações)
+  function checkWord(input, patterns) {
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')) {
+      input.nextElementSibling.remove();
+    }
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    const ok = opts.some(p => text.includes(p));
+    if (ok) {
+      input.style.backgroundColor = "#c6f6c6";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">✅</span>');
+    } else {
+      input.style.backgroundColor = "#fdd";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">❌</span>');
+    }
+  }
+
+  // botão Mostrar dica
+  function toggleHint(btn){
+    const span = btn.nextElementSibling;
+    span.style.display = span.style.display === 'inline' ? 'none' : 'inline';
+  }
+
+  // gabarito
+  function checkAnswer(letter) {
+    const correct = 'C';
+    const message = document.getElementById('message');
+    if (letter === correct) {
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

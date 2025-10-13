@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Física — Lista 03 — Problema 9 (ENEM 2013)</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 260px; text-align: center; margin: 0 4px; }
+    .option { display: block; margin: 10px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao8.html">🔹 Ir para Problema 8</a> |
+  <a href="questao10.html">🔹 Ir para Problema 10</a>
+</p>
+
+<h3>Problema 9:</h3>
+
+<p><strong>107. (ENEM 2013)</strong></p>
+
+<p>
+Medir temperatura é fundamental em muitas aplicações, e apresentar a leitura em mostradores digitais é bastante prático. O seu funcionamento é baseado na correspondência entre valores de temperatura e de diferença de potencial elétrico.
+</p>
+
+<p>
+Por exemplo, podemos usar o circuito elétrico apresentado, no qual o elemento sensor de temperatura ocupa um dos braços do circuito e a dependência da resistência com a temperatura é conhecida.
+</p>
+
+<figure>
+  <img src="questao_114.png" alt="Circuito da questão 107 ENEM 2013">
+</figure>
+<p>
+Para um valor de temperatura em que <strong>R<sub>S</sub> = 100 Ω</strong>, a leitura apresentada pelo voltímetro será de
+</p>
+
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) Corrente no ramo esquerdo (470 + 100):</strong>
+  <input onchange="checkWord(this,'1/57|0,0175')"> A
+</p>
+
+<p><strong>2) Corrente no ramo direito (470 + 120):</strong>
+  <input onchange="checkWord(this,'1/59|0,0169')"> A
+</p>
+
+<p><strong>3) Diferença de potencial medida pelo voltímetro (V<sub>B</sub> − V<sub>C</sub>):</strong>
+  <input onchange="checkWord(this,'-0,3|-0.3|aprox -0,28')"> V
+</p>
+
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')">
+  <span class="circle">A</span>
+  +6,2 V
+</div>
+<div class="option" onclick="checkAnswer('B')">
+  <span class="circle">B</span>
+  +1,7 V
+</div>
+<div class="option" onclick="checkAnswer('C')">
+  <span class="circle">C</span>
+  +0,3 V
+</div>
+<div class="option" onclick="checkAnswer('D')">
+  <span class="circle">D</span>
+  –0,3 V
+</div>
+<div class="option" onclick="checkAnswer('E')">
+  <span class="circle">E</span>
+  –6,2 V
+</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // normalização para tolerar acentos/maiúsculas
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+  function paint(input, ok){
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')){
+      input.nextElementSibling.remove();
+    }
+    input.style.backgroundColor = ok ? "#c6f6c6" : "#fdd";
+    input.insertAdjacentHTML("afterend", `<span class="feedback">${ok ? '✅' : '❌'}</span>`);
+  }
+  function checkWord(input, patterns){
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    paint(input, opts.some(p => text.includes(p)));
+  }
+
+  // gabarito
+  function checkAnswer(letter){
+    const correct = 'D';
+    const message = document.getElementById('message');
+    if (letter === correct){
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

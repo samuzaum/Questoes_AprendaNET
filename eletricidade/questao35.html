@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sistemas Numéricos - Lista — Problema 35</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 420px; text-align: center; margin: 0 4px; }
+    .option { display: block; margin: 10px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+    .hint { display:inline-block; margin-left:8px; font-size: 0.95em; color:#444; }
+    .hint button { background:#eee; border:1px solid #ccc; border-radius:6px; padding:2px 8px; cursor:pointer; }
+    .hint span { display:none; margin-left:6px; }
+    .imgwrap img { max-width: 520px; border: 1px solid #ddd; border-radius: 6px; padding: 4px; }
+    small { color:#444; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao34.html">🔹 Ir para Problema 34</a> |
+  <a href="questao36.html">🔹 Ir para Problema 36</a>
+</p>
+
+<h3>Problema 35:</h3>
+
+<p><strong>ENEM 2024 — questão das lâmpadas L1 e L2 e fio QR</strong></p>
+
+<p>
+  Uma caixa decorativa usa duas lâmpadas pequenas <strong>L1</strong> (6&nbsp;V – 9&nbsp;W) e <strong>L2</strong> (12&nbsp;V – 18&nbsp;W), ligadas em série a uma bateria de tensão <em>V</em><sub>QR</sub>. Um fio resistivo <strong>QR</strong> (48&nbsp;cm) está em paralelo à bateria. Cinco pontos, <strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong> e <strong>E</strong>, dividem o fio em seis segmentos iguais. Um amperímetro tem dois terminais: um terminal <strong>P</strong> está ligado ao ponto entre as lâmpadas; o outro terminal (<strong>S</strong>) será ligado em algum ponto do fio <strong>QR</strong>. Dependendo do ponto escolhido, muda a tensão em cada lâmpada. Qual ponto deve ser usado para que cada lâmpada trabalhe na sua tensão nominal?
+</p>
+
+<!-- Figura do circuito (manter comentada) -->
+<!-- <div class="imgwrap"><img src="circuito_lampadas_fio_QR.png" alt="Duas lâmpadas em série, fio QR com divisões A–E em paralelo à bateria"></div> -->
+
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) Encontre as resistências das lâmpadas a partir de V e P (use R = V²/P).</strong><br>
+  <input onchange="checkWord(this,'l1 4 ohm|l1=4 ohm|4 Ω|4ohm|r1 4|r1=4|r1=4Ω|l2 8 ohm|l2=8 ohm|8 Ω|8ohm|r2 8|r2=8|r2=8Ω')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>Calcule R₁=6²/9 e R₂=12²/18.</span>
+  </span>
+</p>
+
+<p><strong>2) Em série, para cada uma estar na <em>tensão nominal</em>, a razão V₁:V₂ deve ser igual a R₁:R₂. Qual é essa razão?</strong><br>
+  <input onchange="checkWord(this,'1:2|1 para 2|um para dois|v1/v2=1/2|metade')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>Use R₁=4&nbsp;Ω e R₂=8&nbsp;Ω.</span>
+  </span>
+</p>
+
+<p><strong>3) O fio QR (48&nbsp;cm) é uniforme e tem seis segmentos iguais. O ponto S deve dividir <em>V</em><sub>QR</sub> em partes com razão 1:2 (QS:SR). Em qual fração do comprimento a partir de Q ele deve ficar?</strong><br>
+  <input onchange="checkWord(this,'1/3|um terco|2/6|dois sextos|aprox 16 cm|segundo ponto a partir de q')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>QS:SR = 1:2 ⇒ QS = (1/3)·QR.</span>
+  </span>
+</p>
+
+<p><strong>4) Qual marca do fio corresponde a essa posição?</strong><br>
+  <input onchange="checkWord(this,'ponto b|b|segundo marco|segunda divisao|a partir de q b')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>As marcas A, B, C, D, E estão em 1/6, 2/6, 3/6, 4/6, 5/6 do comprimento.</span>
+  </span>
+</p>
+
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')"><span class="circle">A</span> Ponto A</div>
+<div class="option" onclick="checkAnswer('B')"><span class="circle">B</span> Ponto B</div>
+<div class="option" onclick="checkAnswer('C')"><span class="circle">C</span> Ponto C</div>
+<div class="option" onclick="checkAnswer('D')"><span class="circle">D</span> Ponto D</div>
+<div class="option" onclick="checkAnswer('E')"><span class="circle">E</span> Ponto E</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // normalização para ignorar acentos
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+
+  // verificação por palavras-chave (tolerante)
+  function checkWord(input, patterns) {
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')) {
+      input.nextElementSibling.remove();
+    }
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    const ok = opts.some(p => text.includes(p));
+    if (ok) {
+      input.style.backgroundColor = "#c6f6c6";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">✅</span>');
+    } else {
+      input.style.backgroundColor = "#fdd";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">❌</span>');
+    }
+  }
+
+  function toggleHint(btn){
+    const span = btn.nextElementSibling;
+    span.style.display = span.style.display === 'inline' ? 'none' : 'inline';
+  }
+
+  // gabarito
+  function checkAnswer(letter) {
+    const correct = 'B';
+    const message = document.getElementById('message');
+    if (letter === correct) {
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

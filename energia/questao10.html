@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sistemas Numéricos - Lista — Problema 10 (ENEM 2022)</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.65; font-size: 17px; }
+    input { width: 520px; text-align: center; margin: 6px 4px; padding: 6px 8px; font-size: 16px; }
+    .option { display: block; margin: 12px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a { text-decoration: none; background-color: #6c9ba4; color: white;
+        padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block; }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+    .hint { display:inline-block; margin-left:8px; font-size: 0.95em; color:#444; }
+    .hint button { background:#eee; border:1px solid #ccc; border-radius:6px; padding:3px 10px; cursor:pointer; }
+    .hint span { display:none; margin-left:6px; }
+    .imgwrap img { max-width: 620px; border: 1px solid #ddd; border-radius: 6px; padding: 4px; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao9.html">🔹 Ir para Problema 9</a> |
+  <a href="questao11.html">🔹 Ir para Problema 11</a>
+</p>
+
+<h3>Problema 10:</h3>
+
+<p><strong>10 – Enem 2022</strong></p>
+
+<p>
+  Em um autódromo, os carros podem derrapar em uma curva e bater na parede de proteção.
+  Para diminuir o impacto de uma batida, pode-se colocar na parede uma barreira de pneus,
+  isso faz com que a colisão seja mais demorada e o carro retorne com velocidade reduzida.
+  Outra opção é colocar uma barreira de blocos de um material que se deforma, tendo a
+  colisão tão demorada quanto a colisão com os pneus, mas que não permite a volta do carro
+  após a colisão. Comparando as duas situações, como ficam a força média exercida sobre o carro
+  e a energia mecânica dissipada?
+</p>
+
+<!-- (Opcional) ilustração: deixe comentado se não houver arquivo -->
+<!-- <div class="imgwrap"><img src="barreiras_autodromo.png" alt="Colisão com barreira de pneus e com barreira de blocos"></div> -->
+
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) Se o tempo de contato é o mesmo nas duas barreiras, a força média depende de qual grandeza?</strong><br>
+  <input onchange="checkWord(this,'impulso|variacao de quantidade de movimento|delta p|Δp|fmedia=Δp/Δt')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>Com Δt igual, quem tiver maior |Δp| terá maior força média (F̄ = Δp/Δt).</span>
+  </span>
+</p>
+
+<p><strong>2) Na barreira de pneus o carro <em>rebate</em> (volta) com velocidade menor; na de blocos ele para. Qual caso tem |Δp| maior?</strong><br>
+  <input onchange="checkWord(this,'pneus|rebate aumenta delta p|(1+k)p > p|reversao do sentido aumenta a variacao')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>Ir de +p para −k·p (k&lt;1) muda o sentido → |Δp| = (1+k)p, maior que apenas ir a zero (p).</span>
+  </span>
+</p>
+
+<p><strong>3) Qual barreira dissipa mais energia mecânica do carro?</strong><br>
+  <input onchange="checkWord(this,'blocos|nao ha retorno|mais dissipacao|pneus devolvem parte da energia')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>Se o carro não volta, sua energia cinética final é ~0 → maior dissipação (blocos).</span>
+  </span>
+</p>
+
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')">
+  <span class="circle">A</span>
+  A força é maior na colisão com a barreira de pneus, e a energia dissipada é maior na colisão com a barreira de blocos.
+</div>
+<div class="option" onclick="checkAnswer('B')">
+  <span class="circle">B</span>
+  A força é maior na colisão com a barreira de blocos, e a energia dissipada é maior na colisão com a barreira de pneus.
+</div>
+<div class="option" onclick="checkAnswer('C')">
+  <span class="circle">C</span>
+  A força é maior na colisão com a barreira de blocos, e a energia dissipada é a mesma nas duas situações.
+</div>
+<div class="option" onclick="checkAnswer('D')">
+  <span class="circle">D</span>
+  A força é maior nas colisões com a barreira de pneus, e a energia dissipada é maior na colisão com a barreira de pneus.
+</div>
+<div class="option" onclick="checkAnswer('E')">
+  <span class="circle">E</span>
+  A força é maior na colisão com a barreira de blocos, e a energia dissipada é maior na colisão com a barreira de blocos.
+</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // normalização para ignorar acentos
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+
+  // verificação por palavras-chave (tolerante, sem entregar tudo)
+  function checkWord(input, patterns) {
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')) {
+      input.nextElementSibling.remove();
+    }
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    const ok = opts.some(p => text.includes(p));
+    if (ok) {
+      input.style.backgroundColor = "#c6f6c6";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">✅</span>');
+    } else {
+      input.style.backgroundColor = "#fdd";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">❌</span>');
+    }
+  }
+
+  function toggleHint(btn){
+    const span = btn.nextElementSibling;
+    span.style.display = (span.style.display === 'inline') ? 'none' : 'inline';
+  }
+
+  // gabarito
+  function checkAnswer(letter) {
+    const correct = 'A';
+    const message = document.getElementById('message');
+    if (letter === correct) {
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

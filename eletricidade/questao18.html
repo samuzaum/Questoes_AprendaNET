@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Física — Lista 03 — Problema 18 (ENEM)</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 260px; text-align: center; margin: 0 4px; }
+    .option { display: block; margin: 10px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao17.html">🔹 Ir para Problema 17</a> |
+  <a href="questao19.html">🔹 Ir para Problema 19</a>
+</p>
+
+<h3>Problema 18:</h3>
+
+<p><strong>118. (ENEM 2ª aplicação 2010)</strong></p>
+
+<p>
+Um chuveiro elétrico foi instalado em uma rede de 110 V, com três posições de potência:  
+verão 2100 W, meia estação 2400 W e inverno 3200 W.  
+Para garantir a proteção da instalação, deve-se usar um disjuntor que interrompa a corrente 
+quando o valor ultrapassar o necessário.  
+Qual deve ser o valor mínimo desse disjuntor?
+</p>
+
+<p><img src="extra_28.png" alt="Chuveiro em funcionamento - figura da questão"></p>
+
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) A corrente máxima ocorre na posição:</strong>  
+  <input onchange="checkWord(this,'inverno')">  
+</p>
+
+<p><strong>2) A potência nessa posição é:</strong>  
+  <input onchange="checkWord(this,'3200 w|3200')">  
+</p>
+
+<p><strong>3) Corrente calculada por I = P/V:</strong>  
+  <input onchange="checkWord(this,'29 a|aprox 29|3200/110')">  
+</p>
+
+<p><strong>4) O disjuntor mínimo adequado é:</strong>  
+  <input onchange="checkWord(this,'30 a|30 amperes')">
+</p>
+
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')">
+  <span class="circle">A</span>
+  20 A
+</div>
+<div class="option" onclick="checkAnswer('B')">
+  <span class="circle">B</span>
+  30 A
+</div>
+<div class="option" onclick="checkAnswer('C')">
+  <span class="circle">C</span>
+  25 A
+</div>
+<div class="option" onclick="checkAnswer('D')">
+  <span class="circle">D</span>
+  23 A
+</div>
+<div class="option" onclick="checkAnswer('E')">
+  <span class="circle">E</span>
+  35 A
+</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // normalização para tolerar acentos/maiúsculas
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+  function paint(input, ok){
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')){
+      input.nextElementSibling.remove();
+    }
+    input.style.backgroundColor = ok ? "#c6f6c6" : "#fdd";
+    input.insertAdjacentHTML("afterend", `<span class="feedback">${ok ? '✅' : '❌'}</span>`);
+  }
+  function checkWord(input, patterns){
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    paint(input, opts.some(p => text.includes(p)));
+  }
+
+  // gabarito
+  function checkAnswer(letter){
+    const correct = 'B';
+    const message = document.getElementById('message');
+    if (letter === correct){
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sistemas Numéricos - Lista 03 — Problema 17</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 360px; text-align: center; margin: 0 4px; }
+    .option { display: block; margin: 10px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+    .hint { display:inline-block; margin-left:8px; font-size: 0.95em; color:#444; }
+    .hint button { background:#eee; border:1px solid #ccc; border-radius:6px; padding:2px 8px; cursor:pointer; }
+    .hint span { display:none; margin-left:6px; }
+    .imgwrap img { max-width: 520px; border: 1px solid #ddd; border-radius: 6px; padding: 4px; }
+    small { color:#444; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao16.html">🔹 Ir para Problema 16</a> |
+  <a href="questao18.html">🔹 Ir para Problema 18</a>
+</p>
+
+<h3>Problema 17:</h3>
+
+<p><strong>16 – Enem 2023</strong></p>
+<p><strong>Questão 132</strong></p>
+
+<p>
+  O manual de um automóvel alerta sobre os cuidados em relação à pressão do ar no interior dos pneus. Recomenda-se que a pressão seja verificada com os pneus frios (à temperatura ambiente). Um motorista, desatento a essa informação, realizou uma viagem longa sobre o asfalto quente e, em seguida, verificou que a pressão <em>P<sub>0</sub></em> no interior dos pneus não era a recomendada pelo fabricante. Na ocasião, a temperatura dos pneus era <em>T<sub>0</sub></em>. Após um longo período em repouso, os pneus do carro atingiram a temperatura ambiente <em>T</em>. Durante o resfriamento, não há alteração no volume dos pneus e na quantidade de ar no seu interior. Considere o ar dos pneus um gás perfeito (gás ideal).
+</p>
+
+<p>
+  Durante o processo de resfriamento, os valores de pressão em relação à temperatura (<em>P × T</em>) são representados pelo gráfico:
+</p>
+
+<!-- Ilustração dos gráficos (deixar comentada mesmo sem o arquivo) -->
+<!-- <div class="imgwrap"><img src="p_vs_t_pneus.png" alt="Quatro opções de gráfico P em função de T entre T0 e T"></div> -->
+
+<!-- SOLUÇÃO (INTERATIVA) ANTES DAS ALTERNATIVAS -->
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) Quais grandezas permanecem constantes no ar do pneu durante o resfriamento?</strong><br>
+  <input onchange="checkWord(this,'n e v constantes|n constante e v constante|numero de moles constante e volume constante|n constante|v constante')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>O pneu não vaza e o volume praticamente não muda.</span>
+  </span>
+</p>
+
+<p><strong>2) Escreva a lei dos gases aplicável nessas condições.</strong><br>
+  <input onchange="checkWord(this,'p/t = constante|p proporcional a t|gay-lussac|lei de gay lussac|p/t constante|p = k t')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>Com <em>n</em> e <em>V</em> fixos, <em>P/T</em> é constante.</span>
+  </span>
+</p>
+
+<p><strong>3) Em que escala deve estar a temperatura para o gráfico <em>P × T</em>?</strong><br>
+  <input onchange="checkWord(this,'kelvin|temperatura absoluta|k')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>O zero da escala precisa ser absoluto.</span>
+  </span>
+</p>
+
+<p><strong>4) Qual é a forma do gráfico correto de <em>P</em> por <em>T</em>?</strong><br>
+  <input onchange="checkWord(this,'reta crescente|reta que passa pela origem|relacao linear|p diretamente proporcional a t')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>Ao estender o gráfico, ele cruza a origem (0,0).</span>
+  </span>
+</p>
+
+<!-- ALTERNATIVAS -->
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')">
+  <span class="circle">A</span>
+  (Reta horizontal em <em>P</em> = <em>P</em><sub>0</sub> de <em>T</em> a <em>T</em><sub>0</sub>.)
+</div>
+<div class="option" onclick="checkAnswer('B')">
+  <span class="circle">B</span>
+  (Reta vertical em <em>T</em> = <em>T</em><sub>0</sub>.)
+</div>
+<div class="option" onclick="checkAnswer('C')">
+  <span class="circle">C</span>
+  (Reta decrescente/crescente linear de <em>T</em><sub>0</sub> até <em>T</em>, proporcional <em>P</em> ∝ <em>T</em>.)
+</div>
+<div class="option" onclick="checkAnswer('D')">
+  <span class="circle">D</span>
+  (Curva não linear.)
+</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // normaliza/remover acentos
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+
+  // checagem de palavras-chave (tolerante a variações)
+  function checkWord(input, patterns) {
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')) {
+      input.nextElementSibling.remove();
+    }
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    const ok = opts.some(p => text.includes(p));
+    if (ok) {
+      input.style.backgroundColor = "#c6f6c6";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">✅</span>');
+    } else {
+      input.style.backgroundColor = "#fdd";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">❌</span>');
+    }
+  }
+
+  // botão Mostrar dica
+  function toggleHint(btn){
+    const span = btn.nextElementSibling;
+    span.style.display = span.style.display === 'inline' ? 'none' : 'inline';
+  }
+
+  // gabarito
+  function checkAnswer(letter) {
+    const correct = 'C';
+    const message = document.getElementById('message');
+    if (letter === correct) {
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

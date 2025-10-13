@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sistemas Numéricos - Lista 03 — Problema 19</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 280px; text-align: center; margin: 0 4px; }
+    .option { display: block; margin: 10px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao18.html">🔹 Ir para Problema 18</a> |
+  <a href="questao20.html">🔹 Ir para Problema 20</a>
+</p>
+
+<h3>Problema 19:</h3>
+
+<!-- ENUNCIADO IDÊNTICO -->
+<p><strong>78. (Enem 2ª aplicação 2010)</strong></p>
+<p>
+  O efeito <em>Tyndall</em> é um efeito óptico de turbidez provocado pelas partículas de uma dispersão coloidal. Foi observado pela primeira vez por Michael Faraday em 1857 e, posteriormente, investigado pelo físico inglês John Tyndall. Este efeito é o que torna possível, por exemplo, observar as partículas de poeira suspensas no ar por meio de uma réstia de luz, observar gotículas de água que formam a neblina por meio do farol do carro ou, ainda, observar o feixe luminoso de uma lanterna por meio de um recipiente contendo gelatina.
+</p>
+<p>
+  Ao passar por um meio contendo partículas dispersas, um feixe de luz sofre o efeito Tyndall devido
+</p>
+
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) Tipo de meio:</strong>
+  o efeito ocorre em uma
+  <input onchange="checkWord(this,'dispersao coloidal|dispersão coloidal|meio coloidal')">
+  com partículas em suspensão.
+</p>
+
+<p><strong>2) Tamanho das partículas:</strong>
+  as partículas têm tamanho
+  <input onchange="checkWord(this,'comparavel ao comprimento de onda|comparável ao comprimento de onda|da ordem do comprimento de onda')">
+  da luz visível.
+</p>
+
+<p><strong>3) O que acontece com o feixe?</strong>
+  as partículas
+  <input onchange="checkWord(this,'espalham|dispersam|difundem')">
+  a luz em várias direções, tornando o feixe
+  <input onchange="checkWord(this,'visivel no meio|visível no meio|perceptivel no meio')">.
+</p>
+
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')">
+  <span class="circle">A</span>
+  à absorção do feixe de luz por este meio.
+</div>
+<div class="option" onclick="checkAnswer('B')">
+  <span class="circle">B</span>
+  à interferência do feixe de luz neste meio.
+</div>
+<div class="option" onclick="checkAnswer('C')">
+  <span class="circle">C</span>
+  à transmissão do feixe de luz neste meio.
+</div>
+<div class="option" onclick="checkAnswer('D')">
+  <span class="circle">D</span>
+  à refração do feixe de luz neste meio.
+</div>
+<div class="option" onclick="checkAnswer('E')">
+  <span class="circle">E</span>
+  ao espalhamento do feixe de luz neste meio.
+</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // normalização e feedback
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+  function paint(input, ok){
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')){
+      input.nextElementSibling.remove();
+    }
+    input.style.backgroundColor = ok ? "#c6f6c6" : "#fdd";
+    input.insertAdjacentHTML("afterend", `<span class="feedback">${ok ? '✅' : '❌'}</span>`);
+  }
+  function checkWord(input, patterns){
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    paint(input, opts.some(p => text.includes(p)));
+  }
+
+  // gabarito
+  function checkAnswer(letter){
+    const correct = 'E';
+    const message = document.getElementById('message');
+    if (letter === correct){
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

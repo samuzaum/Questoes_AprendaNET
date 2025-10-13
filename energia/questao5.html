@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sistemas Numéricos - Lista 03 — Problema 5</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 360px; text-align: center; margin: 0 4px; }
+    .option { display: block; margin: 10px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+    .hint { display:inline-block; margin-left:8px; font-size: 0.95em; color:#444; }
+    .hint button { background:#eee; border:1px solid #ccc; border-radius:6px; padding:2px 8px; cursor:pointer; }
+    .hint span { display:none; margin-left:6px; }
+    .imgwrap img { max-width: 520px; border: 1px solid #ddd; border-radius: 6px; padding: 4px; }
+    small { color:#444; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao4.html">🔹 Ir para Problema 4</a> |
+  <a href="questao6.html">🔹 Ir para Problema 6</a>
+</p>
+
+<h3>Problema 5:</h3>
+
+<p><strong>9 – Enem 2023</strong></p>
+<p><strong>Questão 117</strong></p>
+
+<p>
+  Os raios cósmicos são fontes de radiação ionizante potencialmente perigosas para o organismo humano. Para quantificar a dose de radiação recebida, utiliza-se o sievert (Sv), definido como a unidade de energia recebida por unidade de massa. A exposição à radiação proveniente de raios cósmicos aumenta com a altitude, o que pode representar um problema para as tripulações de aeronaves. Recentemente, foram realizadas medições acuradas das doses de radiação ionizante para voos entre Rio de Janeiro e Roma. Os resultados têm indicado que a dose média de radiação recebida na fase de cruzeiro (que geralmente representa 80% do tempo total de voo) desse trecho intercontinental é 2 μSv/h. As normas internacionais da aviação civil limitam em 1 000 horas por ano o tempo de trabalho para as tripulações que atuem em voos intercontinentais. Considere que a dose de radiação ionizante para uma radiografia torácica é estimada em 0,2 mSv.
+</p>
+
+<!-- Ilustração (deixar comentada mesmo sem o arquivo) -->
+<!-- <div class="imgwrap"><img src="raios_cosmicos_tripulacao.png" alt="Exposição a raios cósmicos em voos de longa distância"></div> -->
+
+<p>
+  A quantas radiografias torácicas corresponde a dose de radiação ionizante a qual um tripulante que atua no trecho Rio de Janeiro–Roma é exposto ao longo de um ano?
+</p>
+
+<!-- SOLUÇÃO (INTERATIVA) ANTES DAS ALTERNATIVAS -->
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) Qual a taxa efetiva média na fase de cruzeiro (considerando que ela ocupa 80% do tempo)?</strong><br>
+  <input onchange="checkWord(this,'1,6 μsv/h|1.6 μsv/h|1,6usv/h|1.6usv/h|1,6 micro sv/h|1.6 micro sv/h|1,6e0 μsv/h')">
+  <span class="hint">
+    <button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>Ajuste a taxa de 2 μSv/h pela fração de tempo utilizada.</span>
+  </span>
+</p>
+
+<p><strong>2) Estime a dose anual em μSv para 1 000 h de voo (use o valor acima).</strong><br>
+  <input onchange="checkWord(this,'1600 μsv|1,6e3 μsv|1600usv|1,6 msv|1.6 msv|0,0016 sv|0.0016 sv')">
+  <span class="hint">
+    <button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>Taxa efetiva (μSv/h) × tempo (h).</span>
+  </span>
+</p>
+
+<p><strong>3) Converta a dose anual para mSv e compare com 0,2 mSv por radiografia. Quantas radiografias equivalem?</strong><br>
+  <input onchange="checkWord(this,'8|oito radiografias|8 radiografias')">
+  <span class="hint">
+    <button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>Lembre: 1 000 μSv = 1 mSv.</span>
+  </span>
+</p>
+
+<!-- ALTERNATIVAS -->
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')"><span class="circle">A</span> 8</div>
+<div class="option" onclick="checkAnswer('B')"><span class="circle">B</span> 10</div>
+<div class="option" onclick="checkAnswer('C')"><span class="circle">C</span> 80</div>
+<div class="option" onclick="checkAnswer('D')"><span class="circle">D</span> 2</div>
+<div class="option" onclick="checkAnswer('E')"><span class="circle">E</span> 1 000</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // normaliza/remover acentos
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+
+  // checagem de palavras-chave
+  function checkWord(input, patterns) {
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')) {
+      input.nextElementSibling.remove();
+    }
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    const ok = opts.some(p => text.includes(p));
+    if (ok) {
+      input.style.backgroundColor = "#c6f6c6";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">✅</span>');
+    } else {
+      input.style.backgroundColor = "#fdd";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">❌</span>');
+    }
+  }
+
+  // botão Mostrar dica
+  function toggleHint(btn){
+    const span = btn.nextElementSibling;
+    span.style.display = span.style.display === 'inline' ? 'none' : 'inline';
+  }
+
+  // gabarito
+  function checkAnswer(letter) {
+    const correct = 'A';
+    const message = document.getElementById('message');
+    if (letter === correct) {
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

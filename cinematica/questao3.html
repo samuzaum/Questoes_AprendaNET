@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sistemas Numéricos - Lista 03 — Problema 03</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 100px; text-align: center; margin: 0 4px; }
+    .option { display: block; margin: 10px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao2.html">🔹 Ir para Problema 02</a> |
+  <a href="questao4.html">🔹 Ir para Problema 04</a>
+</p>
+
+<h3>Problema 03:</h3>
+
+<p><strong>(Enem PPL 2013)</strong> Conta-se que um curioso incidente aconteceu durante a Primeira Guerra Mundial. Quando voava a uma altitude de dois mil metros, um piloto francês viu o que acreditava ser uma mosca parada perto de sua face. Apanhando-a rapidamente, ficou surpreso ao verificar que se tratava de um projétil alemão.</p>
+
+<p>O piloto consegue apanhar o projétil, pois:</p>
+
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) Idéia central:</strong> Para o piloto, o projétil parece uma “mosca parada” porque a <em>velocidade relativa</em> entre eles é <input onchange="check(this,'0')">.</p>
+
+<p><strong>2) Condição de velocidade relativa:</strong></p>
+<p>
+  v<sub>projétil</sub> = <input onchange="check(this,'v_aviao')"> (mesmo módulo e mesmo sentido do avião).
+</p>
+
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')">
+  <span class="circle">A</span>
+  ele foi disparado em direção ao avião francês, freado pelo ar e parou justamente na frente do piloto.
+</div>
+<div class="option" onclick="checkAnswer('B')">
+  <span class="circle">B</span>
+  o avião se movia no mesmo sentido que o dele, com velocidade visivelmente superior.
+</div>
+<div class="option" onclick="checkAnswer('C')">
+  <span class="circle">C</span>
+  ele foi disparado para cima com velocidade constante, no instante em que o avião francês passou.
+</div>
+<div class="option" onclick="checkAnswer('D')">
+  <span class="circle">D</span>
+  o avião se movia no sentido oposto ao dele, com velocidade de mesmo valor.
+</div>
+<div class="option" onclick="checkAnswer('E')">
+  <span class="circle">E</span>
+  o avião se movia no mesmo sentido que o dele, com velocidade de mesmo valor.
+</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  function check(input, correct) {
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')) {
+      input.nextElementSibling.remove();
+    }
+    const raw = input.value.trim().toLowerCase();
+    const expected = correct.toLowerCase();
+    let ok = false;
+    if (expected === '0') {
+      ok = (raw === '0' || raw === 'zero');
+    } else if (expected === 'v_aviao') {
+      ok = (raw.includes('v') || raw.includes('avião') || raw.includes('aviao'));
+    } else {
+      ok = (raw === expected);
+    }
+    if (ok) {
+      input.style.backgroundColor = "#c6f6c6";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">✅</span>');
+    } else {
+      input.style.backgroundColor = "#fdd";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">❌</span>');
+    }
+  }
+
+  function checkAnswer(letter) {
+    const correct = 'E';
+    const message = document.getElementById('message');
+    if (letter === correct) {
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = `Errado. Tente novamente.`;
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

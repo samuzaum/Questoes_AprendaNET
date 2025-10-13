@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sistemas Numéricos - Lista 03 — Problema 8</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 250px; text-align: center; margin: 0 4px; }
+    .option { display: block; margin: 10px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+    .imgwrap img { max-width: 520px; border: 1px solid #ddd; border-radius: 6px; padding: 4px; }
+    small { color: #444; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao7.html">🔹 Ir para Problema 7</a> |
+  <a href="questao9.html">🔹 Ir para Problema 9</a>
+</p>
+
+<h3>Problema 8:</h3>
+
+<!-- ENUNCIADO IDÊNTICO -->
+<p><strong>66. (Enem PPL 2012)</strong></p>
+<p>A terapia fotodinâmica é um tratamento que utiliza luz para cura de câncer através da excitação de moléculas medicamentosas, que promovem a desestruturação das células tumorais. Para a eficácia do tratamento, é necessária a iluminação na região do tecido a ser tratado. Em geral, as moléculas medicamentosas absorvem as frequências mais altas. Por isso, as intervenções cutâneas são limitadas pela penetração da luz visível, conforme a figura:</p>
+
+<div class="imgwrap">
+  <img src="q37_fig_penetracao.png" alt="Profundidade de penetração da luz visível na pele">
+</div>
+
+<p>A profundidade de até 2 mm em que o tratamento cutâneo é eficiente se justifica porque a luz de</p>
+
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) Relação energia–frequência:</strong>
+  <br>E = <input onchange="checkWord(this,'h f|hf|planck f|constante de planck vezes f')"> (energia do fóton cresce com a frequência).
+</p>
+
+<p><strong>2) O enunciado diz que as moléculas “absorvem as frequências mais altas”. Isso implica que</strong>
+  <br>f <input onchange="checkWord(this,'alta|maior')"> ⇒ E <input onchange="checkWord(this,'maior|elevada')"> ⇒
+  absorção <input onchange="checkWord(this,'mais intensa|maior|forte')"> nas camadas superficiais.
+</p>
+
+<p><strong>3) Consequência para a profundidade de penetração:</strong>
+  <br>Quanto maior a absorção, <input onchange="checkWord(this,'menor a penetracao|menor a profundidade|penetra menos')"> — limitando o tratamento a poucos milímetros.
+</p>
+
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')">
+  <span class="circle">A</span>
+  curto comprimento de onda é mais refletida pela pele.
+</div>
+<div class="option" onclick="checkAnswer('B')">
+  <span class="circle">B</span>
+  maior energia é mais absorvida pelo tecido orgânico.
+</div>
+<div class="option" onclick="checkAnswer('C')">
+  <span class="circle">C</span>
+  menor energia é absorvida nas regiões mais profundas.
+</div>
+<div class="option" onclick="checkAnswer('D')">
+  <span class="circle">D</span>
+  todos os comprimentos de onda terão alta intensidade.
+</div>
+<div class="option" onclick="checkAnswer('E')">
+  <span class="circle">E</span>
+  cada comprimento de onda percebe um índice de refração diferente.
+</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // helpers: validação por palavras-chave (tolerante a acentos/variações)
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+  function paint(input, ok){
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')){
+      input.nextElementSibling.remove();
+    }
+    input.style.backgroundColor = ok ? "#c6f6c6" : "#fdd";
+    input.insertAdjacentHTML("afterend", `<span class="feedback">${ok ? '✅' : '❌'}</span>`);
+  }
+  function checkWord(input, patterns){
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    paint(input, opts.some(p => text.includes(p)));
+  }
+
+  // gabarito apenas aqui
+  function checkAnswer(letter){
+    const correct = 'B';
+    const message = document.getElementById('message');
+    if (letter === correct){
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Física — Lista 03 — Problema 3 (ENEM 2010 2ª aplicação)</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 260px; text-align: center; margin: 0 4px; }
+    .option { display: block; margin: 10px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao2.html">🔹 Ir para Problema 2</a> |
+  <a href="questao4.html">🔹 Ir para Problema 4</a>
+</p>
+
+<h3>Problema 3:</h3>
+
+<p><strong>100. (ENEM 2ª aplicação 2010)</strong></p>
+
+<p>
+Atualmente, existem inúmeras opções de celulares com telas sensíveis ao toque (touchscreen). Para decidir qual escolher, é bom conhecer as diferenças entre os principais tipos de telas sensíveis ao toque existentes no mercado. Existem dois sistemas básicos usados para reconhecer o toque de uma pessoa:
+</p>
+
+<p><em>— Primeiro sistema:</em> painel de vidro normal, recoberto por duas camadas afastadas por espaçadores. Uma camada resistente a riscos é colocada por cima de todo o conjunto. Uma corrente elétrica passa através das duas camadas enquanto a tela está operacional. Quando um usuário toca a tela, as duas camadas fazem contato exatamente naquele ponto. A mudança no campo elétrico é percebida, e as coordenadas do ponto de contato são calculadas pelo computador.
+</p>
+
+<p><em>— Segundo sistema:</em> uma camada que <strong>armazena carga elétrica</strong> é colocada no painel de vidro do monitor. Quando um usuário toca o monitor com seu dedo, parte da carga elétrica é transferida para o usuário, de modo que a carga na camada que a armazena diminui. Esta redução é medida nos circuitos localizados em cada canto do monitor. Considerando as diferenças relativas de carga em cada canto, o computador calcula exatamente onde ocorreu o toque.
+</p>
+
+<p><em>O elemento de armazenamento de carga análogo ao exposto no segundo sistema e a aplicação cotidiana correspondente são, respectivamente:</em></p>
+
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) Elemento que armazena carga:</strong>
+  <input onchange="checkWord(this,'capacitor|capacitores')">
+</p>
+
+<p><strong>2) Aplicação cotidiana correspondente:</strong>
+  <input onchange="checkWord(this,'flash de maquina fotografica|flash de máquina fotográfica|flash fotografico|flash fotográfico')">
+</p>
+
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')">
+  <span class="circle">A</span>
+  receptores — televisor.
+</div>
+<div class="option" onclick="checkAnswer('B')">
+  <span class="circle">B</span>
+  resistores — chuveiro elétrico.
+</div>
+<div class="option" onclick="checkAnswer('C')">
+  <span class="circle">C</span>
+  geradores — telefone celular.
+</div>
+<div class="option" onclick="checkAnswer('D')">
+  <span class="circle">D</span>
+  fusíveis — caixa de força residencial.
+</div>
+<div class="option" onclick="checkAnswer('E')">
+  <span class="circle">E</span>
+  capacitores — flash de máquina fotográfica.
+</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // normalização para tolerar acentos/maiúsculas
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+  function paint(input, ok){
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')){
+      input.nextElementSibling.remove();
+    }
+    input.style.backgroundColor = ok ? "#c6f6c6" : "#fdd";
+    input.insertAdjacentHTML("afterend", `<span class="feedback">${ok ? '✅' : '❌'}</span>`);
+  }
+  function checkWord(input, patterns){
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    paint(input, opts.some(p => text.includes(p)));
+  }
+
+  // gabarito
+  function checkAnswer(letter){
+    const correct = 'E';
+    const message = document.getElementById('message');
+    if (letter === correct){
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

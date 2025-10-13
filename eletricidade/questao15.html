@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Física — Lista 03 — Problema 15 (ENEM)</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 260px; text-align: center; margin: 0 4px; }
+    .option { display: block; margin: 10px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao14.html">🔹 Ir para Problema 14</a> |
+  <a href="questao16.html">🔹 Ir para Problema 16</a>
+</p>
+
+<h3>Problema 15:</h3>
+
+<p><strong>115. (ENEM)</strong></p>
+
+<p>
+O manual de um chuveiro elétrico apresenta uma tabela de características técnicas.  
+Uma pessoa adquiriu um chuveiro do modelo A e verificou que precisava trocá-lo por um disjuntor de 50 A. Intrigou-se com o fato de que o disjuntor a ser usado no modelo B deveria ter corrente 50% menor.  
+Considerando os chuveiros A e B funcionando à mesma potência de 4400 W, a razão entre suas resistências elétricas — que justifica a diferença — é aproximadamente:
+</p>
+
+<p><img src="questao_147.png" alt="Tabela técnica dos chuveiros A e B"></p>
+
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) A resistência de um chuveiro é dada pela fórmula:</strong>  
+  <input onchange="checkWord(this,'r=v^2/p|r = v^2/p|v^2 dividido por p')">  
+</p>
+
+<p><strong>2) Para os modelos A (127 V) e B (220 V), a razão das resistências é:</strong>  
+  <input onchange="checkWord(this,'(127/220)^2|127/220 ao quadrado|127^2/220^2|0,33|0.33')">
+</p>
+
+<p><strong>3) Aproximando o valor, obtemos:</strong>  
+  <input onchange="checkWord(this,'0,3|0.3')">
+</p>
+
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')">
+  <span class="circle">A</span>
+  0,3
+</div>
+<div class="option" onclick="checkAnswer('B')">
+  <span class="circle">B</span>
+  0,6
+</div>
+<div class="option" onclick="checkAnswer('C')">
+  <span class="circle">C</span>
+  0,8
+</div>
+<div class="option" onclick="checkAnswer('D')">
+  <span class="circle">D</span>
+  1,5
+</div>
+<div class="option" onclick="checkAnswer('E')">
+  <span class="circle">E</span>
+  3,0
+</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // normalização para tolerar acentos/maiúsculas
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+  function paint(input, ok){
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')){
+      input.nextElementSibling.remove();
+    }
+    input.style.backgroundColor = ok ? "#c6f6c6" : "#fdd";
+    input.insertAdjacentHTML("afterend", `<span class="feedback">${ok ? '✅' : '❌'}</span>`);
+  }
+  function checkWord(input, patterns){
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    paint(input, opts.some(p => text.includes(p)));
+  }
+
+  // gabarito
+  function checkAnswer(letter){
+    const correct = 'A';
+    const message = document.getElementById('message');
+    if (letter === correct){
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

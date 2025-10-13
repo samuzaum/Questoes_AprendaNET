@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sistemas Numéricos - Lista — Problema 36</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.65; font-size: 17px; }
+    input { width: 420px; text-align: center; margin: 6px 4px; padding: 6px 8px; font-size: 16px; }
+    .option { display: block; margin: 12px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+    .hint { display:inline-block; margin-left:8px; font-size: 0.95em; color:#444; }
+    .hint button { background:#eee; border:1px solid #ccc; border-radius:6px; padding:3px 10px; cursor:pointer; }
+    .hint span { display:none; margin-left:6px; }
+    .imgwrap img { max-width: 620px; border: 1px solid #ddd; border-radius: 6px; padding: 4px; }
+    .eq { font-family: Consolas, Menlo, monospace; background:#f7f7f7; padding: 2px 6px; border-radius: 4px; }
+    h3 { margin-top: 8px; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao35.html">🔹 Ir para Problema 35</a> |
+  <a href="questao37.html">🔹 Ir para Problema 37</a>
+</p>
+
+<h3>Problema 36:</h3>
+
+<p>
+  A fim de classificar as melhores rotas em um aplicativo de trânsito, um pesquisador propõe um modelo com base em circuitos elétricos. Nesse modelo, a corrente representa o número de carros que passam por um ponto da pista no intervalo de 1 s. A diferença de potencial (d.d.p.) corresponde à quantidade de energia por carro necessária para o deslocamento de 1 m. De forma análoga à Lei de Ohm, cada via é classificada pela sua resistência, sendo a de maior resistência a mais congestionada. O aplicativo mostra as rotas em ordem crescente, ou seja, da rota de menor para a de maior resistência. Como teste para o sistema, são utilizadas três possíveis vias para uma viagem de A até B, com os valores de d.d.p. e corrente conforme a tabela.
+</p>
+
+<!-- tabela/figura do enunciado (deixe comentado) -->
+<div class="imgwrap"><img src="tabela_rotas_ddp_corrente.png" alt="Tabela: rota 1: d.d.p.=510 J/(carro·m), I=4 carros/s; rota 2: 608 e 4; rota 3: 575 e 3"></div>
+
+<p>
+  <span class="eq">Rota&nbsp;1: d.d.p.=510 J/(carro·m), I=4 carros/s</span><br>
+  <span class="eq">Rota&nbsp;2: d.d.p.=608 J/(carro·m), I=4 carros/s</span><br>
+  <span class="eq">Rota&nbsp;3: d.d.p.=575 J/(carro·m), I=3 carros/s</span>
+</p>
+
+<p><strong>As rotas devem ser ordenadas, do menor para o maior valor de resistência equivalente (R = V/I), como</strong></p>
+
+<!-- =========================
+     SOLUÇÃO (INTERATIVA) ANTES DAS ALTERNATIVAS
+     ========================= -->
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) Calcule as “resistências” R = V/I para cada rota.</strong><br>
+  <input onchange="checkWord(this,'r1≈31,9|r1≈31.9|31,9|31.9|510/4|r1=510/4')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>Para a rota 1: R1 = 510/4.</span>
+  </span>
+  <br>
+  <input onchange="checkWord(this,'r2=152|608/4|≈152|152,0|152.0')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>Para a rota 2: R2 = 608/4.</span>
+  </span>
+  <br>
+  <input onchange="checkWord(this,'r3≈191,7|r3≈191.7|575/3|≈191|≈191,7')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>Para a rota 3: R3 = 575/3.</span>
+  </span>
+</p>
+
+<p><strong>2) Ordene de menor para maior resistência.</strong><br>
+  <input onchange="checkWord(this,'1, 2, 3|1 2 3|1-2-3|rota 1 depois 2 depois 3')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>Compare os valores numéricos obtidos em R1, R2 e R3.</span>
+  </span>
+</p>
+
+<!-- =========================
+     ALTERNATIVAS
+     ========================= -->
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')"><span class="circle">A</span> 1, 2, 3.</div>
+<div class="option" onclick="checkAnswer('B')"><span class="circle">B</span> 1, 3, 2.</div>
+<div class="option" onclick="checkAnswer('C')"><span class="circle">C</span> 2, 1, 3.</div>
+<div class="option" onclick="checkAnswer('D')"><span class="circle">D</span> 3, 1, 2.</div>
+<div class="option" onclick="checkAnswer('E')"><span class="circle">E</span> 3, 2, 1.</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // normalização para ignorar acentos
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+
+  // verificação por palavras-chave (tolerante)
+  function checkWord(input, patterns) {
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')) {
+      input.nextElementSibling.remove();
+    }
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    const ok = opts.some(p => text.includes(p));
+    if (ok) {
+      input.style.backgroundColor = "#c6f6c6";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">✅</span>');
+    } else {
+      input.style.backgroundColor = "#fdd";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">❌</span>');
+    }
+  }
+
+  // botão Mostrar dica
+  function toggleHint(btn){
+    const span = btn.nextElementSibling;
+    span.style.display = (span.style.display === 'inline') ? 'none' : 'inline';
+  }
+
+  // gabarito
+  function checkAnswer(letter) {
+    const correct = 'A';
+    const message = document.getElementById('message');
+    if (letter === correct) {
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

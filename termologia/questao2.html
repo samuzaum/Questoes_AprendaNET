@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Física — Lista 03 — Problema 2 (ENEM)</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 360px; text-align: center; margin: 0 4px; }
+    .option { display: block; margin: 10px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+    figure { margin: 12px 0; }
+    figcaption { font-size: .95rem; font-style: italic; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="index.html">🔹 Ir para Problema 1</a> |
+  <a href="questao3.html">🔹 Ir para Problema 3</a>
+</p>
+
+<h3>Problema 2:</h3>
+
+<p><strong>134. (Enem 2014)</strong></p>
+
+<p>
+A elevação da temperatura das águas de rios, lagos e mares diminui a solubilidade do oxigênio, 
+pondo em risco as diversas formas de vida aquática que dependem desse gás. 
+Se essa elevação de temperatura acontece por meios artificiais, dizemos que existe poluição térmica.  
+As usinas nucleares, pela própria natureza do processo de geração de energia, podem causar esse tipo de poluição.  
+Que parte do ciclo de geração de energia das usinas nucleares está associada a esse tipo de poluição?
+</p>
+
+
+
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) Qual processo causa a poluição térmica?</strong>
+  <input onchange="checkWord(this,'condensacao do vapor|resfriamento do vapor|agua de rios usada para condensar vapor')">
+</p>
+
+<p><strong>2) O que acontece com a água usada nesse processo?</strong>
+  <input onchange="checkWord(this,'retorna mais quente ao rio|aumenta temperatura do rio')">
+</p>
+
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')">
+  <span class="circle">A</span>
+  Fissão do material radioativo.
+</div>
+<div class="option" onclick="checkAnswer('B')">
+  <span class="circle">B</span>
+  Condensação do vapor-d'água no final do processo.
+</div>
+<div class="option" onclick="checkAnswer('C')">
+  <span class="circle">C</span>
+  Conversão de energia das turbinas pelos geradores.
+</div>
+<div class="option" onclick="checkAnswer('D')">
+  <span class="circle">D</span>
+  Aquecimento da água líquida para gerar vapor d'água.
+</div>
+<div class="option" onclick="checkAnswer('E')">
+  <span class="circle">E</span>
+  Lançamento do vapor-d'água sobre as pás das turbinas.
+</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // normalização para tolerar acentos/maiúsculas
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+  function paint(input, ok){
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')){
+      input.nextElementSibling.remove();
+    }
+    input.style.backgroundColor = ok ? "#c6f6c6" : "#fdd";
+    input.insertAdjacentHTML("afterend", `<span class="feedback">${ok ? '✅' : '❌'}</span>`);
+  }
+  function checkWord(input, patterns){
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    paint(input, opts.some(p => text.includes(p)));
+  }
+
+  // gabarito
+  function checkAnswer(letter){
+    const correct = 'B';
+    const message = document.getElementById('message');
+    if (letter === correct){
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

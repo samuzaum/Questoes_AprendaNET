@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Física — Lista 03 — Problema 13 (ENEM)</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 260px; text-align: center; margin: 0 4px; }
+    .option { display: block; margin: 10px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao12.html">🔹 Ir para Problema 12</a> |
+  <a href="questao14.html">🔹 Ir para Problema 14</a>
+</p>
+
+<h3>Problema 13:</h3>
+
+<p><strong>113. (ENEM)</strong></p>
+
+<p>
+Um eletricista precisa medir a resistência elétrica de uma lâmpada.  
+Ele dispõe de uma pilha, de uma lâmpada (L), de alguns fios e de dois aparelhos:  
+um voltímetro (V), para medir a diferença de potencial entre dois pontos, e um amperímetro (A), para medir a corrente elétrica.  
+O circuito elétrico montado pelo eletricista para medir essa resistência é:
+</p>
+
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) Para medir a resistência, o amperímetro deve estar em:</strong>  
+  <input onchange="checkWord(this,'serie|série')"> com a lâmpada.
+</p>
+
+<p><strong>2) O voltímetro deve estar em:</strong>  
+  <input onchange="checkWord(this,'paralelo')"> aos terminais da lâmpada.
+</p>
+
+<p><strong>3) Logo, o circuito correto é o da alternativa:</strong>  
+  <input onchange="checkWord(this,'c')">
+</p>
+
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')">
+  <span class="circle">A</span>
+  <img src="questao_128.png" alt="Alternativa A">
+</div>
+<div class="option" onclick="checkAnswer('B')">
+  <span class="circle">B</span>
+  <img src="questao_133.png" alt="Alternativa B">
+</div>
+<div class="option" onclick="checkAnswer('C')">
+  <span class="circle">C</span>
+  <img src="questao_135.png" alt="Alternativa C">
+</div>
+<div class="option" onclick="checkAnswer('D')">
+  <span class="circle">D</span>
+  <img src="questao_138.png" alt="Alternativa D">
+</div>
+<div class="option" onclick="checkAnswer('E')">
+  <span class="circle">E</span>
+  <img src="questao_139.png" alt="Alternativa E">
+</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // normalização para tolerar acentos/maiúsculas
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+  function paint(input, ok){
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')){
+      input.nextElementSibling.remove();
+    }
+    input.style.backgroundColor = ok ? "#c6f6c6" : "#fdd";
+    input.insertAdjacentHTML("afterend", `<span class="feedback">${ok ? '✅' : '❌'}</span>`);
+  }
+  function checkWord(input, patterns){
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    paint(input, opts.some(p => text.includes(p)));
+  }
+
+  // gabarito
+  function checkAnswer(letter){
+    const correct = 'C';
+    const message = document.getElementById('message');
+    if (letter === correct){
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

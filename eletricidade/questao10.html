@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Física — Lista 03 — Problema 10 (ENEM 2013)</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 260px; text-align: center; margin: 0 4px; }
+    .option { display: block; margin: 10px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao9.html">🔹 Ir para Problema 9</a> |
+  <a href="questao11.html">🔹 Ir para Problema 11</a>
+</p>
+
+<h3>Problema 10:</h3>
+
+<p><strong>108. (ENEM 2013)</strong></p>
+
+<p>
+Um circuito em série é formado por uma pilha, uma lâmpada incandescente e uma chave interruptora. 
+Ao se ligar a chave, a lâmpada acende quase instantaneamente, irradiando calor e luz. 
+Popularmente, associa-se o fenômeno da irradiação de energia a um desgaste da corrente elétrica, ao atravessar o filamento da lâmpada, e à rapidez com que a lâmpada começa a brilhar. 
+Essa explicação está em desacordo com o modelo clássico de corrente.
+</p>
+
+<p>
+De acordo com o modelo mencionado, o fato de a lâmpada acender quase instantaneamente está relacionado à rapidez com que
+</p>
+
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) O que acontece ao fechar a chave?</strong>  
+  O <input onchange="checkWord(this,'campo eletrico|campo elétrico')"> se estabelece em todo o circuito.
+</p>
+
+<p><strong>2) Isso ocorre quase instantaneamente porque:</strong>  
+  a <input onchange="checkWord(this,'informacao eletromagnetica|sinal eletromagnetico')"> se propaga rapidamente ao longo dos condutores.
+</p>
+
+<p><strong>3) Assim, o brilho imediato da lâmpada está associado ao:</strong>  
+  <input onchange="checkWord(this,'estabelecimento do campo eletrico|estabelecimento do campo elétrico')">
+</p>
+
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')">
+  <span class="circle">A</span>
+  o fluido elétrico se desloca no circuito.
+</div>
+<div class="option" onclick="checkAnswer('B')">
+  <span class="circle">B</span>
+  as cargas negativas móveis atravessam o circuito.
+</div>
+<div class="option" onclick="checkAnswer('C')">
+  <span class="circle">C</span>
+  a bateria libera cargas móveis para o filamento da lâmpada.
+</div>
+<div class="option" onclick="checkAnswer('D')">
+  <span class="circle">D</span>
+  o campo elétrico se estabelece em todos os pontos do circuito.
+</div>
+<div class="option" onclick="checkAnswer('E')">
+  <span class="circle">E</span>
+  as cargas positivas e negativas se chocam no filamento da lâmpada.
+</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // normalização para tolerar acentos/maiúsculas
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+  function paint(input, ok){
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')){
+      input.nextElementSibling.remove();
+    }
+    input.style.backgroundColor = ok ? "#c6f6c6" : "#fdd";
+    input.insertAdjacentHTML("afterend", `<span class="feedback">${ok ? '✅' : '❌'}</span>`);
+  }
+  function checkWord(input, patterns){
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    paint(input, opts.some(p => text.includes(p)));
+  }
+
+  // gabarito
+  function checkAnswer(letter){
+    const correct = 'D';
+    const message = document.getElementById('message');
+    if (letter === correct){
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

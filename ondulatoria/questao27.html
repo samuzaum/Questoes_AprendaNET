@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sistemas Numéricos - Lista — Problema 27</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.65; font-size: 17px; }
+    input { width: 460px; text-align: center; margin: 6px 4px; padding: 6px 8px; font-size: 16px; }
+    .option { display: block; margin: 12px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+    .hint { display:inline-block; margin-left:8px; font-size: 0.95em; color:#444; }
+    .hint button { background:#eee; border:1px solid #ccc; border-radius:6px; padding:3px 10px; cursor:pointer; }
+    .hint span { display:none; margin-left:6px; }
+    .imgwrap img { max-width: 620px; border: 1px solid #ddd; border-radius: 6px; padding: 4px; }
+    small { color:#444; }
+    .eq { font-family: Consolas, Menlo, monospace; background:#f7f7f7; padding: 2px 6px; border-radius: 4px; }
+    h3 { margin-top: 8px; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao26.html">🔹 Ir para Problema 26</a> |
+  <a href="questao28.html">🔹 Ir para Problema 28</a>
+</p>
+
+<h3>Problema 27:</h3>
+
+<p><strong>1 – Enem 2022</strong></p>
+
+<p>
+  O sinal sonoro oriundo da queda de um grande bloco de gelo de uma geleira é detectado por dois dispositivos situados em um barco, sendo que o detector <strong>A</strong> está imerso em <u>água</u> e o <strong>B</strong>, na proa da embarcação. Sabe-se que a velocidade do som na água é de <span class="eq">1540 m/s</span> e no ar é de <span class="eq">340 m/s</span>.
+</p>
+
+<p>
+  Os gráficos indicam, em tempo real, o sinal sonoro detectado pelos dois dispositivos, os quais foram ligados simultaneamente em um instante anterior à queda do bloco de gelo. Ao comparar pontos correspondentes desse sinal em cada dispositivo, é possível obter informações sobre a onda sonora.
+</p>
+
+<!-- IMAGENS DO ENUNCIADO (MANTER COMENTADAS) -->
+<div class="imgwrap"><img src="barco_geladeira_distancia.png" alt="Barco com sensores A (na água) e B (no ar), distante L do iceberg"></div>
+<div class="imgwrap"><img src="sinais_tempo_A.png" alt="Sinal detectado no sensor A (água)"></div>
+
+
+<p><strong>Com base nos dados fornecidos, a distância <em>L</em> entre o barco e a geleira, em metros, é mais próxima de:</strong></p>
+
+<!-- =========================
+     SOLUÇÃO (INTERATIVA)
+     ========================= -->
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) Qual sensor detecta primeiro? E a diferença de tempo observada nos gráficos (aprox.)?</strong><br>
+  <input onchange="checkWord(this,'agua primeiro|água primeiro|sensor a primeiro|12 s|12s|cerca de 12 s')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>Na água o som é mais rápido; do gráfico, a defasagem é ≈ 12 s.</span>
+  </span>
+</p>
+
+<p><strong>2) Relacione L e o atraso Δt (texto simples):</strong><br>
+  <span class="eq">t_ar − t_agua = Δt</span> &nbsp; e &nbsp;
+  <span class="eq">L = v_agua · t_agua = v_ar · t_ar</span><br>
+  Daí, <span class="eq">L = (v_agua · v_ar / (v_agua − v_ar)) · Δt</span>.<br>
+  <input onchange="checkWord(this,'l=(1540*340/(1540-340))*12|5240 m|aprox 5,24 km|5,24 km|5.24 km|~5,2 km')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>Use v_agua = 1540, v_ar = 340 (m/s) e Δt ≈ 12 s.</span>
+  </span>
+</p>
+
+<!-- =========================
+     ALTERNATIVAS
+     ========================= -->
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')"><span class="circle">A</span> 339000</div>
+<div class="option" onclick="checkAnswer('B')"><span class="circle">B</span> 78900</div>
+<div class="option" onclick="checkAnswer('C')"><span class="circle">C</span> 14400</div>
+<div class="option" onclick="checkAnswer('D')"><span class="circle">D</span> 5240</div>
+<div class="option" onclick="checkAnswer('E')"><span class="circle">E</span> 100</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+
+  function checkWord(input, patterns) {
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')) {
+      input.nextElementSibling.remove();
+    }
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    const ok = opts.some(p => text.includes(p));
+    if (ok) {
+      input.style.backgroundColor = "#c6f6c6";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">✅</span>');
+    } else {
+      input.style.backgroundColor = "#fdd";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">❌</span>');
+    }
+  }
+
+  function toggleHint(btn){
+    const span = btn.nextElementSibling;
+    span.style.display = span.style.display === 'inline' ? 'none' : 'inline';
+  }
+
+  function checkAnswer(letter) {
+    const correct = 'D';
+    const message = document.getElementById('message');
+    if (letter === correct) {
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

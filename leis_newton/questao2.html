@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sistemas Numéricos - Lista 03 — Problema 2</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 150px; text-align: center; margin: 0 4px; }
+    .option { display: inline-block; margin: 10px; cursor: pointer; vertical-align: top; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .option .label { display: flex; align-items: center; }
+    .optimg { display: block; max-width: 220px; border: 1px solid #ddd; border-radius: 6px; padding: 4px; margin-top: 6px; }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="index.html">🔹 Ir para Problema 1</a> |
+  <a href="questao3.html">🔹 Ir para Problema 3</a>
+</p>
+
+<h3>Problema 2:</h3>
+
+<!-- ENUNCIADO IDÊNTICO -->
+<p><strong>14. (ENEM 2013)</strong></p>
+<p>Em um dia sem vento, ao saltar de um avião, um paraquedista cai verticalmente até atingir a velocidade limite. No instante em que o paraquedas é aberto (instante TA), ocorre a diminuição de sua velocidade de queda. Algum tempo após a abertura do paraquedas, ele passa a ter velocidade de queda constante, o que possibilita sua aterrissagem em segurança.</p>
+<p>Que gráfico representa a força resultante sobre o paraquedista, durante o seu movimento de queda?</p>
+
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) Início da queda:</strong>
+  resistência do ar é <input onchange="checkWord(this,'zero|desprezavel|desprezível')"> ⇒ resultante é o peso (para baixo) ⇒ valor
+  <input onchange="checkWord(this,'positivo|maior que zero')">.
+</p>
+
+<p><strong>2) Antes de TA (paraquedas fechado):</strong>
+  com a velocidade aumentando, a resistência do ar
+  <input onchange="checkWord(this,'aumenta|cresce')"> e a resultante
+  <input onchange="checkWord(this,'diminui|tende a zero|aproxima de zero')"> (primeira velocidade limite).
+</p>
+
+<p><strong>3) No instante TA (abertura do paraquedas):</strong>
+  a resistência do ar fica maior que o peso ⇒ a resultante passa a ser
+  <input onchange="checkWord(this,'negativa|para cima')">.
+</p>
+
+<p><strong>4) Após TA:</strong>
+  a velocidade diminui, a resistência do ar diminui, e a resultante
+  <input onchange="checkWord(this,'se aproxima de zero pelo lado negativo|tende a zero negativa')"> (nova velocidade limite).
+</p>
+
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<!-- Coloque as imagens das alternativas (recortes) na mesma pasta e ajuste os src -->
+<div class="option" onclick="checkAnswer('A')">
+  <div class="label"><span class="circle">A</span> a)</div>
+  <img class="optimg" src="q14_a.png" alt="Gráfico da alternativa a">
+</div>
+
+<div class="option" onclick="checkAnswer('B')">
+  <div class="label"><span class="circle">B</span> b)</div>
+  <img class="optimg" src="q14_b.png" alt="Gráfico da alternativa b">
+</div>
+
+<div class="option" onclick="checkAnswer('C')">
+  <div class="label"><span class="circle">C</span> c)</div>
+  <img class="optimg" src="q14_c.png" alt="Gráfico da alternativa c">
+</div>
+
+<div class="option" onclick="checkAnswer('D')">
+  <div class="label"><span class="circle">D</span> d)</div>
+  <img class="optimg" src="q14_d.png" alt="Gráfico da alternativa d">
+</div>
+
+<div class="option" onclick="checkAnswer('E')">
+  <div class="label"><span class="circle">E</span> e)</div>
+  <img class="optimg" src="q14_e.png" alt="Gráfico da alternativa e">
+</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // Validação por palavras-chave (flexível, sem LaTeX)
+  function checkWord(input, patterns) {
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')) {
+      input.nextElementSibling.remove();
+    }
+    const text = input.value.trim().toLowerCase();
+    const opts = patterns.toLowerCase().split('|').map(s => s.trim());
+    const ok = opts.some(p => text.includes(p));
+    if (ok) {
+      input.style.backgroundColor = "#c6f6c6";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">✅</span>');
+    } else {
+      input.style.backgroundColor = "#fdd";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">❌</span>');
+    }
+  }
+
+  // Gabarito só aqui (nada "entrega" no texto)
+  function checkAnswer(letter) {
+    const correct = 'B';
+    const message = document.getElementById('message');
+    if (letter === correct) {
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

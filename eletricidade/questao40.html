@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sistemas Numéricos - Lista — Problema 40 (ENEM 2022)</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.65; font-size: 17px; }
+    input { width: 520px; text-align: center; margin: 6px 4px; padding: 6px 8px; font-size: 16px; }
+    .option { display: block; margin: 16px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a { text-decoration: none; background-color: #6c9ba4; color: white;
+        padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block; }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+    .hint { display:inline-block; margin-left:8px; font-size: 0.95em; color:#444; }
+    .hint button { background:#eee; border:1px solid #ccc; border-radius:6px; padding:3px 10px; cursor:pointer; }
+    .hint span { display:none; margin-left:6px; }
+    .imgwrap img { max-width: 620px; border: 1px solid #ddd; border-radius: 6px; padding: 4px; }
+    .altimg { max-width: 420px; border: 1px solid #ddd; border-radius: 6px; padding: 4px; vertical-align: middle; }
+    .optline { display:flex; align-items:center; gap:10px; }
+    .eq { font-family: Consolas, Menlo, monospace; background:#f7f7f7; padding: 2px 6px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao39.html">🔹 Ir para Problema 39</a> |
+  <a href="questao41.html">🔹 Ir para Problema 41</a>
+</p>
+
+<h3>Problema 40:</h3>
+
+<p><strong>14 – Enem 2022</strong></p>
+
+<p>O quadro mostra valores de corrente elétrica e seus efeitos sobre o corpo humano.</p>
+
+<!-- Tabela ilustrativa (opcional) -->
+<div class="imgwrap"><img src="tabela_efeitos_corrente.png" alt="Faixas de corrente e efeitos sobre o corpo humano"></div>
+
+<p>
+A corrente que percorrerá o corpo depende da tensão aplicada e da resistência elétrica média do corpo humano.
+Considere um acidente utilizando baterias de 12 V. Um indivíduo com a pele <strong>molhada</strong> sofreu
+<strong>parada respiratória</strong> ao tocar simultaneamente nos pontos A e B de uma associação dessas baterias.
+Qual associação de baterias foi responsável pelo acidente?
+</p>
+
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) Faixa em que ocorre <u>parada respiratória</u> (pela tabela):</strong><br>
+  <input onchange="checkWord(this,'20 a 100 ma|20–100 ma|entre 20 e 100 ma|0,02 a 0,1 a|0.02 a 0.1 a')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>Procure a linha “parada respiratória”.</span>
+  </span>
+</p>
+
+<p><strong>2) Qual associação gera a <u>maior tensão</u> entre A e B?</strong><br>
+  <input onchange="checkWord(this,'serie|em serie|24 v|duas baterias em serie')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>Em série as tensões somam: 12 V + 12 V = 24 V.</span>
+  </span>
+</p>
+
+<p><strong>3) Ordem de grandeza da corrente com pele molhada (use R≈500–1000 Ω):</strong><br>
+  <input onchange="checkWord(this,'≈48 ma|48 ma|i=24/500|≈24 ma|24 ma|i=24/1000')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>Lei de Ohm: <span class="eq">I = V/R</span>. Com 24 V e R baixo, cai em 20–100 mA.</span>
+  </span>
+</p>
+
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<!-- TODAS AS ALTERNATIVAS COMO IMAGEM -->
+<div class="option" onclick="checkAnswer('A')">
+  <div class="optline">
+    <span class="circle">A</span>
+    <img class="altimg" src="altA_baterias_em_serie.png" alt="Associação em série entre A e B (24 V)">
+  </div>
+</div>
+
+<div class="option" onclick="checkAnswer('B')">
+  <div class="optline">
+    <span class="circle">B</span>
+    <img class="altimg" src="altB_paralelo_12V.png" alt="Associação em paralelo (12 V)">
+  </div>
+</div>
+
+<div class="option" onclick="checkAnswer('C')">
+  <div class="optline">
+    <span class="circle">C</span>
+    <img class="altimg" src="altC_derivacao_12V.png" alt="Arranjo com derivações mantendo 12 V entre A e B">
+  </div>
+</div>
+
+<div class="option" onclick="checkAnswer('D')">
+  <div class="optline">
+    <span class="circle">D</span>
+    <img class="altimg" src="altD_paralelo_derivacao.png" alt="Elementos em paralelo com derivação entre A e B">
+  </div>
+</div>
+
+<div class="option" onclick="checkAnswer('E')">
+  <div class="optline">
+    <span class="circle">E</span>
+    <img class="altimg" src="altE_simetrico_menor_tensao.png" alt="Arranjo simétrico com queda efetiva menor">
+  </div>
+</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+  function checkWord(input, patterns) {
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')) {
+      input.nextElementSibling.remove();
+    }
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    const ok = opts.some(p => text.includes(p));
+    if (ok) { input.style.backgroundColor = "#c6f6c6"; input.insertAdjacentHTML("afterend", '<span class="feedback">✅</span>'); }
+    else { input.style.backgroundColor = "#fdd"; input.insertAdjacentHTML("afterend", '<span class="feedback">❌</span>'); }
+  }
+  function toggleHint(btn){
+    const span = btn.nextElementSibling;
+    span.style.display = (span.style.display === 'inline') ? 'none' : 'inline';
+  }
+  function checkAnswer(letter) {
+    const correct = 'A';
+    const message = document.getElementById('message');
+    if (letter === correct) { message.textContent = 'Correto!'; message.style.color = 'green'; }
+    else { message.textContent = 'Errado. Tente novamente.'; message.style.color = 'red'; }
+  }
+</script>
+
+</body>
+</html>

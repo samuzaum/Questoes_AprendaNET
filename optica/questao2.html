@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Sistemas Numéricos - Lista 03</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 60px; text-align: center; margin: 0 4px; }
+    .option { display: inline-block; margin: 10px; cursor: pointer; }
+    .circle { width: 30px; height: 30px; background-color: #6c9ba4; color: white; border-radius: 50%;
+              display: inline-flex; align-items: center; justify-content: center; font-weight: bold; font-size: 16px; }
+    .feedback { font-weight: bold; margin-top: 6px; }
+    .fraction { display: inline-block; text-align: center; vertical-align: middle; margin: 0 6px; }
+    .fraction .bar { display: block; border-top: 1.5px solid black; width: 100%; margin: 1px 0; }
+    a { text-decoration: none; background-color: #6c9ba4; color: white; padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block; }
+    a:hover { background-color: #55808d; }
+    .step { background:#f7fbfc; border-radius:8px; padding:10px 12px; margin:10px 0; }
+    .tick { margin-left: 6px; font-weight: bold; }
+    label { margin-right: 14px; cursor: pointer; }
+    #message { font-weight: bold; margin-top: 10px; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="index.html">🔹 Ir para Problema 1</a> |
+  <a href="questao3.html">🔹 Ir para Problema 3</a>
+</p>
+
+<h3>Problema 2:</h3>
+
+<p><strong>(Enem 2014)</strong> Uma proposta de dispositivo capaz de indicar a qualidade da gasolina vendida em postos e, consequentemente, evitar fraudes, poderia utilizar o conceito de refração luminosa. Nesse sentido, a gasolina não adulterada, na temperatura ambiente, apresenta <em>razão entre os senos dos raios incidente e refratado</em> igual a 1,4. Desse modo, fazendo incidir o feixe de luz proveniente do ar com um ângulo fixo e maior que zero, qualquer modificação no ângulo do feixe refratado indicará adulteração no combustível.</p>
+
+<p>Em uma fiscalização rotineira, o teste apresentou o valor de 1,9. Qual foi o comportamento do raio refratado?</p>
+
+<h4>Solução:</h4>
+
+<div class="step">
+  <p><strong>1) Comparação do quociente.</strong> Considere o valor do teste em relação ao da gasolina pura, calculando mentalmente o quociente
+  <span class="fraction"><span>1,4</span><span class="bar"></span><span>1,9</span></span>.
+  Esse quociente é:</p>
+  <label><input type="radio" name="q1" value="menor" onchange="checkStep('q1','menor')"> menor que 1</label>
+  <label><input type="radio" name="q1" value="igual"  onchange="checkStep('q1','menor')"> igual a 1</label>
+  <label><input type="radio" name="q1" value="maior" onchange="checkStep('q1','menor')"> maior que 1</label>
+  <span id="q1_tick" class="tick"></span>
+</div>
+
+<div class="step">
+  <p><strong>2) Consequência para o ângulo refratado.</strong> Sabendo que
+  <em>sen&nbsp;r<sub>2</sub> = (1,4/1,9) · sen&nbsp;r<sub>1</sub></em>, a relação correta entre os ângulos é:</p>
+  <label><input type="radio" name="q2" value="menor" onchange="checkStep('q2','menor')"> r<sub>2</sub> &lt; r<sub>1</sub></label>
+  <label><input type="radio" name="q2" value="igual"  onchange="checkStep('q2','menor')"> r<sub>2</sub> = r<sub>1</sub></label>
+  <label><input type="radio" name="q2" value="maior" onchange="checkStep('q2','menor')"> r<sub>2</sub> &gt; r<sub>1</sub></label>
+  <span id="q2_tick" class="tick"></span>
+</div>
+
+<div class="step">
+  <p><strong>3) Interpretação geométrica.</strong> Se o ângulo refratado diminui ao entrar no outro meio, o raio:</p>
+  <label><input type="radio" name="q3" value="aproxima" onchange="checkStep('q3','aproxima')"> aproxima-se da normal</label>
+  <label><input type="radio" name="q3" value="afasta" onchange="checkStep('q3','aproxima')"> afasta-se da normal</label>
+  <label><input type="radio" name="q3" value="outros" onchange="checkStep('q3','aproxima')"> sofre outro efeito</label>
+  <span id="q3_tick" class="tick"></span>
+</div>
+
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')"><div class="circle">A</div> Mudou de sentido.</div>
+<div class="option" onclick="checkAnswer('B')"><div class="circle">B</div> Sofreu reflexão total.</div>
+<div class="option" onclick="checkAnswer('C')"><div class="circle">C</div> Atingiu o valor do ângulo limite.</div>
+<div class="option" onclick="checkAnswer('D')"><div class="circle">D</div> Direcionou-se para a superfície de separação.</div>
+<div class="option" onclick="checkAnswer('E')"><div class="circle">E</div> Aproximou-se da normal à superfície de separação.</div>
+
+<div id="message" class="feedback"></div>
+
+<script>
+  function mark(el, ok){
+    el.textContent = ok ? '✅' : '❌';
+    el.style.color = ok ? 'green' : 'red';
+  }
+  function checkStep(group, correct){
+    const sel = document.querySelector(`input[name="${group}"]:checked`);
+    const ok = sel && sel.value === correct;
+    mark(document.getElementById(group + '_tick'), ok);
+  }
+  function checkAnswer(letter){
+    const correct='E';
+    const msg=document.getElementById('message');
+    if(letter===correct){ msg.textContent='Correto!'; msg.style.color='green'; }
+    else{ msg.textContent='Tente novamente.'; msg.style.color='red'; }
+  }
+</script>
+
+</body>
+</html>

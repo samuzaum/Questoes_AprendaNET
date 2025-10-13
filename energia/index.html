@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sistemas Numéricos - Lista 03 — Problema 18</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 220px; text-align: center; margin: 0 4px; }
+    .option { display: block; margin: 10px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+  </style>
+</head>
+<body>
+
+<p>
+
+  <a href="questao2.html">🔹 Ir para Problema 2</a>
+</p>
+
+<h3>Problema 1:</h3>
+
+<!-- ENUNCIADO IDÊNTICO -->
+<p><strong>31. (Enem 2010)</strong> Com o objetivo de se testar a eficiência de fornos de micro-ondas, planejou-se o aquecimento em 10°C de amostras de diferentes substâncias, cada uma com determinada massa, em cinco fornos de marcas distintas. Nesse teste, cada forno operou à potência máxima.</p>
+
+<p>O forno mais eficiente foi aquele que:</p>
+
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) Definição de eficiência do aquecimento:</strong>
+  eficiência = <input onchange="checkWord(this,'energia util/energia consumida|energia transferida/energia eletrica|pout/pin|energia util dividida pela consumida')">
+  (aceita “energia útil / energia elétrica consumida” ou “potência útil / potência de entrada”).
+</p>
+
+<p><strong>2) Energia que a amostra precisa para aquecer 10°C:</strong>
+  Q = <input onchange="checkWord(this,'m*c*delta t|mcΔt|mc*delta t|m c delta t')"> (depende da massa e do calor específico).
+</p>
+
+<p><strong>3) Taxa de aquecimento:</strong>
+  a potência efetiva entregue à amostra é <input onchange="checkWord(this,'q/t|energia/t|potencia util')">.
+  Para fornos de mesma potência de entrada, maior eficiência ⇒
+  <input onchange="checkWord(this,'maior energia em menor tempo|mesmo q em menor tempo|menor tempo para aquecer')">.
+</p>
+
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')">
+  <span class="circle">A</span>
+  forneceu a maior quantidade de energia às amostras.
+</div>
+<div class="option" onclick="checkAnswer('B')">
+  <span class="circle">B</span>
+  cedeu energia à amostra de maior massa em mais tempo.
+</div>
+<div class="option" onclick="checkAnswer('C')">
+  <span class="circle">C</span>
+  forneceu a maior quantidade de energia em menos tempo.
+</div>
+<div class="option" onclick="checkAnswer('D')">
+  <span class="circle">D</span>
+  cedeu energia à amostra de menor calor específico mais lentamente.
+</div>
+<div class="option" onclick="checkAnswer('E')">
+  <span class="circle">E</span>
+  forneceu a menor quantidade de energia às amostras em menos tempo.
+</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // --- helpers de validação por palavras-chave (flexível, sem LaTeX) ---
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+  function checkWord(input, patterns) {
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')) {
+      input.nextElementSibling.remove();
+    }
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    const ok = opts.some(p => text.includes(p));
+    if (ok) {
+      input.style.backgroundColor = "#c6f6c6";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">✅</span>');
+    } else {
+      input.style.backgroundColor = "#fdd";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">❌</span>');
+    }
+  }
+
+  // gabarito apenas aqui
+  function checkAnswer(letter) {
+    const correct = 'C';
+    const message = document.getElementById('message');
+    if (letter === correct) {
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

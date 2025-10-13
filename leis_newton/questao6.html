@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sistemas Numéricos - Lista 03 — Problema 6</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 320px; text-align: center; margin: 0 4px; }
+    .option { display: block; margin: 10px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+    .hint { display:inline-block; margin-left:8px; font-size: 0.95em; color:#444; }
+    .hint button { background:#eee; border:1px solid #ccc; border-radius:6px; padding:2px 8px; cursor:pointer; }
+    .hint span { display:none; margin-left:6px; }
+    .imgwrap img { max-width: 520px; border: 1px solid #ddd; border-radius: 6px; padding: 4px; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao5.html">🔹 Ir para Problema 5</a> |
+  <a href="questao7.html">🔹 Ir para Problema 7</a>
+</p>
+
+<h3>Problema 6:</h3>
+
+<p><strong>4 – Enem 2023</strong></p>
+<p><strong>Questão 109</strong></p>
+
+<p>
+  Uma academia decide trocar gradualmente seus aparelhos de musculação. Agora, os frequentadores que utilizam os aparelhos do tipo 1 podem também utilizar os aparelhos do tipo 2, representados na figura, para elevar cargas correspondentes às massas <em>M</em><sub>1</sub> e <em>M</em><sub>2</sub>, com velocidade constante. A fim de que o exercício seja realizado com a mesma força <em>F</em>, os usuários devem ser orientados a respeito da relação entre as cargas nos dois tipos de aparelhos, já que as polias fixas apenas mudam a direção das forças, enquanto a polia móvel divide as forças. Em ambos os aparelhos, considere as cordas inextensíveis, as massas das polias e das cordas desprezíveis e que não há dissipação de energia.
+</p>
+
+<!-- Opcional: coloque a ilustração na pasta e descomente a linha abaixo -->
+<!-- <div class="imgwrap"><img src="q_polias_tipo1_tipo2.png" alt="Aparelho tipo 1 (polia fixa) e tipo 2 (polia móvel)"></div> -->
+
+<p>
+  Para essa academia, qual deve ser a razão <strong><em>M</em><sub>2</sub>/<em>M</em><sub>1</sub></strong> informada aos usuários?
+</p>
+
+<!-- SOLUÇÃO (INTERATIVA) ANTES DAS ALTERNATIVAS -->
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) No tipo 2 há polia móvel. O que ela faz com a força necessária para erguer a carga?</strong><br>
+  <input onchange="checkWord(this,'divide a forca|metade da forca|reduz a forca pela metade|vantagem mecanica 2|vantagem mecânica 2')">
+  <span class="hint">
+    <button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>Compare “polia fixa” × “polia móvel” na ideia de vantagem mecânica.</span>
+  </span>
+</p>
+
+<p><strong>2) Mantendo a mesma força aplicada <em>F</em> nos dois aparelhos, como deve ser a relação entre as massas levantadas?</strong><br>
+  <input onchange="checkWord(this,'m2 maior que m1|m2 deve ser o dobro de m1|m2=2m1|m2 e duas vezes m1')">
+  <span class="hint">
+    <button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>No tipo 2, a corda “suporta” a carga em dois ramos.</span>
+  </span>
+</p>
+
+<p><strong>3) Escreva a razão pedida.</strong><br>
+  <input onchange="checkWord(this,'m2/m1=2|m2/m1 igual a 2|razao 2|dois')">
+  <span class="hint">
+    <button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>Pense em <em>F</em> (tipo 1) = <em>F</em> (tipo 2) e vantagem mecânica = 2.</span>
+  </span>
+</p>
+
+<!-- ALTERNATIVAS -->
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')"><span class="circle">A</span> <sup>1</sup>&frasl;<sub>4</sub></div>
+<div class="option" onclick="checkAnswer('B')"><span class="circle">B</span> <sup>1</sup>&frasl;<sub>2</sub></div>
+<div class="option" onclick="checkAnswer('C')"><span class="circle">C</span> 1</div>
+<div class="option" onclick="checkAnswer('D')"><span class="circle">D</span> 2</div>
+<div class="option" onclick="checkAnswer('E')"><span class="circle">E</span> 4</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // normaliza/remover acentos
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+
+  // checagem de palavras-chave
+  function checkWord(input, patterns) {
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')) {
+      input.nextElementSibling.remove();
+    }
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    const ok = opts.some(p => text.includes(p));
+    if (ok) {
+      input.style.backgroundColor = "#c6f6c6";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">✅</span>');
+    } else {
+      input.style.backgroundColor = "#fdd";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">❌</span>');
+    }
+  }
+
+  // botão Mostrar dica
+  function toggleHint(btn){
+    const span = btn.nextElementSibling;
+    span.style.display = span.style.display === 'inline' ? 'none' : 'inline';
+  }
+
+  // gabarito
+  function checkAnswer(letter) {
+    const correct = 'D';
+    const message = document.getElementById('message');
+    if (letter === correct) {
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

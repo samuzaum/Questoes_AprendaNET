@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Física — Problema 64 (ENEM PPL 2014)</title>
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;padding:30px;line-height:1.6;max-width:900px}
+    h3{margin-top:0}
+    input{width:240px;text-align:center;margin:0 6px;padding:6px}
+    .option{display:block;margin:10px 0;cursor:pointer}
+    .circle{width:30px;height:30px;background:#6c9ba4;color:#fff;border-radius:50%;
+            display:inline-flex;align-items:center;justify-content:center;
+            font-weight:bold;font-size:16px;margin-right:8px}
+    .feedback{font-weight:bold;margin-left:8px}
+    a{text-decoration:none;background:#6c9ba4;color:#fff;padding:6px 12px;border-radius:6px;margin:4px;display:inline-block}
+    a:hover{background:#55808d}
+    #message{font-weight:bold;margin-top:16px}
+    small{color:#444}
+    .hint{margin-top:8px}
+    button{background:#eee;border:1px solid #bbb;border-radius:6px;padding:4px 10px;cursor:pointer}
+    button:hover{background:#e4e4e4}
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao2.html">🔹 Ir para Problema 2</a>
+</p>
+
+<h3>98. (ENEM PPL 2014)</h3>
+
+<p>
+Em museus de ciências, é comum encontrarem-se máquinas que eletrizam materiais e geram intensas descargas elétricas. O gerador de Van de Graaff (Figura 1) é um exemplo, como atestam as faíscas (Figura 2) que ele produz. O experimento fica mais interessante quando se aproxima do gerador em funcionamento, com a mão, uma lâmpada fluorescente (Figura 3). Quando a descarga atinge a lâmpada, mesmo desconectada da rede elétrica, ela brilha por breves instantes. Muitas pessoas pensam que é o fato de a descarga atingir a lâmpada que a faz brilhar. Contudo, se a lâmpada for aproximada dos corpos da situação (Figura 2), no momento em que a descarga ocorrer entre eles, a lâmpada também brilhará, apesar de não receber nenhuma descarga elétrica.
+</p>
+<figure>
+  <img src="questao_102.png" alt="Enunciado/ilustração da questão 138">
+</figure>
+<figure>
+  <img src="questao_103.png" alt="Enunciado/ilustração da questão 138">
+</figure>
+<figure>
+  <img src="questao_104.png" alt="Enunciado/ilustração da questão 138">
+</figure>
+<p>
+Disponível em: http://naveastro.com. Acesso em 15 ago 2012<br>
+<strong>A grandeza física associada ao brilho instantâneo da lâmpada fluorescente, por estar próxima a uma descarga elétrica, é o(a)</strong>
+</p>
+
+<div class="option" onclick="checkAnswer('A', this)">
+  <span class="circle">A</span> carga elétrica.
+</div>
+<div class="option" onclick="checkAnswer('B', this)">
+  <span class="circle">B</span> campo elétrico.
+</div>
+<div class="option" onclick="checkAnswer('C', this)">
+  <span class="circle">C</span> corrente elétrica.
+</div>
+<div class="option" onclick="checkAnswer('D', this)">
+  <span class="circle">D</span> capacitância elétrica.
+</div>
+<div class="option" onclick="checkAnswer('E', this)">
+  <span class="circle">E</span> condutividade elétrica.
+</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<div class="hint">
+  <button onclick="toggleHint()">🔎 Dica</button>
+  <span id="hint" style="display:none;">
+    Perto da descarga forma-se um campo intenso no ar; pense no que pode acelerar elétrons no gás da lâmpada mesmo sem ela estar ligada.
+  </span>
+</div>
+
+<div class="hint" style="margin-top:10px;">
+  <button onclick="resetAll()">↺ Limpar seleção</button>
+  <button onclick="toggleExplain()">💡 Mostrar explicação</button>
+  <div id="explain" style="display:none; margin-top:8px;">
+    A descarga cria um <strong>campo elétrico</strong> forte nas proximidades, que acelera cargas dentro da lâmpada fluorescente,
+    causando excitações/ionizações e emissão de luz por instantes.
+  </div>
+</div>
+
+<script>
+  const CORRETA = 'B'; // gabarito só aqui no JS
+
+  function clearMarks(){
+    document.querySelectorAll('.option').forEach(op=>{
+      op.style.background = '';
+      op.style.borderRadius = '';
+    });
+  }
+
+  function checkAnswer(letra, el){
+    clearMarks();
+    if(el){ el.style.background = '#eef6f8'; el.style.borderRadius = '8px'; }
+    const msg = document.getElementById('message');
+    if(letra === CORRETA){
+      msg.textContent = 'Correto! ✔';
+      msg.style.color = 'green';
+    }else{
+      msg.textContent = 'Não é essa. Tente novamente.';
+      msg.style.color = 'red';
+    }
+  }
+
+  function toggleHint(){
+    const h = document.getElementById('hint');
+    h.style.display = (h.style.display === 'none') ? 'inline' : 'none';
+  }
+
+  function toggleExplain(){
+    const e = document.getElementById('explain');
+    e.style.display = (e.style.display === 'none') ? 'block' : 'none';
+  }
+
+  function resetAll(){
+    clearMarks();
+    document.getElementById('message').textContent = '';
+    document.getElementById('hint').style.display = 'none';
+    document.getElementById('explain').style.display = 'none';
+  }
+</script>
+
+</body>
+</html>

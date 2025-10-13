@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sistemas Numéricos - Lista 03 — Problema 12</title>
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;padding:30px;line-height:1.6;max-width:900px}
+    h3{margin-top:0}
+    input{width:240px;text-align:center;margin:0 6px;padding:6px}
+    .option{display:block;margin:10px 0;cursor:pointer}
+    .circle{width:30px;height:30px;background:#6c9ba4;color:#fff;border-radius:50%;
+            display:inline-flex;align-items:center;justify-content:center;
+            font-weight:bold;font-size:16px;margin-right:8px}
+    .feedback{font-weight:bold;margin-left:8px}
+    a{text-decoration:none;background:#6c9ba4;color:#fff;padding:6px 12px;border-radius:6px;margin:4px;display:inline-block}
+    a:hover{background:#55808d}
+    #message{font-weight:bold;margin-top:16px}
+    small{color:#444}
+    .hint{margin-top:8px}
+    button{background:#eee;border:1px solid #bbb;border-radius:6px;padding:4px 10px;cursor:pointer}
+    button:hover{background:#e4e4e4}
+  </style>
+</head>
+<body>
+
+  <p>
+    <a href="questao11.html">🔹 Ir para Problema 11</a>
+    <a href="questao13.html">🔹 Ir para Problema 13</a>
+  </p>
+
+  <h3>Problema 12</h3>
+  <p><strong>95. (Enem 2<sup>a</sup> aplicação 2010)</strong></p>
+  <figure>
+  <img src="questao_95.png" alt="Enunciado/ilustração da questão 132">
+</figure>
+  <p>
+    Os quadrinhos mostram, por meio da projeção da sombra da árvore e do menino,
+    a sequência de períodos do dia: matutino, meio-dia e vespertino, que é determinada
+  </p>
+
+  <!-- Alternativas -->
+  <div class="option" onclick="checkAnswer('A')">
+    <span class="circle">A</span>
+    pela posição vertical da árvore e do menino.
+  </div>
+  <div class="option" onclick="checkAnswer('B')">
+    <span class="circle">B</span>
+    pela posição do menino em relação à árvore.
+  </div>
+  <div class="option" onclick="checkAnswer('C')">
+    <span class="circle">C</span>
+    pelo movimento aparente do Sol em torno da Terra.
+  </div>
+  <div class="option" onclick="checkAnswer('D')">
+    <span class="circle">D</span>
+    pelo fuso horário específico de cada ponto da superfície da Terra.
+  </div>
+  <div class="option" onclick="checkAnswer('E')">
+    <span class="circle">E</span>
+    pela estação do ano, sendo que no inverno os dias são mais curtos que no verão.
+  </div>
+
+  <div id="message" class="feedback" aria-live="polite"></div>
+
+  <button class="hint" onclick="toggleHint()">Mostrar dica</button>
+  <p id="hint" class="hint" style="display:none;">
+    Repare como direção e comprimento das sombras mudam ao longo do dia. Isso acompanha a
+    <em>posição aparente do Sol</em> no céu para um observador na Terra.
+  </p>
+
+  <script>
+    function checkAnswer(letter){
+      const correct = 'C';
+      const msg = document.getElementById('message');
+      if(letter === correct){
+        msg.textContent = 'Correto! As sombras variam com a posição aparente do Sol ao longo do dia.';
+        msg.style.color = 'green';
+      }else{
+        msg.textContent = 'Não foi dessa vez. Pense no que faz a sombra mudar de direção e comprimento durante o dia.';
+        msg.style.color = 'crimson';
+      }
+    }
+    function toggleHint(){
+      const h = document.getElementById('hint');
+      h.style.display = (h.style.display === 'none' || h.style.display === '') ? 'block' : 'none';
+    }
+  </script>
+
+</body>
+</html>

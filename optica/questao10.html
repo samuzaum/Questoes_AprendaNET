@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ondas — Lista 03 — Problema 10 (ENEM 2011)</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 240px; text-align: center; margin: 0 4px; }
+    .option { display: block; margin: 10px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+    small { color: #444; }
+    details { margin: 10px 0; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao9.html">🔹 Ir para Problema 9</a> |
+  <a href="questao11.html">🔹 Ir para Problema 11</a>
+</p>
+
+<h3>Problema 10:</h3>
+
+<p><strong>93. (ENEM 2011)</strong></p>
+<p>
+  Para mapear o interior do <em>Titanic</em> a ~4 km de profundidade, usa-se sonar em vez de luz.
+  Por que o <strong>som</strong> é mais adequado do que a <strong>luz</strong> para gerar imagens através de
+  camadas de sedimentos?
+</p>
+
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) O que acontece com a luz nos sedimentos?</strong></p>
+<p>
+  A luz, ao atravessar sedimentos, sofre
+  <input placeholder="digite aqui" onchange="checkWord(this,'atenuacao|atenuação|absorcao|absorção|espalhamento')">
+  intensa, por isso penetra pouco.
+</p>
+
+<p><strong>2) Como funciona o sonar?</strong></p>
+<p>
+  Ele emite
+  <input placeholder="digite aqui" onchange="checkWord(this,'som|onda sonora|ondas sonoras')">
+  e capta o
+  <input placeholder="digite aqui" onchange="checkWord(this,'eco|ecos')">
+  para formar a imagem.
+</p>
+
+<p><strong>3) Comparação chave:</strong></p>
+<p>
+  Nos materiais do enunciado, a atenuação da <em>luz</em> é
+  <input placeholder="digite aqui" onchange="checkWord(this,'maior|mais alta')">
+  que a do <em>som</em>.
+</p>
+
+<details>
+  <summary>💡 Dica (clique para ver)</summary>
+  <small>
+    Em meios turvos (sedimentos), parte da energia luminosa é absorvida/espalhada logo nos
+    primeiros centímetros. O som sofre menos perdas, atravessa a camada e volta como eco.
+  </small>
+</details>
+
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')">
+  <span class="circle">A</span>
+  A propagação da luz na água ocorre a uma velocidade maior que a do som neste meio.
+</div>
+<div class="option" onclick="checkAnswer('B')">
+  <span class="circle">B</span>
+  A absorção da luz ao longo de uma camada de água é facilitada enquanto a do som não ocorre.
+</div>
+<div class="option" onclick="checkAnswer('C')">
+  <span class="circle">C</span>
+  A refração da luz em grande profundidade acontece com intensidade menor que a do som.
+</div>
+<div class="option" onclick="checkAnswer('D')">
+  <span class="circle">D</span>
+  Os materiais analisados apresentam atenuação da luz distinta (maior) que a do som nesses meios.
+</div>
+<div class="option" onclick="checkAnswer('E')">
+  <span class="circle">E</span>
+  Nas camadas de sedimentos a reflexão da luz é menos intensa que a refração do som.
+</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // ===== helpers (mesmo padrão do seu modelo) =====
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+  function paint(input, ok){
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')){
+      input.nextElementSibling.remove();
+    }
+    input.style.backgroundColor = ok ? "#c6f6c6" : "#fdd";
+    input.insertAdjacentHTML("afterend", `<span class="feedback">${ok ? '✅' : '❌'}</span>`);
+  }
+  function checkWord(input, patterns){
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    paint(input, opts.some(p => text.includes(p)));
+  }
+
+  // ===== gabarito (apenas na função) =====
+  function checkAnswer(letter){
+    const correct = 'D';
+    const message = document.getElementById('message');
+    if (letter === correct){
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

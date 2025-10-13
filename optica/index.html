@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Questão 51 – ENEM 2014 (interativa)</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    .option { display: flex; align-items: center; gap: 10px; margin: 10px 0; cursor: pointer; }
+    .circle { width: 30px; height: 30px; background-color: #6c9ba4; color: #fff; border-radius: 50%;
+              display: inline-flex; align-items: center; justify-content: center; font-weight: bold; }
+    .feedback { font-weight: bold; margin-top: 16px; }
+    a { text-decoration: none; background-color: #6c9ba4; color: #fff; padding: 6px 12px; border-radius: 6px; margin: 4px 6px 16px 0; display: inline-block; }
+    a:hover { background-color: #55808d; }
+    .lab { margin-top: 26px; padding: 16px; border: 1px solid #ddd; border-radius: 10px; }
+    .swatches { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 12px; }
+    .swatch { border: 1px solid #ccc; height: 80px; border-radius: 8px; }
+    .row { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+    .tag { display:inline-block; padding:2px 8px; border-radius:12px; background:#eee; margin-right:6px; font-size:12px; }
+    .note { font-size: 13px; color: #444; }
+    .small { font-size: 13px; color: #666; }
+    label.filter { margin-right: 12px; }
+    input[type="range"] { width: 160px; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao2.html">🔹 Ir para a 2</a>
+</p>
+
+<h3>82. (Enem 2014)</h3>
+
+<p>
+É comum aos fotógrafos tirar fotos coloridas em ambientes iluminados por lâmpadas fluorescentes, que contêm uma forte composição de luz verde. A consequência desse fato na fotografia é que todos os objetos claros, principalmente os brancos, aparecerão esverdeados. Para equilibrar as cores, deve-se usar um filtro adequado para diminuir a intensidade da luz verde que chega aos sensores da câmera fotográfica. Na escolha desse filtro, utiliza-se o conhecimento da composição das cores-luz primárias: vermelho, verde e azul; e das cores-luz secundárias: amarelo = vermelho + verde, ciano = verde + azul e magenta = vermelho + azul.
+<br>
+<small>Disponível em: http://nautilus.fis.uc.pt. Acesso em 20 maio 2014 (adaptado).</small>
+</p>
+
+<p><strong>Na situação descrita, qual deve ser o filtro utilizado para que a fotografia apresente as cores naturais dos objetos?</strong></p>
+
+<!-- Alternativas -->
+<div class="option" onclick="checkAnswer('A')"><div class="circle">A</div> Ciano.</div>
+<div class="option" onclick="checkAnswer('B')"><div class="circle">B</div> Verde.</div>
+<div class="option" onclick="checkAnswer('C')"><div class="circle">C</div> Amarelo.</div>
+<div class="option" onclick="checkAnswer('D')"><div class="circle">D</div> Magenta.</div>
+<div class="option" onclick="checkAnswer('E')"><div class="circle">E</div> Vermelho.</div>
+
+<div id="message" class="feedback"></div>
+
+<!-- Mini laboratório -->
+<div class="lab">
+  <strong>Laboratório de filtros (experimente!)</strong>
+  <p class="small">
+    Ajuste a “luz do ambiente” e escolha um filtro. Repare como o patch “chegando ao sensor” perde o excesso de verde
+    quando o filtro <b>absorve</b> o canal G (verde).
+  </p>
+
+  <div class="row">
+    <span>💡 Luz ambiente (RGB):</span>
+    <label>R <input id="r" type="range" min="0" max="100" value="40" oninput="update()"></label>
+    <label>G <input id="g" type="range" min="0" max="100" value="100" oninput="update()"></label>
+    <label>B <input id="b" type="range" min="0" max="100" value="40" oninput="update()"></label>
+  </div>
+
+  <div class="row" style="margin-top:8px;">
+    <span>🧪 Filtro:</span>
+    <label class="filter"><input type="radio" name="filtro" value="A" onchange="update()"> Ciano (passa G+B)</label>
+    <label class="filter"><input type="radio" name="filtro" value="B" onchange="update()"> Verde (passa G)</label>
+    <label class="filter"><input type="radio" name="filtro" value="C" onchange="update()"> Amarelo (passa R+G)</label>
+    <label class="filter"><input type="radio" name="filtro" value="D" checked onchange="update()"> Magenta (passa R+B)</label>
+    <label class="filter"><input type="radio" name="filtro" value="E" onchange="update()"> Vermelho (passa R)</label>
+  </div>
+
+  <div class="row" style="margin-top:8px;">
+    <label>Quanto o filtro bloqueia do canal “bloqueado”? 
+      <input id="blk" type="range" min="0" max="100" value="80" oninput="update()">
+      <span class="small" id="blkVal">(80%)</span>
+    </label>
+  </div>
+
+  <div class="swatches">
+    <div>
+      <div id="sw1" class="swatch"></div>
+      <div class="small">Luz do ambiente (sem filtro)</div>
+    </div>
+    <div>
+      <div id="sw2" class="swatch"></div>
+      <div class="small">Chegando ao sensor (com filtro)</div>
+    </div>
+  </div>
+
+  <p class="note" id="explain"></p>
+
+  <div class="small">
+    Complementares em luz (RGB): 
+    <span class="tag">verde ↔ magenta</span>
+    <span class="tag">vermelho ↔ ciano</span>
+    <span class="tag">azul ↔ amarelo</span>
+  </div>
+</div>
+
+<script>
+  const passes = {
+    A: [0,1,1], // ciano: passa G+B
+    B: [0,1,0], // verde: passa G
+    C: [1,1,0], // amarelo: passa R+G
+    D: [1,0,1], // magenta: passa R+B
+    E: [1,0,0]  // vermelho: passa R
+  };
+  const nomes = {A:'Ciano', B:'Verde', C:'Amarelo', D:'Magenta', E:'Vermelho'};
+
+  function clamp01(x){ return Math.max(0, Math.min(1, x)); }
+  function toRGB(r,g,b){ return `rgb(${Math.round(r)}%, ${Math.round(g)}%, ${Math.round(b)}%)`; }
+
+  function update(){
+    const r = +document.getElementById('r').value;
+    const g = +document.getElementById('g').value;
+    const b = +document.getElementById('b').value;
+    const filtro = document.querySelector('input[name="filtro"]:checked').value;
+    const block = +document.getElementById('blk').value; // %
+    document.getElementById('blkVal').textContent = `(${block}%)`;
+
+    // cor ambiente
+    document.getElementById('sw1').style.background = toRGB(r,g,b);
+
+    // aplica filtro: canais "passa" = 100%; canal bloqueado = (1 - block)
+    const t = passes[filtro];
+    const kBlock = 1 - block/100; // quanto ainda passa no canal bloqueado
+    const rf = r * (t[0] ? 1 : kBlock);
+    const gf = g * (t[1] ? 1 : kBlock);
+    const bf = b * (t[2] ? 1 : kBlock);
+
+    document.getElementById('sw2').style.background = toRGB(rf,gf,bf);
+
+    const explic = (filtro==='D')
+      ? 'Filtro magenta: deixa passar vermelho+azul e reduz o verde — ideal para neutralizar o esverdeado.'
+      : `Filtro ${nomes[filtro]}: não é o complementar do verde; observe que o tom continua com excesso/escassez de G.`;
+    document.getElementById('explain').textContent = explic;
+  }
+
+  function checkAnswer(letter){
+    const correct = 'D';
+    const msg = document.getElementById('message');
+    if(letter === correct){
+      msg.textContent = 'Correto! O filtro complementar ao verde é o magenta (vermelho + azul).';
+      msg.style.color = 'green';
+      // Seleciona o filtro no laboratório para reforçar a ideia
+      document.querySelector('input[name="filtro"][value="D"]').checked = true;
+      update();
+    } else {
+      msg.textContent = 'Tente outra: qual filtro “corta” o verde e deixa passar vermelho + azul?';
+      msg.style.color = 'red';
+    }
+  }
+
+  // init
+  update();
+</script>
+
+</body>
+</html>

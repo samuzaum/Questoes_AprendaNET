@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sistemas Numéricos - Lista — Problema 32</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 420px; text-align: center; margin: 0 4px; }
+    .option { display: block; margin: 10px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+    .hint { display:inline-block; margin-left:8px; font-size: 0.95em; color:#444; }
+    .hint button { background:#eee; border:1px solid #ccc; border-radius:6px; padding:2px 8px; cursor:pointer; }
+    .hint span { display:none; margin-left:6px; }
+    .imgwrap img { max-width: 520px; border: 1px solid #ddd; border-radius: 6px; padding: 4px; }
+    small { color:#444; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao31.html">🔹 Ir para Problema 31</a> |
+  <a href="questao33.html">🔹 Ir para Problema 33</a>
+</p>
+
+<h3>Problema 32:</h3>
+
+<p><strong>11 – ENEM 2024</strong></p>
+
+<p>
+  Em um experimento, duas barras metálicas <strong>A</strong> e <strong>B</strong> são carregadas com cargas opostas e imersas em óleo. Farelo de milho, lançado sobre o óleo, desenha as linhas de campo elétrico entre as barras (vista superior).
+</p>
+
+<!-- figura base (deixar comentada mesmo sem o arquivo) -->
+<!-- <div class="imgwrap"><img src="linhas_campo_placas.png" alt="Linhas de campo retas entre placas A(+) e B(-) vistas de cima"></div> -->
+
+<p>
+  Ao repetir o experimento colocando-se um <strong>cilindro metálico oco</strong> entre as placas, pergunta-se qual esquema melhor representa o <em>formato</em> das linhas de campo observadas pelo farelo.
+</p>
+
+<!-- figuras das alternativas (deixar comentadas) -->
+<!-- <div class="imgwrap"><img src="opcoes_cilindro_eletrostatico.png" alt="Cinco esboços com o cilindro entre as placas e linhas com diferentes desvios"></div> -->
+
+<!-- SOLUÇÃO (INTERATIVA) ANTES DAS ALTERNATIVAS -->
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) Em um condutor metálico em equilíbrio eletrostático, como é o campo no <u>interior</u> do material?</strong><br>
+  <input onchange="checkWord(this,'nulo|zero|campo interno nulo|E=0 dentro do condutor')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>Os elétrons se redistribuem até cancelar o campo interno.</span>
+  </span>
+</p>
+
+<p><strong>2) E na cavidade oca do cilindro (sem cargas internas), o campo é…?</strong><br>
+  <input onchange="checkWord(this,'nulo tambem|zero na cavidade|blindagem eletrostatica|blindagem|E=0 na cavidade')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>Conceito-chave: blindagem eletrostática causada pelo condutor envolvente.</span>
+  </span>
+</p>
+
+<p><strong>3) Portanto, o que acontece com as <u>linhas de campo</u> ao encontrarem o cilindro?</strong><br>
+  <input onchange="checkWord(this,'contornam a superficie|nao penetram|desviam ao redor|tangenciam equipotenciais e passam fora')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>As linhas não atravessam o interior; elas “abraçam” o condutor e seguem adiante.</span>
+  </span>
+</p>
+
+<!-- ALTERNATIVAS (descritas, já que os desenhos podem não estar disponíveis) -->
+<p><strong>Assinale a alternativa que melhor descreve o padrão correto:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')">
+  <span class="circle">A</span>
+  As linhas atravessam o cilindro e seguem praticamente retas entre as placas.
+</div>
+
+<div class="option" onclick="checkAnswer('B')">
+  <span class="circle">B</span>
+  As linhas entram no cilindro, curvam-se no interior e saem pelo lado oposto.
+</div>
+
+<div class="option" onclick="checkAnswer('C')">
+  <span class="circle">C</span>
+  As linhas convergem para dentro do cilindro, concentrando-se no seu centro.
+</div>
+
+<div class="option" onclick="checkAnswer('D')">
+  <span class="circle">D</span>
+  Parte das linhas contorna o cilindro e parte penetra seu interior.
+</div>
+
+<div class="option" onclick="checkAnswer('E')">
+  <span class="circle">E</span>
+  As linhas desviam e <u>contornam</u> a superfície do cilindro, sem penetrar no interior (campo nulo dentro).
+</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // normalização para ignorar acentos
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+
+  // verificação por palavras-chave
+  function checkWord(input, patterns) {
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')) {
+      input.nextElementSibling.remove();
+    }
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    const ok = opts.some(p => text.includes(p));
+    if (ok) {
+      input.style.backgroundColor = "#c6f6c6";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">✅</span>');
+    } else {
+      input.style.backgroundColor = "#fdd";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">❌</span>');
+    }
+  }
+
+  // botão Mostrar dica
+  function toggleHint(btn){
+    const span = btn.nextElementSibling;
+    span.style.display = span.style.display === 'inline' ? 'none' : 'inline';
+  }
+
+  // gabarito
+  function checkAnswer(letter) {
+    const correct = 'E';
+    const message = document.getElementById('message');
+    if (letter === correct) {
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

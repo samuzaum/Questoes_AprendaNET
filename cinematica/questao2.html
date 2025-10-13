@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sistemas Numéricos - Lista 03 — Problema 02</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 84px; text-align: center; margin: 0 4px; }
+    .option { display: block; margin: 10px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+    ul { margin-top: 0.2rem; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="index.html">🔹 Ir para Problema 01</a> |
+  <a href="questao3.html">🔹 Ir para Problema 03</a>
+</p>
+
+<h3>Problema 02:</h3>
+
+<p><strong>(Enem PPL 2014)</strong> Um pesquisador avaliou o efeito da temperatura do motor (em velocidade constante) e da velocidade média de um veículo (com temperatura do motor constante) sobre a emissão de monóxido de carbono (CO) em dois tipos de percurso, aclive e declive, com iguais distâncias percorridas em linha reta. Os resultados são apresentados nas duas figuras.</p>
+
+<img src="graficos_q2.png" alt="Gráficos de emissão de CO vs temperatura do motor e velocidade média" style="max-width:600px;">
+
+<p>A partir dos resultados, a situação em que ocorre maior emissão de poluentes é aquela na qual o percurso é feito com o motor</p>
+
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) Leitura dos gráficos:</strong></p>
+<ul>
+  <li>No gráfico da esquerda (temperatura do motor): a emissão de CO é <input onchange="check(this,'menor')"> quando a temperatura aumenta. Logo, motor <input onchange="check(this,'frio')"> gera mais emissão.</li>
+  <li>No gráfico da direita (velocidade média): a emissão de CO é <input onchange="check(this,'menor')"> quando a velocidade aumenta. Logo, <input onchange="check(this,'menor velocidade')"> gera mais emissão.</li>
+  <li>Comparando aclive/declive: a emissão é maior em <input onchange="check(this,'aclive')">.</li>
+</ul>
+
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')">
+  <span class="circle">A</span>
+  aquecido, em menores velocidades médias e em pista em declive.
+</div>
+<div class="option" onclick="checkAnswer('B')">
+  <span class="circle">B</span>
+  aquecido, em maiores velocidades médias e em pista em aclive.
+</div>
+<div class="option" onclick="checkAnswer('C')">
+  <span class="circle">C</span>
+  frio, em menores velocidades médias e em pista em declive.
+</div>
+<div class="option" onclick="checkAnswer('D')">
+  <span class="circle">D</span>
+  frio, em menores velocidades médias e em pista em aclive.
+</div>
+<div class="option" onclick="checkAnswer('E')">
+  <span class="circle">E</span>
+  frio, em maiores velocidades médias e em pista em aclive.
+</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  function check(input, correct) {
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')) {
+      input.nextElementSibling.remove();
+    }
+    const raw = input.value.trim().toLowerCase();
+    const expected = correct.toLowerCase();
+    let ok = false;
+
+    if (expected.includes('menor')) {
+      ok = (raw.includes('menor'));
+    } else if (expected.includes('maior')) {
+      ok = (raw.includes('maior'));
+    } else {
+      ok = (raw === expected);
+    }
+
+    if (ok) {
+      input.style.backgroundColor = "#c6f6c6";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">✅</span>');
+    } else {
+      input.style.backgroundColor = "#fdd";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">❌</span>');
+    }
+  }
+
+  function checkAnswer(letter) {
+    const correct = 'D';
+    const message = document.getElementById('message');
+    if (letter === correct) {
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = `Errado. Tente novamente.`;
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Física — Lista 03 — Problema 10 (ENEM)</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 360px; text-align: center; margin: 0 4px; }
+    .option { display: block; margin: 10px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+    figure { margin: 12px 0; }
+    figcaption { font-size: .95rem; font-style: italic; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao9.html">🔹 Ir para Problema 9</a> |
+  <a href="questao11.html">🔹 Ir para Problema 11</a>
+</p>
+
+<h3>Problema 10:</h3>
+
+<p><strong>142. (Enem PPL 2012)</strong></p>
+
+<p>
+Em dias com baixas temperaturas, as pessoas utilizam casacos ou blusas de lã com o intuito de minimizar a sensação de frio.  
+Fisicamente, esta sensação ocorre pelo fato de o corpo humano liberar calor, que é a energia transferida de um corpo para outro em virtude da diferença de temperatura entre eles.  
+A utilização de vestimenta de lã diminui a sensação de frio, porque
+</p>
+
+
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) A lã é um bom...</strong>
+  <input onchange="checkWord(this,'isolante termico|isolante de calor')">
+</p>
+
+<p><strong>2) O efeito da lã sobre a perda de calor do corpo é...</strong>
+  <input onchange="checkWord(this,'diminui a transferencia de calor|reduz a perda de calor')">
+</p>
+
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')">
+  <span class="circle">A</span>
+  Possui a propriedade de gerar calor.
+</div>
+<div class="option" onclick="checkAnswer('B')">
+  <span class="circle">B</span>
+  É constituída de material denso, o que não permite a entrada do ar frio.
+</div>
+<div class="option" onclick="checkAnswer('C')">
+  <span class="circle">C</span>
+  Diminui a taxa de transferência de calor do corpo humano para o meio externo.
+</div>
+<div class="option" onclick="checkAnswer('D')">
+  <span class="circle">D</span>
+  Tem como principal característica a absorção de calor, facilitando o equilíbrio térmico.
+</div>
+<div class="option" onclick="checkAnswer('E')">
+  <span class="circle">E</span>
+  Está em contato direto com o corpo humano, facilitando a transferência de calor por condução.
+</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // normalização para tolerar acentos/maiúsculas
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+  function paint(input, ok){
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')){
+      input.nextElementSibling.remove();
+    }
+    input.style.backgroundColor = ok ? "#c6f6c6" : "#fdd";
+    input.insertAdjacentHTML("afterend", `<span class="feedback">${ok ? '✅' : '❌'}</span>`);
+  }
+  function checkWord(input, patterns){
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    paint(input, opts.some(p => text.includes(p)));
+  }
+
+  // gabarito
+  function checkAnswer(letter){
+    const correct = 'C';
+    const message = document.getElementById('message');
+    if (letter === correct){
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

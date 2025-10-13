@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sistemas Numéricos - Lista — Problema 20</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.65; font-size: 17px; }
+    input { width: 460px; text-align: center; margin: 6px 4px; padding: 6px 8px; font-size: 16px; }
+    .option { display: block; margin: 12px 0; cursor: pointer; }
+    .circle { width: 30px; height: 30px; background-color: #6c9ba4; color: white; border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center; font-weight: bold; font-size: 16px; margin-right: 8px; }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a { text-decoration: none; background-color: #6c9ba4; color: white; padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block; }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+    .hint { display:inline-block; margin-left:8px; font-size: 0.95em; color:#444; }
+    .hint button { background:#eee; border:1px solid #ccc; border-radius:6px; padding:3px 10px; cursor:pointer; }
+    .hint span { display:none; margin-left:6px; }
+    .imgwrap img { max-width: 620px; border: 1px solid #ddd; border-radius: 6px; padding: 4px; }
+    table { border-collapse: collapse; margin: 10px 0 18px; }
+    th, td { border: 1px solid #999; padding: 6px 10px; text-align: center; }
+    th { background: #f3f6f8; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao19.html">🔹 Ir para Problema 19</a> |
+  <a href="questao21.html">🔹 Ir para Problema 21</a>
+</p>
+
+<h3>Problema 20:</h3>
+
+<p><strong>8 – Enem 2022</strong></p>
+
+<p>
+  A variação da incidência de radiação solar sobre a superfície da Terra resulta em uma variação de temperatura ao longo de um dia denominada amplitude térmica. Edificações e pavimentações realizadas nas áreas urbanas contribuem para alterar as amplitudes térmicas dessas regiões, em comparação com regiões que mantêm suas características naturais, com presença de vegetação e água, já que o calor específico do concreto é inferior ao da água. Assim, parte da avaliação do impacto ambiental que a presença de concreto proporciona às áreas urbanas consiste em considerar a substituição da área concretada por um mesmo volume de água e comparar as variações de temperatura devido à absorção da radiação solar nas duas situações (concretada e alagada). Desprezando os efeitos de evaporação e considerando que toda a radiação é absorvida, essa avaliação pode ser realizada com os seguintes dados:
+</p>
+
+<!-- (Opcional) imagem da tabela original -->
+<!-- <div class="imgwrap"><img src="tabela_agua_concreto.png" alt="Tabela com densidade e calor específico de água e concreto"></div> -->
+
+<table>
+  <thead>
+    <tr>
+      <th>Substância</th>
+      <th>Densidade (kg/m³)</th>
+      <th>Calor específico (J/(g·°C))</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Água</td>
+      <td>1000</td>
+      <td>4,2</td>
+    </tr>
+    <tr>
+      <td>Concreto</td>
+      <td>2500</td>
+      <td>0,8</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>
+  A razão entre as variações de temperatura nas áreas concretada e alagada é mais próxima de
+</strong></p>
+
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) Para o mesmo volume e mesma energia recebida, como ΔT depende de ρ e c?</strong><br>
+  <input onchange="checkWord(this,'delta t proporcional a 1/(rho c)|inversamente a rho c|quanto maior rho c menor delta t')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>Use Q = m·c·ΔT e m = ρ·V (com V igual para os dois).</span>
+  </span>
+</p>
+
+<p><strong>2) Escreva a razão desejada: ΔT_concreto / ΔT_água.</strong><br>
+  <input onchange="checkWord(this,'(rho_agua c_agua)/(rho_concreto c_concreto)|razao = rho_a c_a / (rho_c c_c)')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>Como ΔT ∝ 1/(ρc), então ΔT_conc / ΔT_água = (ρ_água c_água)/(ρ_conc c_conc).</span>
+  </span>
+</p>
+
+<p><strong>3) Substitua os valores numéricos e estime.</strong><br>
+  <input onchange="checkWord(this,'(1000*4,2)/(2500*0,8)|(1000*4.2)/(2500*0.8)|≈2,1|2,1|2.1')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>Água: ρ=1000, c=4,2; Concreto: ρ=2500, c=0,8.</span>
+  </span>
+</p>
+
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')"><span class="circle">A</span> 1,0</div>
+<div class="option" onclick="checkAnswer('B')"><span class="circle">B</span> 2,1</div>
+<div class="option" onclick="checkAnswer('C')"><span class="circle">C</span> 2,5</div>
+<div class="option" onclick="checkAnswer('D')"><span class="circle">D</span> 5,3</div>
+<div class="option" onclick="checkAnswer('E')"><span class="circle">E</span> 3,1</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+  function checkWord(input, patterns) {
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')) {
+      input.nextElementSibling.remove();
+    }
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    const ok = opts.some(p => text.includes(p));
+    if (ok) {
+      input.style.backgroundColor = "#c6f6c6";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">✅</span>');
+    } else {
+      input.style.backgroundColor = "#fdd";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">❌</span>');
+    }
+  }
+  function toggleHint(btn){
+    const span = btn.nextElementSibling;
+    span.style.display = (span.style.display === 'inline') ? 'none' : 'inline';
+  }
+  function checkAnswer(letter) {
+    const correct = 'B';
+    const message = document.getElementById('message');
+    if (letter === correct) {
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

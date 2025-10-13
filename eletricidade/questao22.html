@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Física — Lista 03 — Problema 22 (ENEM)</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 340px; text-align: center; margin: 0 4px; }
+    .option { display: block; margin: 10px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+    figure { margin: 12px 0; }
+    figcaption { font-size: .95rem; font-style: italic; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao21.html">🔹 Ir para Problema 21</a> |
+  <a href="questao23.html">🔹 Ir para Problema 23</a>
+</p>
+
+<h3>Problema 22:</h3>
+
+<p><strong>122. (ENEM 2009)</strong></p>
+
+<p>
+Considere a seguinte situação hipotética: ao preparar o palco para a apresentação de uma peça de teatro, o iluminador
+deveria colocar três atores sob luzes que tivessem igual brilho e as demais sob luzes de menor brilho. O iluminador
+determinou, então, aos técnicos, que instalassem no palco oito lâmpadas incandescentes com a mesma especificação (L1 a L8),
+interligadas em um circuito com uma bateria, conforme mostra a figura.
+</p>
+<figure>
+  <img src="extra_34.png" alt="Trecho do manual e diagrama associados à questão 121">
+  <figcaption>Dados técnicos/diagrama (insira a imagem do seu PDF)</figcaption>
+</figure>
+
+<p>
+Nessa situação, quais são as três lâmpadas que acendem com o mesmo brilho por apresentarem igual valor de corrente
+fluindo nelas, sob as quais devem se posicionar os três atores?
+</p>
+
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) Todas as lâmpadas são:</strong>
+  <input onchange="checkWord(this,'identicas|idênticas|mesma resistencia|mesma resistência')">
+</p>
+
+<p><strong>2) No nó B, a corrente que chega:</strong>
+  <input onchange="checkWord(this,'se divide igualmente|divide em dois ramos iguais|se reparte igualmente')">
+</p>
+
+<p><strong>3) Assim, as três lâmpadas com a <u>mesma corrente</u> (logo, mesmo brilho) são:</strong>
+  <input onchange="checkWord(this,'l2, l3 e l4|l2 l3 l4|l2 l3 e l4')">
+</p>
+
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')">
+  <span class="circle">A</span>
+  L1, L2 e L3.
+</div>
+<div class="option" onclick="checkAnswer('B')">
+  <span class="circle">B</span>
+  L2, L3 e L4.
+</div>
+<div class="option" onclick="checkAnswer('C')">
+  <span class="circle">C</span>
+  L2, L5 e L7.
+</div>
+<div class="option" onclick="checkAnswer('D')">
+  <span class="circle">D</span>
+  L4, L5 e L6.
+</div>
+<div class="option" onclick="checkAnswer('E')">
+  <span class="circle">E</span>
+  L4, L7 e L8.
+</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // normalização para tolerar acentos/maiúsculas
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+  function paint(input, ok){
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')){
+      input.nextElementSibling.remove();
+    }
+    input.style.backgroundColor = ok ? "#c6f6c6" : "#fdd";
+    input.insertAdjacentHTML("afterend", `<span class="feedback">${ok ? '✅' : '❌'}</span>`);
+  }
+  function checkWord(input, patterns){
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    paint(input, opts.some(p => text.includes(p)));
+  }
+
+  // gabarito
+  function checkAnswer(letter){
+    const correct = 'B';
+    const message = document.getElementById('message');
+    if (letter === correct){
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

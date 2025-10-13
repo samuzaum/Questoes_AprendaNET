@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Física — Lista 03 — Problema 4 (ENEM)</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 360px; text-align: center; margin: 0 4px; }
+    .option { display: block; margin: 10px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+    figure { margin: 12px 0; }
+    figcaption { font-size: .95rem; font-style: italic; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao3.html">🔹 Ir para Problema 3</a> |
+  <a href="questao5.html">🔹 Ir para Problema 5</a>
+</p>
+
+<h3>Problema 4:</h3>
+
+<p><strong>136. (Enem 2013)</strong></p>
+
+<p>
+Aquecedores solares usados em residências têm o objetivo de elevar a temperatura da água até 70 °C.  
+No entanto, a temperatura ideal da água para um banho é de 30 °C.  
+Por isso, deve-se misturar a água aquecida com a água à temperatura ambiente de um outro reservatório, que se encontra a 25 °C.  
+Qual a razão entre a massa de água quente e a massa de água fria na mistura para um banho à temperatura ideal?
+</p>
+
+
+
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) Condição de equilíbrio térmico (Qcedido = Qrecebido):</strong>
+  <input onchange="checkWord(this,'mquente.(70-30)=mfria.(30-25)|q cedido = q recebido')">
+</p>
+
+<p><strong>2) Razão entre as massas:</strong>
+  <input onchange="checkWord(this,'0,125|1/8|mquente/mfria=0,125')">
+</p>
+
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')">
+  <span class="circle">A</span>
+  0,111
+</div>
+<div class="option" onclick="checkAnswer('B')">
+  <span class="circle">B</span>
+  0,125
+</div>
+<div class="option" onclick="checkAnswer('C')">
+  <span class="circle">C</span>
+  0,357
+</div>
+<div class="option" onclick="checkAnswer('D')">
+  <span class="circle">D</span>
+  0,428
+</div>
+<div class="option" onclick="checkAnswer('E')">
+  <span class="circle">E</span>
+  0,833
+</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // normalização para tolerar acentos/maiúsculas
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+  function paint(input, ok){
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')){
+      input.nextElementSibling.remove();
+    }
+    input.style.backgroundColor = ok ? "#c6f6c6" : "#fdd";
+    input.insertAdjacentHTML("afterend", `<span class="feedback">${ok ? '✅' : '❌'}</span>`);
+  }
+  function checkWord(input, patterns){
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    paint(input, opts.some(p => text.includes(p)));
+  }
+
+  // gabarito
+  function checkAnswer(letter){
+    const correct = 'B';
+    const message = document.getElementById('message');
+    if (letter === correct){
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

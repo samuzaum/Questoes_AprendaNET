@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sistemas Numéricos - Lista 03 — Problema 3</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 210px; text-align: center; margin: 0 4px; }
+    .option { display: block; margin: 10px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+    .imgwrap img { max-width: 520px; border: 1px solid #ddd; border-radius: 6px; padding: 4px; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao2.html">🔹 Ir para Problema 2</a> |
+  <a href="questao4.html">🔹 Ir para Problema 4</a>
+</p>
+
+<h3>Problema 3:</h3>
+
+<!-- ENUNCIADO IDÊNTICO -->
+<p><strong>61. (ENEM 2013)</strong></p>
+<p>Em um piano, o Dó central e a próxima nota Dó (Dó maior) apresentam sons parecidos, mas não idênticos. É possível utilizar programas computacionais para expressar o formato dessas ondas sonoras em cada uma das situações como apresentado nas figuras, em que estão indicados intervalos de tempo idênticos (T).</p>
+
+<div class="imgwrap">
+  <!-- (opcional) coloque a figura do enunciado na mesma pasta e ajuste o src) -->
+  <img src="q32_figs.png" alt="Ondas do Dó central e do Dó maior em janelas T idênticas">
+</div>
+
+<p>A razão entre as frequências do Dó central e do Dó maior é de:</p>
+
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) Compare os períodos nas figuras:</strong>
+  <br>O período do Dó central (<em>T<sub>C</sub></em>) é
+  <input onchange="checkWord(this,'o dobro|2x|duas vezes maior')"> do período do Dó maior (<em>T<sub>M</sub></em>).
+</p>
+
+<p><strong>2) Escreva essa relação:</strong>
+  <br>T<sub>C</sub> = <input onchange="checkExpr(this,'2*T_M|2T_M|2')"> · T<sub>M</sub>
+  <small>(use “2*T_M” ou só “2” para o fator)</small>
+</p>
+
+<p><strong>3) Use f = 1/T e monte a razão pedida:</strong>
+  <br>f<sub>C</sub>/f<sub>M</sub> = T<sub>M</sub>/T<sub>C</sub> =
+  <input onchange="checkExpr(this,'1/2|0.5')">
+</p>
+
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')">
+  <span class="circle">A</span>
+  1/2
+</div>
+<div class="option" onclick="checkAnswer('B')">
+  <span class="circle">B</span>
+  2
+</div>
+<div class="option" onclick="checkAnswer('C')">
+  <span class="circle">C</span>
+  1/4
+</div>
+<div class="option" onclick="checkAnswer('D')">
+  <span class="circle">D</span>
+  4
+</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // ---- helpers: aceita vírgula/ponto e expressões simples ----
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+  function safeEval(expr){
+    const cleaned = String(expr).replace(/\s/g,'');
+    if (!/^[0-9eE+\-*/().,×^a-zA-Z_]+$/.test(cleaned)) return null; // permite T_M etc.
+    const norm = cleaned
+      .replace(/,/g,'.')
+      .replace(/×/g,'*')
+      .replace(/\^/g,'**')
+      .replace(/T_M/gi,'1'); // só precisamos do fator (razão), então T_M cancela
+    try {
+      const v = Function('"use strict"; return ('+norm+');')();
+      return (typeof v === 'number' && Number.isFinite(v)) ? v : null;
+    } catch { return null; }
+  }
+  function nearlyEqual(a,b,eps=1e-3){ return Math.abs(a-b) <= eps*Math.max(1,Math.abs(a),Math.abs(b)); }
+  function paint(input, ok){
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')) {
+      input.nextElementSibling.remove();
+    }
+    input.style.backgroundColor = ok ? "#c6f6c6" : "#fdd";
+    input.insertAdjacentHTML("afterend", `<span class="feedback">${ok ? '✅' : '❌'}</span>`);
+  }
+  function checkWord(input, patterns){
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    paint(input, opts.some(p => text.includes(p)));
+  }
+  function checkExpr(input, expectedExprs){
+    const val = safeEval(input.value.trim());
+    const targets = expectedExprs.split('|').map(e => safeEval(e));
+    const ok = (val !== null) && targets.some(t => t !== null && nearlyEqual(val, t));
+    paint(input, ok);
+  }
+
+  // gabarito apenas aqui
+  function checkAnswer(letter){
+    const correct = 'A';
+    const message = document.getElementById('message');
+    if (letter === correct){
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sistemas Numéricos - Lista — Problema 38</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.65; font-size: 17px; }
+    input { width: 460px; text-align: center; margin: 6px 4px; padding: 6px 8px; font-size: 16px; }
+    .option { display: block; margin: 12px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a { text-decoration: none; background-color: #6c9ba4; color: white;
+        padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block; }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+    .hint { display:inline-block; margin-left:8px; font-size: 0.95em; color:#444; }
+    .hint button { background:#eee; border:1px solid #ccc; border-radius:6px; padding:3px 10px; cursor:pointer; }
+    .hint span { display:none; margin-left:6px; }
+    .imgwrap img { max-width: 620px; border: 1px solid #ddd; border-radius: 6px; padding: 4px; }
+    .eq { font-family: Consolas, Menlo, monospace; background:#f7f7f7; padding: 2px 6px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao37.html">🔹 Ir para Problema 37</a> |
+  <a href="questao39.html">🔹 Ir para Problema 39</a>
+</p>
+
+<h3>Problema 38:</h3>
+
+<p>
+  O manual de uma ducha elétrica informa que seus três níveis de aquecimento (morno, quente e superquente) apresentam as seguintes variações de temperatura da água em função de sua vazão:
+</p>
+
+<!-- Tabela do enunciado (deixe comentada mesmo sem o arquivo) -->
+<div class="imgwrap"><img src="tabela_ducha_ddt.png" alt="Variação de temperatura (°C) em função da vazão (L/min): 3 L/min → 10, 20, 30; 6 L/min → 5, 10, 15"></div>
+
+<p class="eq">
+Vazão (L/min) → ΔT(°C)<br>
+3 L/min → Morno 10 | Quente 20 | Superquente 30<br>
+6 L/min → Morno 5 | Quente 10 | Superquente 15
+</p>
+
+<p>
+  Utiliza-se um disjuntor para proteger o circuito dessa ducha contra sobrecargas elétricas em qualquer nível de aquecimento. Por padrão, o disjuntor é especificado pela corrente nominal igual ao múltiplo de 5 A imediatamente superior à corrente máxima do circuito. Considere que a ducha deve ser ligada em 220 V e que toda a energia é dissipada através da resistência do chuveiro e convertida em energia térmica transferida para a água, que apresenta calor específico de 4,2×10³ J/(kg·°C) e densidade de 1000 kg/m³. O disjuntor adequado para a proteção dessa ducha é especificado por:
+</p>
+
+<!-- =========================
+     SOLUÇÃO (INTERATIVA) ANTES DAS ALTERNATIVAS
+     ========================= -->
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) Para qual combinação (vazão, ΔT) a potência é maior?</strong><br>
+  <input onchange="checkWord(this,'6 l/min e 15 c|6 l/min 15|maior vazao e maior delta t|superquente 6 l/min|6, 15')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>Potência térmica P = (massa/tempo)·c·ΔT. Maior quando vazão e ΔT são máximos.</span>
+  </span>
+</p>
+
+<p><strong>2) Converta a vazão de 6 L/min para kg/s.</strong><br>
+  <input onchange="checkWord(this,'0,1 kg/s|0.1 kg/s|6 kg/min|6/60|0,006 m^3/min → 0,0001?|0,1')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>6 L/min = 0,006 m³/min → ×1000 = 6 kg/min → ÷60 = 0,1 kg/s.</span>
+  </span>
+</p>
+
+<p><strong>3) Calcule a potência: P = ṁ·c·ΔT.</strong><br>
+  <input onchange="checkWord(this,'6300 w|≈6,3 kw|6,3 kw|6.3 kw|6 300 w')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>P = 0,1 · 4,2×10³ · 15 ≈ 6300 W.</span>
+  </span>
+</p>
+
+<p><strong>4) Corrente na rede de 220 V e seleção do disjuntor.</strong><br>
+  <input onchange="checkWord(this,'i≈28,6 a|28,6 a|28.6 a|p/v≈28,6|29 a|entre 25 e 30 a')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>I = P/V ≈ 6300/220 ≈ 28,6 A → escolha o múltiplo de 5 A imediatamente superior.</span>
+  </span>
+</p>
+
+<!-- =========================
+     ALTERNATIVAS
+     ========================= -->
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')"><span class="circle">A</span> 60 A</div>
+<div class="option" onclick="checkAnswer('B')"><span class="circle">B</span> 30 A</div>
+<div class="option" onclick="checkAnswer('C')"><span class="circle">C</span> 20 A</div>
+<div class="option" onclick="checkAnswer('D')"><span class="circle">D</span> 10 A</div>
+<div class="option" onclick="checkAnswer('E')"><span class="circle">E</span> 5 A</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // normalização para ignorar acentos
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+
+  // verificação por palavras-chave
+  function checkWord(input, patterns) {
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')) {
+      input.nextElementSibling.remove();
+    }
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    const ok = opts.some(p => text.includes(p));
+    if (ok) {
+      input.style.backgroundColor = "#c6f6c6";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">✅</span>');
+    } else {
+      input.style.backgroundColor = "#fdd";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">❌</span>');
+    }
+  }
+
+  function toggleHint(btn){
+    const span = btn.nextElementSibling;
+    span.style.display = (span.style.display === 'inline') ? 'none' : 'inline';
+  }
+
+  // gabarito
+  function checkAnswer(letter) {
+    const correct = 'B';
+    const message = document.getElementById('message');
+    if (letter === correct) {
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

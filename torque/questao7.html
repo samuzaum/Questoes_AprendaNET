@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sistemas Numéricos - Lista — Problema 7</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 360px; text-align: center; margin: 0 4px; }
+    .option { display: block; margin: 10px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+    .hint { display:inline-block; margin-left:8px; font-size: 0.95em; color:#444; }
+    .hint button { background:#eee; border:1px solid #ccc; border-radius:6px; padding:2px 8px; cursor:pointer; }
+    .hint span { display:none; margin-left:6px; }
+    .imgwrap img { max-width: 520px; border: 1px solid #ddd; border-radius: 6px; padding: 4px; }
+    small { color:#444; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao6.html">🔹 Ir para Problema 6</a> |
+  <a href="questao8.html">🔹 Ir para Problema 8</a>
+</p>
+
+<h3>Problema 7:</h3>
+
+<p><strong>2 – ENEM 2024</strong></p>
+<p><strong>Questão 2</strong></p>
+
+<p>
+  Nos automóveis, é importante garantir que o centro de massa (CM) de cada conjunto roda/pneu coincida com o seu centro geométrico. No balanceamento, o conjunto gira a velocidade constante e, pelas vibrações medidas, indica-se a posição do CM. Para corrigir, fixa-se uma pequena peça de chumbo em um ponto da roda.
+</p>
+
+<!-- Imagem do enunciado (deixar comentada mesmo sem o arquivo) -->
+<!-- <div class="imgwrap"><img src="roda_balanceamento_pontos.png" alt="Roda com CM deslocado à direita e cinco pontos numerados (1 a 5) para fixar o peso"></div> -->
+
+<p><strong>Em qual ponto deve ser fixada a peça de chumbo para corrigir a posição do centro de massa desse conjunto roda/pneu?</strong></p>
+
+<!-- SOLUÇÃO (INTERATIVA) ANTES DAS ALTERNATIVAS -->
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) Se o CM está deslocado para a direita do centro geométrico, onde o conjunto é “mais pesado”?</strong><br>
+  <input onchange="checkWord(this,'lado direito|direita do centro|quadrante direito')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>O CM aponta para o lado com maior massa efetiva.</span>
+  </span>
+</p>
+
+<p><strong>2) Para balancear, o peso de correção deve ser colocado onde, em relação ao deslocamento do CM?</strong><br>
+  <input onchange="checkWord(this,'no lado oposto|oposto ao cm|180 graus oposto|lado esquerdo')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>Queremos gerar um momento que “puxe” o CM de volta ao centro.</span>
+  </span>
+</p>
+
+<p><strong>3) No esquema proposto (pontos 1 a 5), qual ponto está diametralmente oposto ao CM indicado?</strong><br>
+  <input onchange="checkWord(this,'ponto 3|3')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>Olhe o eixo pontilhado: o oposto ao marcador “CM” é o ponto numerado 3.</span>
+  </span>
+</p>
+
+<!-- ALTERNATIVAS -->
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')"><span class="circle">A</span> 1</div>
+<div class="option" onclick="checkAnswer('B')"><span class="circle">B</span> 2</div>
+<div class="option" onclick="checkAnswer('C')"><span class="circle">C</span> 3</div>
+<div class="option" onclick="checkAnswer('D')"><span class="circle">D</span> 4</div>
+<div class="option" onclick="checkAnswer('E')"><span class="circle">E</span> 5</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // normalização para ignorar acentos
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+
+  function checkWord(input, patterns) {
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')) {
+      input.nextElementSibling.remove();
+    }
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    const ok = opts.some(p => text.includes(p));
+    if (ok) {
+      input.style.backgroundColor = "#c6f6c6";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">✅</span>');
+    } else {
+      input.style.backgroundColor = "#fdd";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">❌</span>');
+    }
+  }
+
+  function toggleHint(btn){
+    const span = btn.nextElementSibling;
+    span.style.display = span.style.display === 'inline' ? 'none' : 'inline';
+  }
+
+  // gabarito
+  function checkAnswer(letter) {
+    const correct = 'C';
+    const message = document.getElementById('message');
+    if (letter === correct) {
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

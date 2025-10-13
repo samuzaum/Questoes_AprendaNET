@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Física — Lista 03 — Problema 26 (ENEM)</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 360px; text-align: center; margin: 0 4px; }
+    .option { display: block; margin: 10px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+    figure { margin: 12px 0; }
+    figcaption { font-size: .95rem; font-style: italic; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao25.html">🔹 Ir para Problema 25</a> |
+  <a href="questao27.html">🔹 Ir para Problema 27</a>
+</p>
+
+<h3>Problema 26:</h3>
+
+<p><strong>129. (Enem 2013)</strong></p>
+
+<p>
+Desenvolve-se um dispositivo para abrir automaticamente uma porta no qual um botão, quando acionado, faz com que uma corrente elétrica <em>i = 6 A</em>
+percorra uma barra condutora de comprimento <em>L = 5 cm</em>, cujo ponto médio está preso a uma mola de constante elástica <em>k = 5 × 10<sup>2</sup> N/m</em>.
+O sistema mola-condutor está imerso em um campo magnético uniforme perpendicular ao plano. 
+Quando acionado o botão, a barra sairá da posição de equilíbrio a uma velocidade média de <em>5 m/s</em> e atingirá a catraca em <em>6 ms</em>, abrindo a porta.
+</p>
+
+<figure>
+  <img src="extra_37.png" alt="Enunciado/ilustração da questão 129">
+  <figcaption>Enunciado (use a imagem do seu PDF, se desejar)</figcaption>
+</figure>
+
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) Força magnética na barra (F = B·i·L):</strong>
+  <input onchange="checkWord(this,'f = b.i.l|b.i.l|forca magnetica')">
+</p>
+
+<p><strong>2) Força elástica (F = k·x):</strong>
+  <input onchange="checkWord(this,'f = kx|k.x|forca elastica')">
+</p>
+
+<p><strong>3) Condição de funcionamento:</strong>
+  <input onchange="checkWord(this,'forca magnetica = forca elastica|equilibrio de forcas')">
+</p>
+
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')">
+  <span class="circle">A</span>
+  5 × 10<sup>−2</sup> T
+</div>
+<div class="option" onclick="checkAnswer('B')">
+  <span class="circle">B</span>
+  5 × 10<sup>−2</sup> T
+</div>
+<div class="option" onclick="checkAnswer('C')">
+  <span class="circle">C</span>
+  5 × 10<sup>1</sup> T
+</div>
+<div class="option" onclick="checkAnswer('D')">
+  <span class="circle">D</span>
+  2 × 10<sup>−2</sup> T
+</div>
+<div class="option" onclick="checkAnswer('E')">
+  <span class="circle">E</span>
+  2 × 10<sup>0</sup> T
+</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // normalização para tolerar acentos/maiúsculas
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+  function paint(input, ok){
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')){
+      input.nextElementSibling.remove();
+    }
+    input.style.backgroundColor = ok ? "#c6f6c6" : "#fdd";
+    input.insertAdjacentHTML("afterend", `<span class="feedback">${ok ? '✅' : '❌'}</span>`);
+  }
+  function checkWord(input, patterns){
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    paint(input, opts.some(p => text.includes(p)));
+  }
+
+  // gabarito
+  function checkAnswer(letter){
+    const correct = 'A';
+    const message = document.getElementById('message');
+    if (letter === correct){
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

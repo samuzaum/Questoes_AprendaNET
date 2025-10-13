@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sistemas Numéricos - Lista 03 — Problema 01</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 84px; text-align: center; margin: 0 4px; }
+    .option { display: block; margin: 10px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+    ul { margin-top: 0.2rem; }
+  </style>
+</head>
+<body>
+
+<p>|
+  <a href="questao2.html">🔹 Ir para Problema 02</a>
+</p>
+
+<h3>Problema 01:</h3>
+
+<!-- ENUNCIADO IDÊNTICO -->
+<p><strong>1. (Enem PPL 2014)</strong> Na Antiguidade, algumas pessoas acreditavam que, no lançamento oblíquo de um objeto, a resultante das forças que atuavam sobre ele tinha o mesmo sentido da velocidade em todos os instantes do movimento. Isso não está de acordo com as interpretações científicas atualmente utilizadas para explicar esse fenômeno.</p>
+
+<p>Desprezando a resistência do ar, qual é a direção e o sentido do vetor força resultante que atua sobre o objeto no ponto mais alto da trajetória?</p>
+
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) Forças atuantes (sem resistência do ar):</strong></p>
+<ul>
+  <li>Peso P = <input onchange="check(this, 'm*g')"> (em módulo).</li>
+  <li>Resistência do ar: <input onchange="check(this, '0')"> (desprezada).</li>
+</ul>
+
+<p><strong>2) No ponto mais alto:</strong></p>
+<ul>
+  <li>Velocidade vertical (vy): <input onchange="check(this, '0')">.</li>
+  <li>Velocidade horizontal (vx): <input onchange="check(this, '>0')"> e constante.</li>
+  <li>Aceleração horizontal (ax): <input onchange="check(this, '0')">.</li>
+  <li>Aceleração vertical (ay): <input onchange="check(this, '-g')">.</li>
+</ul>
+
+<p><strong>3) Resultante (2ª Lei de Newton):</strong></p>
+<p>
+  Fresult = m · a ⇒ componentes:
+  Fx = <input onchange="check(this, '0')">,
+  Fy = <input onchange="check(this, '-m*g')">.
+</p>
+
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<!-- SOMENTE AS ALTERNATIVAS CLICÁVEIS, TEXTO IDÊNTICO -->
+<div class="option" onclick="checkAnswer('A')">
+  <span class="circle">A</span>
+  Indefinido, pois ele é nulo, assim como a velocidade vertical nesse ponto.
+</div>
+<div class="option" onclick="checkAnswer('B')">
+  <span class="circle">B</span>
+  Vertical para baixo, pois somente o peso está presente durante o movimento.
+</div>
+<div class="option" onclick="checkAnswer('C')">
+  <span class="circle">C</span>
+  Horizontal no sentido do movimento, pois devido à inércia o objeto mantém seu movimento.
+</div>
+<div class="option" onclick="checkAnswer('D')">
+  <span class="circle">D</span>
+  Inclinado na direção do lançamento, pois a força inicial que atua sobre o objeto é constante.
+</div>
+<div class="option" onclick="checkAnswer('E')">
+  <span class="circle">E</span>
+  Inclinado para baixo e no sentido do movimento, pois aponta para o ponto onde o objeto cairá.
+</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // --- utilidades ---
+  function safeEval(expr) {
+    const cleaned = String(expr).replace(/\s/g, '');
+    if (!/^[0-9+\-*/().,a-zA-Z><=]+$/.test(cleaned)) return null;
+    const withDot = cleaned.replace(/,/g, '.');
+    try {
+      const val = Function('"use strict"; return (' + withDot + ');')();
+      return (typeof val === 'number' && Number.isFinite(val)) ? val : null;
+    } catch { return null; }
+  }
+  function nearlyEqual(a, b, eps = 1e-6) {
+    return Math.abs(a - b) <= eps * Math.max(1, Math.abs(a), Math.abs(b));
+  }
+
+  // --- validação de inputs (aceita vírgula/ponto e expressões) ---
+  function check(input, correct) {
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')) {
+      input.nextElementSibling.remove();
+    }
+    const raw = input.value.trim();
+    if (raw === '') { input.style.backgroundColor = ''; return; }
+
+    const norm = raw.replace(/\s/g, '').toLowerCase();
+    const expected = (typeof correct === 'string') ? correct.toLowerCase() : correct;
+
+    // caso semântico: ">0"
+    if (expected === '>0') {
+      const num = safeEval(norm);
+      paint(input, (num !== null) && (num > 0));
+      return;
+    }
+
+    const parsedUser = safeEval(norm);
+    const parsedExpected = (typeof correct === 'number') ? correct : safeEval(expected);
+
+    let ok = false;
+    if (parsedUser !== null && parsedExpected !== null) {
+      ok = nearlyEqual(parsedUser, parsedExpected);
+    } else {
+      // comparação literal (para "m*g", "-g", "-m*g" etc.)
+      ok = norm === expected.toString();
+    }
+    paint(input, ok);
+  }
+
+  function paint(input, ok) {
+    if (ok) {
+      input.style.backgroundColor = "#c6f6c6";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">✅</span>');
+    } else {
+      input.style.backgroundColor = "#fdd";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">❌</span>');
+    }
+  }
+
+  // --- alternativas (gabarito fica só aqui; não há conclusão no texto) ---
+  function checkAnswer(letter) {
+    const correct = 'B';
+    const message = document.getElementById('message');
+    if (letter === correct) {
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = `Errado. Tente novamente.`;
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

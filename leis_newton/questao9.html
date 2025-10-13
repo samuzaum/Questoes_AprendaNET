@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sistemas Numéricos - Lista — Problema 9</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.65; font-size: 17px; }
+    input { width: 480px; text-align: center; margin: 6px 4px; padding: 6px 8px; font-size: 16px; }
+    .option { display: block; margin: 12px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a { text-decoration: none; background-color: #6c9ba4; color: white;
+        padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block; }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+    .hint { display:inline-block; margin-left:8px; font-size: 0.95em; color:#444; }
+    .hint button { background:#eee; border:1px solid #ccc; border-radius:6px; padding:3px 10px; cursor:pointer; }
+    .hint span { display:none; margin-left:6px; }
+    .imgwrap img { max-width: 620px; border: 1px solid #ddd; border-radius: 6px; padding: 4px; }
+    .eq { font-family: Consolas, Menlo, monospace; background:#f7f7f7; padding: 2px 6px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao8.html">🔹 Ir para Problema 8</a> |
+  <a href="questao10.html">🔹 Ir para Problema 10</a>
+</p>
+
+<h3>Problema 9:</h3>
+
+<p><strong>7 – Enem 2022</strong></p>
+
+<p>
+  Um pai faz um balanço utilizando dois segmentos paralelos e iguais da mesma corda para fixar uma tábua a uma barra horizontal. Por segurança, opta por um tipo de corda cuja tensão de ruptura seja 25% superior à tensão máxima calculada nas seguintes condições:
+</p>
+<ul>
+  <li>O ângulo máximo atingido pelo balanço em relação à vertical é igual a 90°;</li>
+  <li>Os filhos utilizarão o balanço até que tenham uma massa de 24 kg.</li>
+</ul>
+<p>
+  Além disso, ele aproxima o movimento do balanço para o movimento circular uniforme, considera que a aceleração da gravidade é igual a 10 m/s² e despreza forças dissipativas. Qual é a tensão de ruptura da corda escolhida?
+</p>
+
+<!-- (Opcional) diagrama do balanço – deixe comentado -->
+<!-- <div class="imgwrap"><img src="balanco_duas_cordas.png" alt="Balanço com duas cordas e criança na posição mais baixa"></div> -->
+
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) Do topo (90° da vertical) até a parte mais baixa, qual a velocidade na parte mais baixa?</strong><br>
+  <input onchange="checkWord(this,'v^2=2gL|v=sqrt(2gL)|energia potencial vira cinetica|conservacao de energia')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>Use conservação de energia: queda de altura ≈ L ⇒ m g L = ½ m v².</span>
+  </span>
+</p>
+
+<p><strong>2) Na parte mais baixa, qual a soma das forças radiais e como fica a tensão total?</strong><br>
+  <input onchange="checkWord(this,'t_total - mg = m v^2 / l|t_total=mg+m v^2/l|forca centripeta na parte baixa')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>Direção radial para cima: T_total − mg = m v²/L.</span>
+  </span>
+</p>
+
+<p><strong>3) Cada corda suporta metade da tração total. Com v² = 2 g L, qual é a tração em <em>cada</em> corda?</strong><br>
+  <input onchange="checkWord(this,'t=(3/2)mg|1,5 mg|1.5 mg|t= (2mg+mg)/2|cada corda suporta metade')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>T_total = mg + 2mg = 3mg ⇒ cada corda: T = (3mg)/2.</span>
+  </span>
+</p>
+
+<p><strong>4) Calcule o valor numérico e acrescente 25% de margem para a ruptura.</strong><br>
+  <input onchange="checkWord(this,'360 n e 450 n|360n e 450n|360 n; 25%→450 n|t=360 n; ruptura=450 n|360;450')">
+  <span class="hint"><button onclick="toggleHint(this)">Mostrar dica</button>
+    <span>Com m=24 kg e g=10 m/s² ⇒ T(cada) = 1,5·24·10 = 360 N. Margem 25% ⇒ 360×1,25 = 450 N.</span>
+  </span>
+</p>
+
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')"><span class="circle">A</span> 120 N</div>
+<div class="option" onclick="checkAnswer('B')"><span class="circle">B</span> 300 N</div>
+<div class="option" onclick="checkAnswer('C')"><span class="circle">C</span> 360 N</div>
+<div class="option" onclick="checkAnswer('D')"><span class="circle">D</span> 450 N</div>
+<div class="option" onclick="checkAnswer('E')"><span class="circle">E</span> 900 N</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+
+  function checkWord(input, patterns) {
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')) {
+      input.nextElementSibling.remove();
+    }
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    const ok = opts.some(p => text.includes(p));
+    if (ok) {
+      input.style.backgroundColor = "#c6f6c6";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">✅</span>');
+    } else {
+      input.style.backgroundColor = "#fdd";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">❌</span>');
+    }
+  }
+
+  function toggleHint(btn){
+    const span = btn.nextElementSibling;
+    span.style.display = (span.style.display === 'inline') ? 'none' : 'inline';
+  }
+
+  function checkAnswer(letter) {
+    const correct = 'D';
+    const message = document.getElementById('message');
+    if (letter === correct) {
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>
