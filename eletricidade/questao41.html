@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Problema 41</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      line-height: 1.65;
+      color: #111827;
+      background-color: #ffffff;
+    }
+    .topnav {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+    .topnav a {
+      text-decoration: none;
+      color: #2563eb;
+      font-weight: bold;
+    }
+    h1 { font-size: 28px; margin-bottom: 8px; }
+    .meta { color: #6b7280; font-size: 14px; margin-bottom: 18px; }
+    .enunciado {
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 18px 20px;
+      margin-bottom: 24px;
+    }
+    .imgwrap { text-align: center; margin: 14px 0; }
+    .solucao { border-left: 4px solid #0ea5e9; padding-left: 10px; font-weight: bold; margin-bottom: 10px; }
+    .step {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 16px;
+      margin: 14px 0;
+    }
+    .controls input {
+      width: clamp(420px, 48vw, 520px);
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+    }
+    .controls input.ok { border-color: #15803d; background: #f0fdf4; }
+    .controls input.bad { border-color: #b91c1c; background: #fef2f2; }
+    .hint { display: none; background: #f1f5f9; padding: 8px; border-radius: 6px; margin-top: 6px; width: clamp(420px,48vw,520px); }
+    .status.ok { color: #15803d; }
+    .status.bad { color: #b91c1c; }
+    button { margin-top: 4px; padding: 6px 12px; border-radius: 8px; cursor: pointer; }
+    .options { margin-top: 20px; }
+    .option {
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 10px;
+      margin-bottom: 8px;
+      cursor: pointer;
+    }
+    .circle { 
+      display: inline-block; 
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      border: 2px solid #64748b;
+      text-align: center;
+      line-height: 24px;
+      font-weight: bold;
+      margin-right: 10px;
+    }
+    #message.ok { color: #15803d; font-weight: bold; }
+    #message.bad { color: #b91c1c; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <nav class="topnav">
+    <a href="questao40.html">← Ir para Problema anterior</a>
+    <a href="questao42.html">Ir para Próximo →</a>
+  </nav>
+
+  <h1>Problema 41</h1>
+  <div class="meta">Fonte: ENEM 2021</div>
+
+  <section class="enunciado">
+    <p>
+      Um garoto precisa montar um circuito que acenda três lâmpadas de cores diferentes (verde, vermelha e azul), 
+      sendo acesa apenas uma de cada vez. Ele dispõe de fios, uma bateria e dois interruptores de três pontos 
+      (tipo “chave comutadora”), conforme mostrado.
+    </p>
+    <div class="imgwrap">
+    <img src="q41_fig1.png" alt="Esquema com três lâmpadas coloridas e dois interruptores de três pontos (A, B, C)">
+    </div>
+    <p>
+      O garoto fez cinco circuitos elétricos com esses dois interruptores, mas apenas um satisfaz a condição de 
+      acender apenas uma lâmpada por vez. Qual diagrama representa esse circuito?
+    </p>
+  </section>
+
+  <div class="solucao">Solução (interativa)</div>
+
+  <div class="step">
+    <div class="q">1) Quantas lâmpadas devem acender simultaneamente, segundo o enunciado?</div>
+    <div class="controls">
+      <input type="text" onchange="checkWord(this,'1|uma|somente uma')" placeholder="Digite sua resposta">
+      <div class="status" aria-live="polite"></div>
+      <button onclick="toggleHint(this)">Mostrar dica</button>
+      <div class="hint">Apenas uma lâmpada deve acender em cada posição dos interruptores.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="q">2) Que tipo de interruptor possui três terminais, ligando AB ou BC alternadamente?</div>
+    <div class="controls">
+      <input type="text" onchange="checkWord(this,'comutador|chave comutadora|chave reversora')" placeholder="Digite o nome do interruptor">
+      <div class="status" aria-live="polite"></div>
+      <button onclick="toggleHint(this)">Mostrar dica</button>
+      <div class="hint">É um tipo de chave usada para alternar o contato entre dois caminhos elétricos.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="q">3) Para que apenas uma lâmpada acenda, como os interruptores devem atuar sobre as ligações?</div>
+    <div class="controls">
+      <input type="text" onchange="checkWord(this,'selecionar apenas um ramo|conectar um ramo de cada vez|ligar um circuito de cada vez')" placeholder="Descreva a condição">
+      <div class="status" aria-live="polite"></div>
+      <button onclick="toggleHint(this)">Mostrar dica</button>
+      <div class="hint">Cada posição dos interruptores deve conectar a bateria a apenas um dos três ramos de lâmpadas.</div>
+    </div>
+  </div>
+
+  <section class="options" aria-label="Alternativas">
+    <div class="option" onclick="checkAnswer('A')">
+      <span class="circle">A</span> 
+      <img class="altimg" src="q41_altA.png" alt="Circuito com as três lâmpadas em paralelo e ligações cruzadas incorretas">
+      <div>Configuração com duas lâmpadas ligadas simultaneamente.</div>
+    </div>
+
+    <div class="option" onclick="checkAnswer('B')">
+      <span class="circle">B</span> 
+     <img class="altimg" src="q41_altB.png" alt="Configuração alternativa incorreta.">
+      <div>Circuito em que duas lâmpadas permanecem ligadas em todas as posições.</div>
+    </div>
+
+    <div class="option" onclick="checkAnswer('C')">
+      <span class="circle">C</span> 
+      <img class="altimg" src="q41_altC.png" alt="Configuração que acende duas lâmpadas alternadamente.">
+      <div>Duas lâmpadas acendem alternadamente, mas nunca apenas uma.</div>
+    </div>
+
+    <div class="option" onclick="checkAnswer('D')">
+      <span class="circle">D</span> 
+      <img class="altimg" src="q41_altD.png" alt="Circuito correto: cada posição do interruptor seleciona uma única lâmpada.">
+      <div>Circuito em que cada posição dos interruptores seleciona uma única lâmpada (correto).</div>
+    </div>
+
+    <div class="option" onclick="checkAnswer('E')">
+      <span class="circle">E</span> 
+      <img class="altimg" src="q41_altE.png" alt="Circuito em que as três lâmpadas ligam juntas.">
+      <div>Todas as lâmpadas acendem simultaneamente.</div>
+    </div>
+  </section>
+
+  <div style="margin-top:15px;">
+    <button onclick="checkAnswer('_force')">Confirmar escolha</button>
+    <div id="message" aria-live="polite"></div>
+  </div>
+
+  <script>
+    function normalize(str) {
+      return str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+    }
+    function checkWord(input, patterns) {
+      const val = normalize(input.value);
+      const list = patterns.split('|').map(normalize);
+      const ok = list.includes(val);
+      const st = input.parentElement.querySelector('.status');
+      if (ok) {
+        input.className = 'ok';
+        st.textContent = '✅ Correto';
+        st.className = 'status ok';
+      } else {
+        input.className = 'bad';
+        st.textContent = '❌ Verifique';
+        st.className = 'status bad';
+      }
+    }
+    function toggleHint(btn) {
+      const hint = btn.parentElement.querySelector('.hint');
+      hint.style.display = hint.style.display === 'block' ? 'none' : 'block';
+      btn.textContent = hint.style.display === 'block' ? 'Ocultar dica' : 'Mostrar dica';
+    }
+    const correct = 'D';
+    let lastChoice = null;
+    document.querySelectorAll('.option').forEach(o => {
+      o.addEventListener('click', () => {
+        document.querySelectorAll('.option').forEach(e => e.style.borderColor = '#e5e7eb');
+        o.style.borderColor = '#94a3b8';
+        lastChoice = o.querySelector('.circle').textContent.trim();
+      });
+    });
+    function checkAnswer(x) {
+      const chosen = x !== '_force' ? x : lastChoice;
+      const msg = document.getElementById('message');
+      if (!chosen) { msg.textContent = 'Selecione uma alternativa.'; msg.className = ''; return; }
+      if (chosen === correct) { msg.textContent = 'Correto!'; msg.className = 'ok'; }
+      else { msg.textContent = 'Errado. Tente novamente.'; msg.className = 'bad'; }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Problema 13</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root{--ok:#15803d;--bad:#b91c1c;--ink:#111827;--muted:#6b7280;--card:#f8fafc;}
+    body{font-family:Arial,Helvetica,sans-serif;padding:30px;line-height:1.65;background:#fff;color:var(--ink);}
+    .topnav{display:flex;justify-content:space-between;margin-bottom:24px;}
+    .topnav a{text-decoration:none;color:#2563eb;font-weight:bold;}
+    h1{font-size:28px;margin:0 0 8px 0;}
+    .meta{color:var(--muted);font-size:14px;margin-bottom:18px;}
+    .enunciado{background:var(--card);border:1px solid #e5e7eb;border-radius:10px;padding:18px 20px;margin-bottom:24px;}
+    .imgwrap{text-align:center;margin:12px 0;}
+    .solucao{border-left:4px solid #0ea5e9;padding:8px 12px;margin:26px 0 10px;font-weight:bold;}
+    .step{background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:16px;margin:14px 0;}
+    .q{font-weight:bold;margin-bottom:8px;}
+    .controls{display:grid;gap:8px;align-items:center;justify-items:start;}
+    .controls input[type="text"]{width:clamp(420px,48vw,520px);padding:10px 12px;font-size:16px;border-radius:8px;border:1px solid #d1d5db;outline:none;transition:border-color .15s,background-color .15s;}
+    .controls input.ok{border-color:var(--ok);background:#f0fdf4;}
+    .controls input.bad{border-color:var(--bad);background:#fef2f2;}
+    .status{font-size:14px;min-height:1.2em;}
+    .status.ok{color:var(--ok);} .status.bad{color:var(--bad);}
+    .hint{display:none;font-size:14px;color:#1f2937;background:#f1f5f9;border-left:3px solid #94a3b8;padding:8px 10px;border-radius:6px;margin-top:6px;width:clamp(420px,48vw,520px);}
+    button{appearance:none;border:1px solid #cbd5e1;background:#f8fafc;padding:8px 12px;border-radius:8px;cursor:pointer;font-weight:600;}
+    button:hover{background:#eef2ff;}
+    .options{display:grid;gap:10px;margin-top:8px;}
+    .option{border:1px solid #e5e7eb;border-radius:10px;padding:10px 12px;cursor:pointer;background:#fff;transition:transform .05s ease,background-color .15s ease,border-color .15s ease;}
+    .option:hover{background:#f8fafc;transform:translateY(-1px);}
+    .optline{display:flex;align-items:center;gap:12px;}
+    .circle{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;border:2px solid #64748b;color:#334155;font-weight:800;flex:0 0 28px;}
+    #message{min-height:1.2em;font-weight:bold;}
+    #message.ok{color:var(--ok);} #message.bad{color:var(--bad);}
+    .small{font-size:12px;color:var(--muted);}
+    code{background:#f3f4f6;padding:2px 6px;border-radius:4px;}
+  </style>
+</head>
+<body>
+  <nav class="topnav" aria-label="Navegação entre problemas">
+    <a href="questao12.html">← Ir para Problema anterior</a>
+    <a href="questao14.html">Ir para Próximo →</a>
+  </nav>
+
+  <h1>Problema 13</h1>
+  <div class="meta">Fonte/rotulagem: ENEM 2021 — Astronomia (planetas)</div>
+
+  <section class="enunciado">
+    <strong>Enunciado (texto integral):</strong>
+    <p><em>TEXTO I</em><br>
+      No cordel intitulado <em>Senhor dos Anéis</em>, de autoria de Gonçalo Ferreira da Silva, lê-se a sextilha:<br>
+      A distância em relação<br>
+      Ao nosso planeta amado<br>
+      Pouco menos que a do Sol<br>
+      Ele está distanciado<br>
+      E menos denso que a água<br>
+      Quando no normal estado.
+    </p>
+    <p><em>TEXTO II</em><br>
+      Distâncias médias dos planetas ao Sol e suas densidades médias.
+    </p>
+    <div class="imgwrap">
+      <img src="q13_fig1.png" alt="Tabela com planetas, distância média ao Sol em unidades astronômicas e densidade relativa média.">
+    </div>
+    <p>
+      Considerando os versos da sextilha e as informações da tabela, a qual planeta o cordel faz referência?
+    </p>
+  </section>
+
+  <div class="solucao">Solução (interativa)</div>
+
+  <div class="step">
+    <div class="q">1) Qual planeta do sistema solar tem densidade média menor que a da água (≈1 g/cm³)?</div>
+    <div class="controls">
+      <input type="text" aria-label="Passo 1" placeholder="Digite o nome do planeta"
+             onchange="checkWord(this,'saturno')" />
+      <div class="status" aria-live="polite"></div>
+      <button type="button" onclick="toggleHint(this)">Mostrar dica</button>
+      <div class="hint">Na tabela, apenas um planeta apresenta densidade relativa ≈ 0,7.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="q">2) O verso “Pouco menos que a do Sol ele está distanciado” indica que a distância Terra→planeta é ligeiramente menor que a distância planeta→Sol. Isso é compatível com qual planeta gigante?</div>
+    <div class="controls">
+      <input type="text" aria-label="Passo 2" placeholder="Digite o nome do planeta"
+             onchange="checkWord(this,'saturno')" />
+      <div class="status" aria-live="polite"></div>
+      <button type="button" onclick="toggleHint(this)">Mostrar dica</button>
+      <div class="hint">Para planetas externos, Terra→planeta pode ser da ordem de 8–10 u.a. quando em oposição; compare com as distâncias ao Sol.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="q">3) Conclua: qual planeta satisfaz simultaneamente os dois indícios (densidade &lt; 1 e verso da distância)?</div>
+    <div class="controls">
+      <input type="text" aria-label="Passo 3" placeholder="Resposta final"
+             onchange="checkWord(this,'saturno')" />
+      <div class="status" aria-live="polite"></div>
+      <button type="button" onclick="toggleHint(this)">Mostrar dica</button>
+      <div class="hint">É o único com densidade menor que a da água e com distância ao Sol cerca de 9–10 u.a.</div>
+    </div>
+  </div>
+
+  <section aria-label="Alternativas de resposta">
+    <h2 style="font-size:20px; margin-top:26px;">Alternativas</h2>
+    <div class="options">
+      <div class="option" onclick="checkAnswer('A')">
+        <div class="optline"><span class="circle">A</span><div>Mercúrio.</div></div>
+      </div>
+      <div class="option" onclick="checkAnswer('B')">
+        <div class="optline"><span class="circle">B</span><div>Júpiter.</div></div>
+      </div>
+      <div class="option" onclick="checkAnswer('C')">
+        <div class="optline"><span class="circle">C</span><div>Urano.</div></div>
+      </div>
+      <div class="option" onclick="checkAnswer('D')">
+        <div class="optline"><span class="circle">D</span><div>Saturno.</div></div>
+      </div>
+      <div class="option" onclick="checkAnswer('E')">
+        <div class="optline"><span class="circle">E</span><div>Netuno.</div></div>
+      </div>
+
+      <!-- EXEMPLO DE BLOCO DE OPÇÃO COM IMAGEM (para copiar)
+      <div class="option" onclick="checkAnswer('B')">
+        <div class="optline">
+          <span class="circle">B</span>
+          <!-- <img class="altimg" src="q13_altB.png" alt="Diagrama ilustrando a alternativa B"> -->
+        </div>
+      </div>
+      -->
+    </div>
+
+    <div style="margin-top:12px;">
+      <button type="button" onclick="checkAnswer('_force')">Confirmar escolha</button>
+      <div id="message" aria-live="polite"></div>
+      <div class="small" style="margin-top:6px;">Se houver figuras, deixe-as ativas quando o arquivo estiver disponível; aqui elas foram deixadas comentadas com alt descritivo.</div>
+    </div>
+  </section>
+
+  <script>
+    function normalize(str){
+      if(typeof str!=='string') return '';
+      return str.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ').trim();
+    }
+    function toggleHint(btn){
+      const hint = btn.closest('.controls').querySelector('.hint');
+      const showing = hint.style.display==='block';
+      hint.style.display = showing ? 'none' : 'block';
+      btn.textContent = showing ? 'Mostrar dica' : 'Ocultar dica';
+    }
+    function checkWord(inputEl, patterns){
+      const norm = normalize(inputEl.value);
+      const accepted = String(patterns||'').split('|').map(s=>normalize(s)).filter(Boolean);
+      const ok = accepted.some(acc=>acc===norm);
+      const st = inputEl.parentElement.querySelector('.status');
+      if(ok){
+        inputEl.classList.remove('bad'); inputEl.classList.add('ok');
+        st.textContent='✅ Correto'; st.className='status ok';
+      }else{
+        inputEl.classList.remove('ok'); inputEl.classList.add('bad');
+        st.textContent='❌ Verifique sua resposta'; st.className='status bad';
+      }
+    }
+    const correct='D';
+    let lastChoice=null;
+    document.querySelectorAll('.option').forEach(opt=>{
+      opt.addEventListener('click',()=>{
+        document.querySelectorAll('.option').forEach(o=>o.style.borderColor='#e5e7eb');
+        opt.style.borderColor='#94a3b8';
+        const c=opt.querySelector('.circle');
+        lastChoice=c?c.textContent.trim():null;
+      });
+    });
+    function checkAnswer(trigger){
+      const msg=document.getElementById('message');
+      const chosen=(trigger && trigger!=='_force')?trigger:lastChoice;
+      if(!chosen){ msg.textContent='Selecione uma alternativa.'; msg.className=''; return; }
+      if(chosen===correct){ msg.textContent='Correto!'; msg.className='ok'; }
+      else{ msg.textContent='Errado. Tente novamente.'; msg.className='bad'; }
+    }
+  </script>
+</body>
+</html>

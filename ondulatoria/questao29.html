@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Problema 29</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root { --ok:#15803d; --bad:#b91c1c; --ink:#111827; --muted:#6b7280; --card:#f8fafc; }
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.65; background:#fff; color:var(--ink); }
+    .topnav { display:flex; justify-content:space-between; margin-bottom:24px; }
+    .topnav a { color:#2563eb; text-decoration:none; font-weight:bold; }
+    h1 { font-size:28px; margin:0 0 8px 0; }
+    .meta { color:var(--muted); font-size:14px; margin-bottom:18px; }
+    .enunciado { background:var(--card); border:1px solid #e5e7eb; border-radius:10px; padding:18px 20px; margin-bottom:24px; }
+    .imgwrap { text-align:center; margin: 14px 0; }
+    .solucao { border-left:4px solid #0ea5e9; padding:8px 12px; margin:26px 0 10px; font-weight:bold; }
+    .step { background:#fff; border:1px solid #e5e7eb; border-radius:10px; padding:16px; margin:14px 0; }
+    .q { font-weight:bold; margin-bottom:8px; }
+    .controls { display:grid; gap:8px; align-items:center; justify-items:start; }
+    .controls input[type="text"]{ width:clamp(420px,48vw,520px); padding:10px 12px; font-size:16px; border-radius:8px; border:1px solid #d1d5db; outline:none; transition:border-color .15s, background-color .15s; }
+    .controls input.ok{ border-color:var(--ok); background:#f0fdf4; }
+    .controls input.bad{ border-color:var(--bad); background:#fef2f2; }
+    .status{ font-size:14px; min-height:1.2em; }
+    .status.ok{ color:var(--ok); } .status.bad{ color:var(--bad); }
+    .hint{ display:none; font-size:14px; color:#1f2937; background:#f1f5f9; border-left:3px solid #94a3b8; padding:8px 10px; border-radius:6px; margin-top:6px; width:clamp(420px,48vw,520px); }
+    button{ appearance:none; border:1px solid #cbd5e1; background:#f8fafc; padding:8px 12px; border-radius:8px; cursor:pointer; font-weight:600; }
+    button:hover{ background:#eef2ff; }
+    .options{ display:grid; gap:10px; margin-top:8px; }
+    .option{ border:1px solid #e5e7eb; border-radius:10px; padding:10px 12px; cursor:pointer; background:#fff; transition:transform .05s ease, background-color .15s ease, border-color .15s ease; }
+    .option:hover{ background:#f8fafc; transform:translateY(-1px); }
+    .optline{ display:flex; align-items:center; gap:12px; }
+    .circle{ display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px; border-radius:50%; border:2px solid #64748b; color:#334155; font-weight:800; flex:0 0 28px; }
+    #message{ min-height:1.2em; font-weight:bold; }
+    #message.ok{ color:var(--ok); } #message.bad{ color:var(--bad); }
+    code{ background:#f3f4f6; padding:2px 6px; border-radius:4px; }
+  </style>
+</head>
+<body>
+  <nav class="topnav" aria-label="Navegação entre problemas">
+    <a href="questao28.html">← Ir para Problema anterior</a>
+    <a href="questao30.html">Ir para Próximo →</a>
+  </nav>
+
+  <h1>Problema 29</h1>
+  <div class="meta">Fonte/rotulagem: ENEM 2021 — ondas sonoras em barras metálicas (sino dos ventos)</div>
+
+  <section class="enunciado">
+    <strong>Enunciado (texto integral):</strong>
+    <p>
+      O sino dos ventos é composto por várias barras metálicas de mesmo material e espessura, mas
+      de comprimentos diferentes, conforme a figura.
+    </p>
+    <div class="imgwrap">
+      <img src="q29_fig1.png" alt="Sino dos ventos com barras metálicas de diferentes comprimentos; uma barra mais curta (comprimento 1) e outra mais longa (comprimento 2).">
+    </div>
+    <p>
+      Considere <code>f1</code> e <code>v1</code>, respectivamente, como a frequência fundamental e a velocidade
+      de propagação do som emitido pela barra de <strong>menor</strong> comprimento, e <code>f2</code> e <code>v2</code> as mesmas
+      grandezas para a barra de <strong>maior</strong> comprimento. As relações entre as frequências fundamentais e entre
+      as velocidades de propagação são, respectivamente:
+    </p>
+  </section>
+
+  <div class="solucao">Solução (interativa)</div>
+
+  <div class="step">
+    <div class="q">1) A frequência fundamental de uma barra vibrante depende de que forma do comprimento?</div>
+    <div class="controls">
+      <input type="text" aria-label="Passo 1" placeholder="Ex.: inversamente proporcional"
+             onchange="checkWord(this,'inversamente proporcional|inversamente ao comprimento')" />
+      <div class="status" aria-live="polite"></div>
+      <button type="button" onclick="toggleHint(this)">Mostrar dica</button>
+      <div class="hint">Barras mais curtas “soam” mais agudo: <code>f ∝ 1/L</code>.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="q">2) Comparando as barras, qual relação entre as frequências <code>f1</code> (barra menor) e <code>f2</code> (barra maior)?</div>
+    <div class="controls">
+      <input type="text" aria-label="Passo 2" placeholder="Ex.: f1 > f2"
+             onchange="checkWord(this,'f1 > f2|f1&gt;f2|f1 maior que f2')" />
+      <div class="status" aria-live="polite"></div>
+      <button type="button" onclick="toggleHint(this)">Mostrar dica</button>
+      <div class="hint">Se <code>f ∝ 1/L</code> e a barra 1 é menor, sua frequência fundamental é maior.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="q">3) E quanto às velocidades de propagação <code>v1</code> e <code>v2</code> do som nas barras do mesmo material?</div>
+    <div class="controls">
+      <input type="text" aria-label="Passo 3" placeholder="Ex.: v1 = v2"
+             onchange="checkWord(this,'v1 = v2|v1=v2|iguais')" />
+      <div class="status" aria-live="polite"></div>
+      <button type="button" onclick="toggleHint(this)">Mostrar dica</button>
+      <div class="hint">No mesmo material e ambiente, a velocidade do som é a mesma: <code>v</code> independe do comprimento.</div>
+    </div>
+  </div>
+
+  <section aria-label="Alternativas de resposta">
+    <h2 style="font-size:20px; margin-top:26px;">Alternativas</h2>
+    <div class="options">
+      <div class="option" onclick="checkAnswer('A')">
+        <div class="optline"><span class="circle">A</span><div><code>f1 &gt; f2</code> e <code>v1 = v2</code>.</div></div>
+      </div>
+      <div class="option" onclick="checkAnswer('B')">
+        <div class="optline"><span class="circle">B</span><div><code>f1 &lt; f2</code> e <code>v1 = v2</code>.</div></div>
+      </div>
+      <div class="option" onclick="checkAnswer('C')">
+        <div class="optline"><span class="circle">C</span><div><code>f1 = f2</code> e <code>v1 &gt; v2</code>.</div></div>
+      </div>
+      <div class="option" onclick="checkAnswer('D')">
+        <div class="optline"><span class="circle">D</span><div><code>f1 &gt; f2</code> e <code>v1 &gt; v2</code>.</div></div>
+      </div>
+      <div class="option" onclick="checkAnswer('E')">
+        <div class="optline"><span class="circle">E</span><div><code>f1 &lt; f2</code> e <code>v1 &lt; v2</code>.</div></div>
+      </div>
+
+      <!-- EXEMPLO DE BLOCO DE OPÇÃO COM IMAGEM (para copiar)
+      <div class="option" onclick="checkAnswer('A')">
+        <div class="optline">
+          <span class="circle">A</span>
+          <!-- <img class="altimg" src="q29_altA.png" alt="Diagrama indicando f1 maior que f2 e mesma velocidade v"> -->
+        </div>
+      </div>
+      -->
+    </div>
+
+    <div style="margin-top:12px;">
+      <button type="button" onclick="checkAnswer('_force')">Confirmar escolha</button>
+      <div id="message" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <script>
+    // ===== Funções exigidas =====
+    function normalize(str){
+      if(typeof str!=='string') return '';
+      return str.toLowerCase()
+        .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+        .replace(/\s+/g,' ').trim();
+    }
+    function checkWord(inputEl, patterns){
+      const norm = normalize(inputEl.value);
+      const accepted = String(patterns||'').split('|').map(s=>normalize(s)).filter(Boolean);
+      const ok = accepted.some(acc => acc === norm);
+      const st = inputEl.parentElement.querySelector('.status');
+      if(ok){ inputEl.classList.remove('bad'); inputEl.classList.add('ok'); st.textContent='✅ Correto'; st.className='status ok'; }
+      else { inputEl.classList.remove('ok'); inputEl.classList.add('bad'); st.textContent='❌ Verifique sua resposta'; st.className='status bad'; }
+    }
+    function toggleHint(btn){
+      const hint = btn.closest('.controls').querySelector('.hint');
+      const show = hint.style.display === 'block';
+      hint.style.display = show ? 'none' : 'block';
+      btn.textContent = show ? 'Mostrar dica' : 'Ocultar dica';
+    }
+
+    // ===== Checagem de alternativas =====
+    const correct = 'A';
+    let lastChoice = null;
+    document.querySelectorAll('.option').forEach(opt=>{
+      opt.addEventListener('click',()=>{
+        document.querySelectorAll('.option').forEach(o=>o.style.borderColor='#e5e7eb');
+        opt.style.borderColor='#94a3b8';
+        lastChoice = opt.querySelector('.circle').textContent.trim();
+      });
+    });
+    function checkAnswer(trigger){
+      const msg = document.getElementById('message');
+      const chosen = (trigger && trigger!=='_force') ? trigger : lastChoice;
+      if(!chosen){ msg.textContent = 'Selecione uma alternativa.'; msg.className=''; return; }
+      if(chosen===correct){ msg.textContent = 'Correto!'; msg.className='ok'; }
+      else { msg.textContent = 'Errado. Tente novamente.'; msg.className='bad'; }
+    }
+  </script>
+</body>
+</html>
