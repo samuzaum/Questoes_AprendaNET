@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sistemas Numéricos - Lista 03 — Problema 11</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 160px; text-align: center; margin: 0 4px; }
+    .option { display: block; margin: 10px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+    .imgwrap img { max-width: 520px; border: 1px solid #ddd; border-radius: 6px; padding: 4px; }
+    small { color: #444; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao10.html">🔹 Ir para Problema 10</a> |
+  <a href="questao12.html">🔹 Ir para Problema 12</a>
+</p>
+
+<h3>Problema 11:</h3>
+
+<p><strong>106. (ENEM — Slackline)</strong></p>
+
+<p>
+No slackline, um atleta (massa <em>m</em> = 80 kg) fica exatamente no meio da fita, que forma um ângulo de
+<em>10°</em> com a horizontal em cada lado. Considere \(g = 10\ \text{m s}^{-2}\), \(\sin 10^\circ \approx 0{,}17\) e \(\cos 10^\circ \approx 0{,}98\).
+Qual é a <strong>força que a fita exerce em cada árvore</strong> devido à presença do atleta?
+</p>
+
+<div class="imgwrap">
+  <!-- opcional: figura -->
+  <img src="questao11_slackline.png" alt="Atleta no meio da fita entre duas árvores, ângulo 10° com a horizontal" />
+</div>
+
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) Equilíbrio vertical do atleta:</strong>
+  As duas trações têm componentes verticais que sustentam o peso:  
+  \(2\,T\sin\theta = m g\).  
+  m = <input onchange="checkNum(this,'80')"> kg, g = <input onchange="checkNum(this,'10')"> m/s²,
+  \(\sin 10^\circ\) = <input onchange="checkNum(this,'0.17')">.
+</p>
+
+<p><strong>2) Tração na fita (módulo):</strong>
+  \(T = \dfrac{m g}{2\sin 10^\circ} = \)
+  <input onchange="checkRange(this,'2300,2400')"> N
+  (≈ <input onchange="checkWord(this,'2.35e3|2,35e3|2.4e3|2,4e3')"> N).
+</p>
+
+<p><small>Observação: a força que cada árvore “sente” é a tração ao longo da fita presa a ela (módulo \(T\)).</small></p>
+
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')">
+  <span class="circle">A</span>
+  4,0 × 10² N
+</div>
+<div class="option" onclick="checkAnswer('B')">
+  <span class="circle">B</span>
+  4,1 × 10³ N
+</div>
+<div class="option" onclick="checkAnswer('C')">
+  <span class="circle">C</span>
+  2,0 × 10³ N
+</div>
+<div class="option" onclick="checkAnswer('D')">
+  <span class="circle">D</span>
+  2,4 × 10³ N
+</div>
+<div class="option" onclick="checkAnswer('E')">
+  <span class="circle">E</span>
+  4,7 × 10⁴ N
+</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // -------- utilidades --------
+  function safeEval(expr) {
+    const cleaned = String(expr).replace(/\s/g, '');
+    if (!/^[0-9eE+\-*/().,]+$/.test(cleaned)) return null;
+    const withDot = cleaned.replace(/,/g, '.');
+    try {
+      const val = Function('"use strict"; return (' + withDot + ');')();
+      return (typeof val === 'number' && Number.isFinite(val)) ? val : null;
+    } catch { return null; }
+  }
+  function nearlyEqual(a, b, eps = 1e-3) {
+    return Math.abs(a - b) <= eps * Math.max(1, Math.abs(a), Math.abs(b));
+  }
+  function paint(input, ok) {
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')) {
+      input.nextElementSibling.remove();
+    }
+    if (ok) {
+      input.style.backgroundColor = "#c6f6c6";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">✅</span>');
+    } else {
+      input.style.backgroundColor = "#fdd";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">❌</span>');
+    }
+  }
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+  function checkWord(input, patterns) {
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    const ok = opts.some(p => text.includes(p));
+    paint(input, ok);
+  }
+  function checkNum(input, expected) {
+    const raw = input.value.trim();
+    if (raw === '') return paint(input, false);
+    const val = safeEval(raw);
+    const ok = (val !== null) && nearlyEqual(val, Number(expected));
+    paint(input, ok);
+  }
+  function checkRange(input, rangeStr) {
+    const raw = input.value.trim();
+    if (raw === '') return paint(input, false);
+    const val = safeEval(raw);
+    const parts = rangeStr.split(',').map(Number);
+    const lo = Math.min(parts[0], parts[1]);
+    const hi = Math.max(parts[0], parts[1]);
+    const ok = (val !== null) && val >= lo && val <= hi;
+    paint(input, ok);
+  }
+
+  // gabarito
+  function checkAnswer(letter) {
+    const correct = 'D';
+    const message = document.getElementById('message');
+    if (letter === correct) {
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

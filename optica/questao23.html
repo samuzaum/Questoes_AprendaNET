@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sistemas Numéricos - Lista 03 — Problema 23</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 220px; text-align: center; margin: 0 4px; }
+    .option { display: block; margin: 10px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+    small { color: #444; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao22.html">🔹 Ir para Problema 22</a> |
+  <a href="questao24.html">🔹 Ir para Problema 24</a>
+</p>
+
+<h3>Problema 23:</h3>
+
+<p><strong>132. (Fisiologia da visão — pupila e acuidade)</strong></p>
+
+<p>
+A maioria das pessoas fica com a visão embaçada ao abrir os olhos debaixo d’água. Uma exceção é o povo moken, que habita a costa da Tailândia.
+Essa característica se deve principalmente à adaptabilidade do olho e à plasticidade do cérebro, o que sugere que, com treino, é possível enxergar relativamente bem debaixo d’água. Estudos mostram que as pupilas dos moken sofrem <em>redução significativa</em> de diâmetro sob a água, fazendo com que os raios luminosos que incidem sejam quase paralelos ao eixo óptico da pupila. A acuidade visual associada a essa redução é explicada pela diminuição:
+</p>
+
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) Efeito da pupila menor:</strong>
+  Pupila contraída deixa passar apenas raios próximos ao
+  <input onchange="checkWord(this,'eixo optico|eixo óptico|eixo')">, reduzindo
+  <input onchange="checkWord(this,'aberracoes|aberrações|desvios|desvio')">
+  e melhorando a <input onchange="checkWord(this,'acuidade|resolucao|resolução')">.
+</p>
+
+<p><strong>2) O que acontece dentro do olho (água × córnea):</strong>
+  Sob a água, o contraste de índices muda e raios
+  <input onchange="checkWord(this,'refratados|refracao|refração')">
+  desviam menos quando passam mais perto do eixo ⇒
+  <input onchange="checkWord(this,'diminui o desvio|menor desvio|diminui o desvio dos feixes')">.
+</p>
+
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')">
+  <span class="circle">A</span>
+  da intensidade luminosa incidente na retina.
+</div>
+<div class="option" onclick="checkAnswer('B')">
+  <span class="circle">B</span>
+  da difração dos feixes luminosos que atravessam a pupila.
+</div>
+<div class="option" onclick="checkAnswer('C')">
+  <span class="circle">C</span>
+  da intensidade dos feixes luminosos em uma direção por polarização.
+</div>
+<div class="option" onclick="checkAnswer('D')">
+  <span class="circle">D</span>
+  do desvio dos feixes luminosos refratados no interior do olho.
+</div>
+<div class="option" onclick="checkAnswer('E')">
+  <span class="circle">E</span>
+  das reflexões dos feixes luminosos no interior do olho.
+</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // -------- utilidades --------
+  function safeEval(expr) {
+    const cleaned = String(expr).replace(/\s/g, '');
+    if (!/^[0-9eE+\-*/().,]+$/.test(cleaned)) return null;
+    const withDot = cleaned.replace(/,/g, '.');
+    try {
+      const val = Function('"use strict"; return (' + withDot + ');')();
+      return (typeof val === 'number' && Number.isFinite(val)) ? val : null;
+    } catch { return null; }
+  }
+  function nearlyEqual(a, b, eps = 1e-3) {
+    return Math.abs(a - b) <= eps * Math.max(1, Math.abs(a), Math.abs(b));
+  }
+  function paint(input, ok) {
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')) {
+      input.nextElementSibling.remove();
+    }
+    if (ok) {
+      input.style.backgroundColor = "#c6f6c6";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">✅</span>');
+    } else {
+      input.style.backgroundColor = "#fdd";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">❌</span>');
+    }
+  }
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+  function checkWord(input, patterns) {
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    const ok = opts.some(p => text.includes(p));
+    paint(input, ok);
+  }
+
+  // gabarito
+  function checkAnswer(letter) {
+    const correct = 'D';
+    const message = document.getElementById('message');
+    if (letter === correct) {
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

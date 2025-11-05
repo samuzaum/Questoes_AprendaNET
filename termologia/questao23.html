@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sistemas Numéricos - Lista 03 — Problema 23</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 180px; text-align: center; margin: 0 4px; }
+    .option { display: block; margin: 10px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+    .imgwrap img { max-width: 520px; border: 1px solid #ddd; border-radius: 6px; padding: 4px; }
+    small { color: #444; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao22.html">🔹 Ir para Problema 22</a> |
+  <a href="questao24.html">🔹 Ir para Problema 24</a>
+</p>
+
+<h3>Problema 23:</h3>
+
+<p><strong>117. (Calorimetria)</strong></p>
+
+<p>
+Em uma aula experimental de calorimetria, uma professora queimou <em>2,5 g</em> de castanha-de-caju crua para aquecer <em>350 g</em> de água, em um recipiente apropriado para diminuir as perdas de calor. Com base na leitura da tabela nutricional e na medida da temperatura da água após a queima total do combustível, concluiu-se que o <em>c</em> específico da água é <em>1 cal·g⁻¹·°C⁻¹</em> e a temperatura inicial era de <em>20 °C</em>.
+</p>
+
+<p><em>Tabela (por porção de 10 g):</em> Valor energético = 70 kcal; Carboidratos = 0,8 g; Proteínas = 3,5 g; Gorduras totais = 3,5 g.</p>
+
+<p>
+Qual foi a temperatura da água, em graus Celsius, medida ao final do experimento?
+</p>
+
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) Energia liberada pelo combustível:</strong>
+  Porção de 10 g → <input onchange="checkNum(this,'70')"> kcal.  
+  Massa queimada: <input onchange="checkNum(this,'2.5')"> g = <input onchange="checkNum(this,'0.25')"> porções.  
+  \(Q_{\text{comb}}\) = 70 × 0,25 = <input onchange="checkNum(this,'17.5')"> kcal = <input onchange="checkNum(this,'17500')"> cal.
+</p>
+
+<p><strong>2) Fração absorvida pela água:</strong>
+  Suponha que apenas <input onchange="checkNum(this,'50')"> % aquece a água →  
+  \(Q_{\text{água}}\) = <input onchange="checkNum(this,'8750')"> cal.
+</p>
+
+<p><strong>3) Variação de temperatura:</strong>
+  \( \Delta T = \dfrac{Q}{m\,c} \) com m = <input onchange="checkNum(this,'350')"> g, c = <input onchange="checkNum(this,'1')"> cal·g⁻¹·°C⁻¹ →  
+  \(\Delta T \approx\) <input onchange="checkNum(this,'25')"> °C.
+</p>
+
+<p><strong>4) Temperatura final:</strong>
+  \(T_f = T_i + \Delta T =\) 20 °C + 25 °C = <input onchange="checkNum(this,'45')"> °C.
+</p>
+
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')">
+  <span class="circle">A</span>
+  25
+</div>
+<div class="option" onclick="checkAnswer('B')">
+  <span class="circle">B</span>
+  27
+</div>
+<div class="option" onclick="checkAnswer('C')">
+  <span class="circle">C</span>
+  45
+</div>
+<div class="option" onclick="checkAnswer('D')">
+  <span class="circle">D</span>
+  50
+</div>
+<div class="option" onclick="checkAnswer('E')">
+  <span class="circle">E</span>
+  70
+</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // -------- utilidades --------
+  function safeEval(expr) {
+    const cleaned = String(expr).replace(/\s/g, '');
+    if (!/^[0-9eE+\-*/().,]+$/.test(cleaned)) return null;
+    const withDot = cleaned.replace(/,/g, '.');
+    try {
+      const val = Function('"use strict"; return (' + withDot + ');')();
+      return (typeof val === 'number' && Number.isFinite(val)) ? val : null;
+    } catch { return null; }
+  }
+  function nearlyEqual(a, b, eps = 1e-3) {
+    return Math.abs(a - b) <= eps * Math.max(1, Math.abs(a), Math.abs(b));
+  }
+  function paint(input, ok) {
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')) {
+      input.nextElementSibling.remove();
+    }
+    if (ok) {
+      input.style.backgroundColor = "#c6f6c6";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">✅</span>');
+    } else {
+      input.style.backgroundColor = "#fdd";
+      input.insertAdjacentHTML("afterend", '<span class="feedback">❌</span>');
+    }
+  }
+  // palavras-chave (com tolerância a acentos)
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+  function checkWord(input, patterns) {
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    const ok = opts.some(p => text.includes(p));
+    paint(input, ok);
+  }
+  // número ~ exato
+  function checkNum(input, expected) {
+    const raw = input.value.trim();
+    if (raw === '') return paint(input, false);
+    const val = safeEval(raw);
+    const ok = (val !== null) && nearlyEqual(val, Number(expected));
+    paint(input, ok);
+  }
+  // número dentro de intervalo [a,b]
+  function checkRange(input, rangeStr) {
+    const raw = input.value.trim();
+    if (raw === '') return paint(input, false);
+    const val = safeEval(raw);
+    const parts = rangeStr.split(',').map(Number);
+    const lo = Math.min(parts[0], parts[1]);
+    const hi = Math.max(parts[0], parts[1]);
+    const ok = (val !== null) && val >= lo && val <= hi;
+    paint(input, ok);
+  }
+
+  // gabarito
+  function checkAnswer(letter) {
+    const correct = 'C';
+    const message = document.getElementById('message');
+    if (letter === correct) {
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>
