@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Física — Lista 03 — Problema 47 (ENEM 2020 — Q97)</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 340px; text-align: center; margin: 0 4px; }
+    .option { display: block; margin: 10px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 0 6px 12px 0; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao46.html">🔹 Ir para Problema 46</a> |
+  <a href="questao48.html">🔹 Ir para Problema 48</a>
+</p>
+
+<h3>Problema 47:</h3>
+<p><strong>Enem 2020</strong></p>
+
+<p><strong>Questão 97 – Ciências da Natureza e suas Tecnologias</strong></p>
+
+<p>
+As populares pilhas zinco-carbono (alcalinas e de Leclanché) são compostas por um invólucro externo de aço (liga de ferro-carbono), um ânodo (zinco metálico), um cátodo (grafite) e um eletrólito (MnO<sub>2</sub> mais NH<sub>4</sub>Cl ou KOH), contido em uma massa úmida com carbono chamada pasta eletrolítica.
+Nos processos de reciclagem, geralmente propostos para essas pilhas usadas, tem como ponto de partida a moagem (trituração). Na sequência, uma das etapas é a separação do aço, presente no invólucro externo, dos demais componentes. Que processo aplicado à pilha moída permite obter essa separação?
+</p>
+
+<ol type="A">
+  <li>Catação manual.</li>
+  <li>Ação de um eletroímã.</li>
+  <li>Calcinação em um forno.</li>
+  <li>Fracionamento por densidade.</li>
+  <li>Dissolução do eletrólito em água.</li>
+</ol>
+
+<!-- Resolução apenas posicionada antes das alternativas -->
+<h4>Resolução (interativa):</h4>
+
+<p><strong>1) Primeira etapa do processo de reciclagem mencionada:</strong>
+  <input onchange="checkWord(this,'trituracao|moagem|trituração|moer')">
+</p>
+
+<p><strong>2) Qual procedimento separa o invólucro de aço dos demais fragmentos?</strong>
+  <input onchange="checkWord(this,'eletroima|eletroímã|ima|ímã|separacao magnetica|separação magnética')">
+</p>
+
+<p><strong>3) Que propriedade do aço permite essa separação?</strong>
+  <input onchange="checkWord(this,'ferromagnetismo|magnetismo|material ferromagnetico|material ferromagnético')">
+</p>
+
+<!-- ALTERNATIVAS CLICÁVEIS -->
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" role="button" tabindex="0"
+     onclick="checkAnswer('A')" onkeydown="if(event.key==='Enter')checkAnswer('A')">
+  <span class="circle">A</span> Catação manual.
+</div>
+<div class="option" role="button" tabindex="0"
+     onclick="checkAnswer('B')" onkeydown="if(event.key==='Enter')checkAnswer('B')">
+  <span class="circle">B</span> Ação de um eletroímã.
+</div>
+<div class="option" role="button" tabindex="0"
+     onclick="checkAnswer('C')" onkeydown="if(event.key==='Enter')checkAnswer('C')">
+  <span class="circle">C</span> Calcinação em um forno.
+</div>
+<div class="option" role="button" tabindex="0"
+     onclick="checkAnswer('D')" onkeydown="if(event.key==='Enter')checkAnswer('D')">
+  <span class="circle">D</span> Fracionamento por densidade.
+</div>
+<div class="option" role="button" tabindex="0"
+     onclick="checkAnswer('E')" onkeydown="if(event.key==='Enter')checkAnswer('E')">
+  <span class="circle">E</span> Dissolução do eletrólito em água.
+</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // normalização e marcação ✅/❌ nos inputs
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+  function paint(input, ok){
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')){
+      input.nextElementSibling.remove();
+    }
+    input.style.backgroundColor = ok ? "#c6f6c6" : "#fdd";
+    input.insertAdjacentHTML("afterend", `<span class="feedback">${ok ? '✅' : '❌'}</span>`);
+  }
+  function checkWord(input, patterns){
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    paint(input, opts.some(p => text.includes(p)));
+  }
+
+  // gabarito simples (sem dica ao errar)
+  const CORRECT = 'B';
+  function checkAnswer(letter){
+    const message = document.getElementById('message');
+    if (letter === CORRECT){
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Física — Lista 03 — Problema 50 (ENEM 2020 — Q118)</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 360px; text-align: center; margin: 0 4px; }
+    .option { display: block; margin: 10px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 0 6px 12px 0; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+    /* bloco de ilustração */
+figure.illustration {
+  margin: 14px auto 18px;
+  padding: 10px;
+  max-width: 680px;          /* limita a largura do bloco */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fafafa;
+}
+figure.illustration img {
+  display: block;
+  max-width: 100%;            /* responsivo */
+  height: auto;
+  margin: 0 auto;
+}
+figure.illustration figcaption {
+  text-align: center;
+  font-size: 0.95rem;
+  color: #555;
+  margin-top: 8px;
+}
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao49.html">🔹 Ir para Problema 49</a> |
+  <a href="questao51.html">🔹 Ir para Problema 51</a>
+</p>
+
+<h3>Problema 50:</h3>
+<p><strong>Enem 2020</strong></p>
+
+<p><strong>Questão 118 – Ciências da Natureza e suas Tecnologias</strong></p>
+
+<p>
+Diversos brinquedos são constituídos de pilhas ligadas a um motor elétrico. A figura (esquemática) mostra uma pilha e um motor acoplados, em que \(e\) representa a força eletromotriz (FEM) da pilha, \(e'\) representa a força contraeletromotriz (FCEM) do motor e \(r\) sua resistência interna.
+Um problema comum que danifica esses brinquedos é o travamento do eixo do motor.
+O que ocorre com a FCEM e com a energia fornecida pelas pilhas quando o eixo de rotação fica travado?
+</p>
+<figure class="illustration" aria-labelledby="figcap">
+  <img src="questao50.png" alt="Esquema com pilha, chave e motor indicando FEM e FCEM">
+  <figcaption id="figcap">Figura 1 – Esquema do circuito da questão.</figcaption>
+</figure>
+<h4>Resolução (interativa):</h4>
+
+<p><strong>1) A FCEM em um motor é proporcional à velocidade de rotação. Se o eixo fica travado, a FCEM torna-se:</strong>
+  <input onchange="checkWord(this,'zero|nula|0')">
+</p>
+
+<p><strong>2) Com FCEM ≈ 0, a corrente no motor tende a:</strong>
+  <input onchange="checkWord(this,'aumentar|subir|ficar maxima|maxima|maior|alta')">
+</p>
+
+<p><strong>3) Nessa condição, a energia das pilhas é principalmente:</strong>
+  <input onchange="checkWord(this,'dissipada como calor na resistencia interna do motor|dissipada em calor|perdida em calor|efeito joule na resistencia interna|efeito joule no enrolamento')">
+</p>
+
+<!-- ALTERNATIVAS CLICÁVEIS -->
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" role="button" tabindex="0"
+     onclick="checkAnswer('A')" onkeydown="if(event.key==='Enter')checkAnswer('A')">
+  <span class="circle">A</span> A FCEM iguala-se à FEM e toda a energia das pilhas fica armazenada no circuito.
+</div>
+<div class="option" role="button" tabindex="0"
+     onclick="checkAnswer('B')" onkeydown="if(event.key==='Enter')checkAnswer('B')">
+  <span class="circle">B</span> A FCEM sofre grande aumento e a energia das pilhas passa a ser dissipada na forma de calor.
+</div>
+<div class="option" role="button" tabindex="0"
+     onclick="checkAnswer('C')" onkeydown="if(event.key==='Enter')checkAnswer('C')">
+  <span class="circle">C</span> A FCEM inverte a polaridade e a energia das pilhas é devolvida em forma de energia potencial.
+</div>
+<div class="option" role="button" tabindex="0"
+     onclick="checkAnswer('D')" onkeydown="if(event.key==='Enter')checkAnswer('D')">
+  <span class="circle">D</span> A FCEM reduz-se a zero e a energia das pilhas passa a ser dissipada na resistência interna do motor.
+</div>
+<div class="option" role="button" tabindex="0"
+     onclick="checkAnswer('E')" onkeydown="if(event.key==='Enter')checkAnswer('E')">
+  <span class="circle">E</span> A FCEM mantém-se constante e a energia das pilhas converte-se integralmente em energia mecânica.
+</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // normalização e marcação ✅/❌ nos inputs
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+  function paint(input, ok){
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')){
+      input.nextElementSibling.remove();
+    }
+    input.style.backgroundColor = ok ? "#c6f6c6" : "#fdd";
+    input.insertAdjacentHTML("afterend", `<span class="feedback">${ok ? '✅' : '❌'}</span>`);
+  }
+  function checkWord(input, patterns){
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    paint(input, opts.some(p => text.includes(p)));
+  }
+
+  // gabarito simples (sem dica ao errar)
+  const CORRECT = 'D';
+  function checkAnswer(letter){
+    const message = document.getElementById('message');
+    if (letter === CORRECT){
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

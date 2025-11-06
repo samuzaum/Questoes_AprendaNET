@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Física — Lista 03 — Problema 27 (ENEM 2020 — Q133)</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 360px; text-align: center; margin: 0 4px; }
+    .option { display: block; margin: 14px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 0 6px 12px 0; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao26.html">🔹 Ir para Problema 26</a> |
+  <a href="questao28.html">🔹 Ir para Problema 28</a>
+</p>
+
+<h3>Problema 27:</h3>
+<p><strong>Enem 2020</strong></p>
+
+<p><strong>Questão 133 – Ciências da Natureza e suas Tecnologias</strong></p>
+
+<p>
+O leite UHT é aquecido rapidamente sob alta pressão e, em seguida, resfriado de modo abrupto por redução súbita da pressão, fazendo com que parte da água evapore e a temperatura caia. Qual é o processo termodinâmico que explica essa redução rápida de temperatura?
+</p>
+
+<!-- Resolução (apenas posicionada antes das alternativas) -->
+<h4>Resolução (interativa):</h4>
+
+<p><strong>1) A queda brusca de pressão favorece a mudança de fase da água para:</strong>
+  <input onchange="checkWord(this,'vapor|fase gasosa|evaporacao|evaporação')">
+</p>
+
+<p><strong>2) A energia necessária para essa mudança é o:</strong>
+  <input onchange="checkWord(this,'calor latente de vaporizacao|calor latente|vaporizacao|vaporização')">
+</p>
+
+<p><strong>3) Essa energia é retirada do próprio leite, causando:</strong>
+  <input onchange="checkWord(this,'resfriamento|queda de temperatura|arrefecimento')">
+</p>
+
+<!-- ALTERNATIVAS -->
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" role="button" tabindex="0"
+     onclick="checkAnswer('A')" onkeydown="if(event.key==='Enter')checkAnswer('A')">
+  <span class="circle">A</span> convecção induzida pelo movimento de bolhas de vapor de água.
+</div>
+<div class="option" role="button" tabindex="0"
+     onclick="checkAnswer('B')" onkeydown="if(event.key==='Enter')checkAnswer('B')">
+  <span class="circle">B</span> emissão de radiação térmica durante a liberação de vapor de água.
+</div>
+<div class="option" role="button" tabindex="0"
+     onclick="checkAnswer('C')" onkeydown="if(event.key==='Enter')checkAnswer('C')">
+  <span class="circle">C</span> expansão livre do vapor de água liberado pelo leite no resfriamento.
+</div>
+<div class="option" role="button" tabindex="0"
+     onclick="checkAnswer('D')" onkeydown="if(event.key==='Enter')checkAnswer('D')">
+  <span class="circle">D</span> conversão de energia térmica em energia química pelas moléculas orgânicas.
+</div>
+<div class="option" role="button" tabindex="0"
+     onclick="checkAnswer('E')" onkeydown="if(event.key==='Enter')checkAnswer('E')">
+  <span class="circle">E</span> transferência de energia térmica durante a vaporização da água presente no leite.
+</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // normalização e marcação ✅/❌ nos inputs
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+  function paint(input, ok){
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')){
+      input.nextElementSibling.remove();
+    }
+    input.style.backgroundColor = ok ? "#c6f6c6" : "#fdd";
+    input.insertAdjacentHTML("afterend", `<span class="feedback">${ok ? '✅' : '❌'}</span>`);
+  }
+  function checkWord(input, patterns){
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    paint(input, opts.some(p => text.includes(p)));
+  }
+
+  // gabarito (sem dica ao errar)
+  const CORRECT = 'E';
+  function checkAnswer(letter){
+    const message = document.getElementById('message');
+    if (letter === CORRECT){
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

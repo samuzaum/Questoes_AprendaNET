@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Física — Lista 03 — Problema 51 (ENEM 2020 — Q132)</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 360px; text-align: center; margin: 0 4px; }
+    .option { display: block; margin: 14px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 0 6px 12px 0; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+    code { background: #f6f6f6; padding: 2px 4px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao50.html">🔹 Ir para Problema 50</a> |
+  <a href="questao52.html">🔹 Ir para Problema 52</a>
+</p>
+
+<h3>Problema 51:</h3>
+<p><strong>Enem 2020</strong></p>
+
+<p><strong>Questão 132 – Ciências da Natureza e suas Tecnologias</strong></p>
+
+<p>
+As pilhas recarregáveis, bastante utilizadas atualmente, atuam como célula galvânica na descarga e como célula eletrolítica quando estão sendo recarregadas.
+Considere a pilha formada pelos elementos níquel e cádmio com os potenciais padrão de redução:
+</p>
+
+<p style="margin-left:18px">
+Ni²⁺(aq) + 2 e⁻ → Ni(s) &nbsp;&nbsp; <em>E</em>° = −0,230 V<br>
+Cd²⁺(aq) + 2 e⁻ → Cd(s) &nbsp;&nbsp; <em>E</em>° = −0,402 V
+</p>
+
+<p>
+Teoricamente, para que um carregador seja, ao mesmo tempo, eficiente e de menor custo, qual a diferença de potencial mínima (em volt) que ele deve superar?
+</p>
+
+<!-- Resolução (interativa, apenas posicionada antes das alternativas) -->
+<h4>Resolução (interativa):</h4>
+
+<p><strong>1) O eletrodo com maior potencial de redução (menos negativo) é o:</strong>
+  <input onchange="checkWord(this,'niquel|níquel|ni')">
+</p>
+
+<p><strong>2) Logo, na descarga, o cátodo é:</strong>
+  <input onchange="checkWord(this,'niquel|níquel|catodo ni|cátodo níquel')">
+</p>
+
+<p><strong>3) Cálculo da FEM na descarga: </strong>
+  <code>E°<sub>cel</sub> = E°<sub>cátodo</sub> − E°<sub>ânodo</sub> = (−0,230) − (−0,402) =</code>
+  <input onchange="checkWord(this,'0,172|0.172|1,72e-1|1.72e-1')">
+</p>
+
+<p><strong>4) Na recarga, a ddp mínima do carregador deve ser</strong>
+  <input onchange="checkWord(this,'maior que a fem|maior que 0,172 v|superior a 0,172 v|superar 0,172 v')">
+</p>
+
+<!-- ALTERNATIVAS -->
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" role="button" tabindex="0"
+     onclick="checkAnswer('A')" onkeydown="if(event.key==='Enter')checkAnswer('A')">
+  <span class="circle">A</span> 0,086.
+</div>
+<div class="option" role="button" tabindex="0"
+     onclick="checkAnswer('B')" onkeydown="if(event.key==='Enter')checkAnswer('B')">
+  <span class="circle">B</span> 0,172.
+</div>
+<div class="option" role="button" tabindex="0"
+     onclick="checkAnswer('C')" onkeydown="if(event.key==='Enter')checkAnswer('C')">
+  <span class="circle">C</span> 0,316.
+</div>
+<div class="option" role="button" tabindex="0"
+     onclick="checkAnswer('D')" onkeydown="if(event.key==='Enter')checkAnswer('D')">
+  <span class="circle">D</span> 0,632.
+</div>
+<div class="option" role="button" tabindex="0"
+     onclick="checkAnswer('E')" onkeydown="if(event.key==='Enter')checkAnswer('E')">
+  <span class="circle">E</span> 1,264.
+</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // normalização e marcação ✅/❌ nos inputs
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+  function paint(input, ok){
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')){
+      input.nextElementSibling.remove();
+    }
+    input.style.backgroundColor = ok ? "#c6f6c6" : "#fdd";
+    input.insertAdjacentHTML("afterend", `<span class="feedback">${ok ? '✅' : '❌'}</span>`);
+  }
+  function checkWord(input, patterns){
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    paint(input, opts.some(p => text.includes(p)));
+  }
+
+  // gabarito (sem dica ao errar)
+  const CORRECT = 'B';
+  function checkAnswer(letter){
+    const message = document.getElementById('message');
+    if (letter === CORRECT){
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

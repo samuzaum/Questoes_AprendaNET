@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Física — Lista 03 — Problema 15 (ENEM 2020 — Q123)</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 360px; text-align: center; margin: 0 4px; }
+    .option { display: block; margin: 14px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 0 6px 12px 0; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+
+    /* imagens nas alternativas */
+    .altimg { display: block; max-width: 420px; height: auto; margin: 8px 0 0 38px; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao14.html">🔹 Ir para Problema 14</a> |
+  <a href="questao16.html">🔹 Ir para Problema 16</a>
+</p>
+
+<h3>Problema 15:</h3>
+<p><strong>Enem 2020</strong></p>
+
+<p><strong>Questão 123 – Ciências da Natureza e suas Tecnologias</strong></p>
+
+<p>
+O custo de implantação de redes de transmissão aumenta linearmente com a distância da hidrelétrica, de modo que, a partir de uma certa distância, o uso de energia solar fotovoltaica (ESF), que não depende da distância, é favorecido. Assim, em regiões isoladas, como a Amazônia, o uso da energia solar torna-se alternativa viável. Qual gráfico representa qualitativamente os custos do uso de energia solar fotovoltaica (ESF) e da implantação de redes de transmissão (RT) em função da distância?
+</p>
+
+<!-- Resolução (apenas posicionada antes das alternativas) -->
+<h4>Resolução (interativa):</h4>
+
+<p><strong>1) Com a distância até a usina, o custo de RT tende a:</strong>
+  <input onchange="checkWord(this,'crescer linearmente|aumentar linearmente|linha inclinada crescente|proporcional a distancia|proporcional à distância')">
+</p>
+
+<p><strong>2) O custo de ESF instalado localmente, em 1ª aproximação, é:</strong>
+  <input onchange="checkWord(this,'praticamente constante|aprox constante|horizontal|independente da distancia|independente da distância')">
+</p>
+
+<p><strong>3) Para alguma distância, a solução ESF torna-se mais barata, logo os gráficos devem:</strong>
+  <input onchange="checkWord(this,'se cruzar|cruzar|intersectar|ter interseccao|interseção')">
+</p>
+
+<!-- ALTERNATIVAS COM IMAGENS (mesma pasta do HTML) -->
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" role="button" tabindex="0"
+     onclick="checkAnswer('A')" onkeydown="if(event.key==='Enter')checkAnswer('A')">
+  <span class="circle">A</span>
+  <img class="altimg" src="questao123a.png" alt="Alternativa A — gráfico de custos ESF e RT versus distância">
+</div>
+
+<div class="option" role="button" tabindex="0"
+     onclick="checkAnswer('B')" onkeydown="if(event.key==='Enter')checkAnswer('B')">
+  <span class="circle">B</span>
+  <img class="altimg" src="questao123b.png" alt="Alternativa B — gráfico de custos ESF e RT versus distância">
+</div>
+
+<div class="option" role="button" tabindex="0"
+     onclick="checkAnswer('C')" onkeydown="if(event.key==='Enter')checkAnswer('C')">
+  <span class="circle">C</span>
+  <img class="altimg" src="questao123c.png" alt="Alternativa C — gráfico de custos ESF e RT versus distância">
+</div>
+
+<div class="option" role="button" tabindex="0"
+     onclick="checkAnswer('D')" onkeydown="if(event.key==='Enter')checkAnswer('D')">
+  <span class="circle">D</span>
+  <img class="altimg" src="questao123d.png" alt="Alternativa D — gráfico de custos ESF e RT versus distância">
+</div>
+
+<div class="option" role="button" tabindex="0"
+     onclick="checkAnswer('E')" onkeydown="if(event.key==='Enter')checkAnswer('E')">
+  <span class="circle">E</span>
+  <img class="altimg" src="questao123e.png" alt="Alternativa E — gráfico de custos ESF e RT versus distância">
+</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // normalização e marcação ✅/❌ nos inputs
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+  function paint(input, ok){
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')){
+      input.nextElementSibling.remove();
+    }
+    input.style.backgroundColor = ok ? "#c6f6c6" : "#fdd";
+    input.insertAdjacentHTML("afterend", `<span class="feedback">${ok ? '✅' : '❌'}</span>`);
+  }
+  function checkWord(input, patterns){
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    paint(input, opts.some(p => text.includes(p)));
+  }
+
+  // gabarito (sem dica ao errar)
+  const CORRECT = 'E';
+  function checkAnswer(letter){
+    const message = document.getElementById('message');
+    if (letter === CORRECT){
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

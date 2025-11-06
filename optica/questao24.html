@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Física — Lista 03 — Problema 24 (ENEM 2020 — Q94)</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 320px; text-align: center; margin: 0 4px; }
+    .option { display: block; margin: 10px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao23.html">🔹 Ir para Problema 23</a> |
+  <a href="questao25.html">🔹 Ir para Problema 25</a>
+</p>
+
+<h3>Problema 24:</h3>
+<p><strong>3 – Enem 2020</strong></p>
+
+<p><strong>Questão 94 – Ciências da Natureza e suas Tecnologias</strong></p>
+
+<p>
+As células fotovoltaicas (placas semicondutoras compostas de silício) são os componentes principais dos painéis solares e são capazes de converter, com certa eficiência, parte da energia dos raios solares em energia elétrica.
+Essa conversão é causada pelo fenômeno físico denominado <em>efeito fotoelétrico</em>, que pode ocorrer em uma variedade de materiais, incluindo metais e semicondutores.
+Na superfície dos metais, a sequência de eventos que caracteriza esse efeito, de forma simplificada, é a
+</p>
+
+<!-- Resolução apenas posicionada antes das alternativas (sem bloqueio) -->
+<h4>Resolução (interativa):</h4>
+
+<p><strong>1) Nome do fenômeno responsável pela conversão:</strong>
+  <input onchange="checkWord(this,'efeito fotoeletrico|efeito fotoelétrico')">
+</p>
+
+<p><strong>2) Condição para que haja emissão eletrônica:</strong>
+  <input onchange="checkWord(this,'energia do foton maior que a funcao trabalho|hf maior que funcao trabalho|energia do fóton maior que a função trabalho|hf>phi|hf maior que phi|frequencia de corte')">
+</p>
+
+<p><strong>3) Sequência básica do processo na superfície metálica:</strong>
+  <input onchange="checkWord(this,'absorcao de fotons e emissao de eletrons|absorção de fótons e emissão de elétrons|absorver foton e emitir eletron')">
+</p>
+
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" role="button" tabindex="0"
+     onclick="checkAnswer('A')" onkeydown="if(event.key==='Enter')checkAnswer('A')">
+  <span class="circle">A</span> absorção de fótons e a emissão de elétrons.
+</div>
+<div class="option" role="button" tabindex="0"
+     onclick="checkAnswer('B')" onkeydown="if(event.key==='Enter')checkAnswer('B')">
+  <span class="circle">B</span> absorção de elétrons e a emissão de fótons.
+</div>
+<div class="option" role="button" tabindex="0"
+     onclick="checkAnswer('C')" onkeydown="if(event.key==='Enter')checkAnswer('C')">
+  <span class="circle">C</span> emissão de fótons e a absorção de elétrons.
+</div>
+<div class="option" role="button" tabindex="0"
+     onclick="checkAnswer('D')" onkeydown="if(event.key==='Enter')checkAnswer('D')">
+  <span class="circle">D</span> absorção e a emissão de elétrons.
+</div>
+<div class="option" role="button" tabindex="0"
+     onclick="checkAnswer('E')" onkeydown="if(event.key==='Enter')checkAnswer('E')">
+  <span class="circle">E</span> absorção e a emissão de fótons.
+</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // normalização e marcação ✅/❌ nos inputs
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+  function paint(input, ok){
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')){
+      input.nextElementSibling.remove();
+    }
+    input.style.backgroundColor = ok ? "#c6f6c6" : "#fdd";
+    input.insertAdjacentHTML("afterend", `<span class="feedback">${ok ? '✅' : '❌'}</span>`);
+  }
+  function checkWord(input, patterns){
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    paint(input, opts.some(p => text.includes(p)));
+  }
+
+  // gabarito simples (sem dica ao errar)
+  const CORRECT = 'A';
+  function checkAnswer(letter){
+    const message = document.getElementById('message');
+    if (letter === CORRECT){
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>
