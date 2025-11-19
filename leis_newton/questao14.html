@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>Sistemas Numéricos - Lista 03 — Problema 29</title>
+  <title>Sistemas Numéricos - Lista 03 — Problema 14</title>
   <style>
     body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
     input { width: 220px; text-align: center; margin: 0 4px; }
@@ -28,77 +28,80 @@
 <body>
 
 <p>
-  <a href="questao28.html">🔹 Ir para Problema 28</a> |
-  <a href="questao30.html">🔹 Ir para Problema 30</a>
+  <a href="questao13.html">🔹 Ir para Problema 13</a> |
+  <a href="questao15.html">🔹 Ir para Problema 15</a>
 </p>
 
-<h3>Problema 29:</h3>
+<h3>Problema 14:</h3>
 
 <!-- ENUNCIADO -->
-<p><strong>118. (ENEM 2018)</strong></p>
+<p><strong>93. (ENEM – cintos de segurança)</strong></p>
+
 <p>
-Alguns materiais sólidos são compostos por átomos que interagem entre si formando ligações que podem ser covalentes,
-iônicas ou metálicas. A figura apresenta a energia potencial de ligação em função da distância interatômica em um sólido
-cristalino.
+Em uma colisão frontal entre dois automóveis, a força que o cinto de segurança exerce sobre o tórax e o abdômen do motorista
+pode causar lesões graves nos órgãos internos. Pensando na segurança do seu produto, um fabricante de automóveis realizou
+testes em cinco modelos diferentes de cinto.
 </p>
 <p>
-Analisando essa figura, observa-se que, na temperatura de zero kelvin, a distância de equilíbrio da ligação entre os
-átomos (\(R_0\)) corresponde ao valor mínimo de energia potencial. Acima dessa temperatura, a energia térmica fornecida
-aos átomos aumenta sua energia cinética e faz com que eles oscilem em torno de uma posição de equilíbrio média
-(círculos cheios), que é diferente para cada temperatura. A distância de ligação pode variar sobre toda a extensão das
-linhas horizontais, identificadas com o valor da temperatura, de \(T_1\) a \(T_4\) (temperaturas crescentes).
-</p>
-<p>
-O deslocamento observado na distância média revela o fenômeno da
+Os testes simularam uma colisão de 0,30 s de duração, e os bonecos que representavam os ocupantes foram equipados com
+acelerômetros, que registraram o módulo da desaceleração em função do tempo. Os parâmetros como massa dos bonecos, dimensões
+dos cintos e velocidade imediatamente antes e após o impacto foram os mesmos para todos os testes.
 </p>
 
 <figure>
-  <!-- Ajuste o caminho/nome da imagem conforme você salvar -->
-  <img src="questao29_potencial.png"
-       alt="Curva de energia potencial de ligação em função da distância interatômica, com diferentes temperaturas T1 a T4 mostrando o deslocamento da distância média.">
-  <figcaption>Figura 1 – Energia potencial de ligação em função da distância interatômica para diferentes temperaturas.</figcaption>
+  <!-- ajuste o caminho/nome do arquivo da figura quando salvar -->
+  <img src="questao14_cintos.png"
+       alt="Gráfico de aceleração em função do tempo para cinco cintos diferentes, com picos de desaceleração distintos.">
+  <figcaption>Figura – Módulo da desaceleração em função do tempo para cinco modelos de cinto.</figcaption>
 </figure>
+
+<p>
+Qual modelo de cinto oferece menor risco de lesão interna ao motorista?
+</p>
 
 <h4>Solução (interativa):</h4>
 
-<p><strong>1) O que acontece com a distância média entre átomos quando a temperatura aumenta?</strong><br>
-À medida que a temperatura sobe, os átomos vibram em torno de posições
-<input onchange="checkWord(this,'mais afastadas|mais distantes|com maior distancia')">
-entre si; isto é, a distância média
-<input onchange="checkWord(this,'aumenta|cresce|fica maior')">.
+<p><strong>1) Qual é a grandeza associada à mudança de velocidade (mesma antes e depois para todos)?</strong><br>
+A área sob o gráfico aceleração × tempo é o
+<input onchange="checkWord(this,'impulso|variacao de momento|mudanca de momento')">
+que cada cinto aplica no corpo. Como a variação de velocidade é a mesma, o impulso é
+<input onchange="checkWord(this,'igual para todos|o mesmo para todos os cintos')">.
 </p>
 
-<p><strong>2) Como se chama o fenômeno macroscópico associado ao aumento da distância média entre átomos em um sólido?</strong><br>
-Esse aumento na distância média caracteriza a
-<input onchange="checkWord(this,'dilatacao termica|dilatação térmica|dilatacao')">
-do sólido.
+<p><strong>2) De que fator depende o risco de lesão interna?</strong><br>
+O risco está associado aos
+<input onchange="checkWord(this,'picos de aceleracao|maximos de desaceleracao|maiores valores de aceleracao')">
+do gráfico: quanto menor o valor máximo, menor o trauma.
 </p>
 
-<p><strong>3) Logo, o deslocamento observado na distância média revela o fenômeno de</strong><br>
-<input onchange="checkWord(this,'dilatacao|dilatacao termica|dilatação térmica')">.
+<p><strong>3) Observando o gráfico, qual cinto tem a menor aceleração máxima?</strong><br>
+Comparando os cinco gráficos, o cinto que apresenta o
+<input onchange="checkWord(this,'menor pico|menor aceleracao maxima')">
+é o
+<input onchange="checkWord(this,'cinto 2|modelo 2')">.
 </p>
 
 <p><strong>Assinale a alternativa correta:</strong></p>
 
 <div class="option" onclick="checkAnswer('A')">
   <span class="circle">A</span>
-  ionização.
+  1
 </div>
 <div class="option" onclick="checkAnswer('B')">
   <span class="circle">B</span>
-  dilatação.
+  2
 </div>
 <div class="option" onclick="checkAnswer('C')">
   <span class="circle">C</span>
-  dissociação.
+  3
 </div>
 <div class="option" onclick="checkAnswer('D')">
   <span class="circle">D</span>
-  quebra de ligações covalentes.
+  4
 </div>
 <div class="option" onclick="checkAnswer('E')">
   <span class="circle">E</span>
-  formação de ligações metálicas.
+  5
 </div>
 
 <div id="message" class="feedback" aria-live="polite"></div>

@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>Sistemas Numéricos - Lista 03 — Problema 29</title>
+  <title>Sistemas Numéricos - Lista 03 — Problema 28</title>
   <style>
     body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
     input { width: 220px; text-align: center; margin: 0 4px; }
@@ -28,77 +28,74 @@
 <body>
 
 <p>
-  <a href="questao28.html">🔹 Ir para Problema 28</a> |
-  <a href="questao30.html">🔹 Ir para Problema 30</a>
+  <a href="questao27.html">🔹 Ir para Problema 27</a> |
+  <a href="questao29.html">🔹 Ir para Problema 29</a>
 </p>
 
-<h3>Problema 29:</h3>
+<h3>Problema 28:</h3>
 
 <!-- ENUNCIADO -->
-<p><strong>118. (ENEM 2018)</strong></p>
+<p><strong>(ENEM – fibra óptica)</strong></p>
+
 <p>
-Alguns materiais sólidos são compostos por átomos que interagem entre si formando ligações que podem ser covalentes,
-iônicas ou metálicas. A figura apresenta a energia potencial de ligação em função da distância interatômica em um sólido
-cristalino.
-</p>
-<p>
-Analisando essa figura, observa-se que, na temperatura de zero kelvin, a distância de equilíbrio da ligação entre os
-átomos (\(R_0\)) corresponde ao valor mínimo de energia potencial. Acima dessa temperatura, a energia térmica fornecida
-aos átomos aumenta sua energia cinética e faz com que eles oscilem em torno de uma posição de equilíbrio média
-(círculos cheios), que é diferente para cada temperatura. A distância de ligação pode variar sobre toda a extensão das
-linhas horizontais, identificadas com o valor da temperatura, de \(T_1\) a \(T_4\) (temperaturas crescentes).
-</p>
-<p>
-O deslocamento observado na distância média revela o fenômeno da
+Em uma linha de transmissão de informações por fibra óptica, quando um sinal diminui sua intensidade para valores
+inferiores a 10 dB, ele precisa ser retransmitido. No entanto, intensidades superiores a 100 dB não podem ser
+transmitidas adequadamente. A figura apresenta como se dá a perda de sinal (perda óptica) para diferentes comprimentos
+de onda para certo tipo de fibra óptica.
 </p>
 
 <figure>
-  <!-- Ajuste o caminho/nome da imagem conforme você salvar -->
-  <img src="questao29_potencial.png"
-       alt="Curva de energia potencial de ligação em função da distância interatômica, com diferentes temperaturas T1 a T4 mostrando o deslocamento da distância média.">
-  <figcaption>Figura 1 – Energia potencial de ligação em função da distância interatômica para diferentes temperaturas.</figcaption>
+  <!-- ajuste o caminho/nome do arquivo da figura -->
+  <img src="questao28_fibra.png"
+       alt="Gráfico da perda óptica em dB/km em função do comprimento de onda em micrômetros para uma fibra óptica, exibindo um mínimo próximo de 1 dB/km.">
+  <figcaption>Figura – Perda óptica (dB/km) em função do comprimento de onda para uma fibra óptica.</figcaption>
 </figure>
+
+<p>
+Qual é a máxima distância, em km, que um sinal pode ser enviado nessa fibra sem ser necessária uma retransmissão?
+</p>
 
 <h4>Solução (interativa):</h4>
 
-<p><strong>1) O que acontece com a distância média entre átomos quando a temperatura aumenta?</strong><br>
-À medida que a temperatura sobe, os átomos vibram em torno de posições
-<input onchange="checkWord(this,'mais afastadas|mais distantes|com maior distancia')">
-entre si; isto é, a distância média
-<input onchange="checkWord(this,'aumenta|cresce|fica maior')">.
+<p><strong>1) Faixa de intensidade permitida.</strong><br>
+O sinal deve permanecer entre
+<input onchange="checkExpr(this,'10')"> dB e
+<input onchange="checkExpr(this,'100')"> dB.
+Logo, a variação máxima de intensidade (perda permitida) é
+<input onchange="checkExpr(this,'100-10|90')"> dB.
 </p>
 
-<p><strong>2) Como se chama o fenômeno macroscópico associado ao aumento da distância média entre átomos em um sólido?</strong><br>
-Esse aumento na distância média caracteriza a
-<input onchange="checkWord(this,'dilatacao termica|dilatação térmica|dilatacao')">
-do sólido.
+<p><strong>2) Menor perda por quilômetro.</strong><br>
+Analisando o gráfico, a menor perda ocorre em torno do comprimento de onda de mínimo, com cerca de
+<input onchange="checkExpr(this,'1|1.0')"> dB/km (aproximadamente).
 </p>
 
-<p><strong>3) Logo, o deslocamento observado na distância média revela o fenômeno de</strong><br>
-<input onchange="checkWord(this,'dilatacao|dilatacao termica|dilatação térmica')">.
+<p><strong>3) Distância máxima sem retransmissão.</strong><br>
+Se a perda é de aproximadamente 1 dB/km, para perder 90 dB o sinal pode percorrer uma distância
+<input onchange="checkExpr(this,'90/1|90')"> km.
 </p>
 
 <p><strong>Assinale a alternativa correta:</strong></p>
 
 <div class="option" onclick="checkAnswer('A')">
   <span class="circle">A</span>
-  ionização.
+  6
 </div>
 <div class="option" onclick="checkAnswer('B')">
   <span class="circle">B</span>
-  dilatação.
+  60
 </div>
 <div class="option" onclick="checkAnswer('C')">
   <span class="circle">C</span>
-  dissociação.
+  100
 </div>
 <div class="option" onclick="checkAnswer('D')">
   <span class="circle">D</span>
-  quebra de ligações covalentes.
+  90
 </div>
 <div class="option" onclick="checkAnswer('E')">
   <span class="circle">E</span>
-  formação de ligações metálicas.
+  180
 </div>
 
 <div id="message" class="feedback" aria-live="polite"></div>
@@ -139,7 +136,7 @@ do sólido.
 
   // gabarito apenas aqui
   function checkAnswer(letter){
-    const correct = 'B';
+    const correct = 'D';
     const message = document.getElementById('message');
     if (letter === correct){
       message.textContent = 'Correto!';

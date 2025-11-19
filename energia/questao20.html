@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>Sistemas Numéricos - Lista 03 — Problema 29</title>
+  <title>Sistemas Numéricos - Lista 03 — Problema 20</title>
   <style>
     body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
     input { width: 220px; text-align: center; margin: 0 4px; }
@@ -20,85 +20,85 @@
     a:hover { background-color: #55808d; }
     #message { font-weight: bold; margin-top: 20px; }
     small { color: #444; }
-    figure { text-align: center; margin: 20px auto; }
-    figure img { max-width: 100%; height: auto; }
-    figure figcaption { font-size: 0.9rem; color: #555; margin-top: 6px; }
   </style>
 </head>
 <body>
 
 <p>
-  <a href="questao28.html">🔹 Ir para Problema 28</a> |
-  <a href="questao30.html">🔹 Ir para Problema 30</a>
+  <a href="questao19.html">🔹 Ir para Problema 19</a> |
+  <a href="questao21.html">🔹 Ir para Problema 21</a>
 </p>
 
-<h3>Problema 29:</h3>
+<h3>Problema 20:</h3>
 
 <!-- ENUNCIADO -->
-<p><strong>118. (ENEM 2018)</strong></p>
+<p><strong>104. (ENEM 2018)</strong></p>
 <p>
-Alguns materiais sólidos são compostos por átomos que interagem entre si formando ligações que podem ser covalentes,
-iônicas ou metálicas. A figura apresenta a energia potencial de ligação em função da distância interatômica em um sólido
-cristalino.
+A técnica do carbono-14 permite a datação de fósseis pela medição dos valores de emissão beta desse isótopo presente no
+material. Para um ser em vida, o máximo são 15 emissões beta por minuto e por grama (15&nbsp;emissões&nbsp;β/(min·g)).
+Após a morte, a quantidade de <sup>14</sup>C se reduz pela metade a cada 5&nbsp;730 anos.
 </p>
 <p>
-Analisando essa figura, observa-se que, na temperatura de zero kelvin, a distância de equilíbrio da ligação entre os
-átomos (\(R_0\)) corresponde ao valor mínimo de energia potencial. Acima dessa temperatura, a energia térmica fornecida
-aos átomos aumenta sua energia cinética e faz com que eles oscilem em torno de uma posição de equilíbrio média
-(círculos cheios), que é diferente para cada temperatura. A distância de ligação pode variar sobre toda a extensão das
-linhas horizontais, identificadas com o valor da temperatura, de \(T_1\) a \(T_4\) (temperaturas crescentes).
+Considere que um fragmento fóssil de massa igual a 30&nbsp;g foi encontrado em um sítio arqueológico, e a medição de
+radiação apresentou 6&nbsp;750 emissões beta por hora. A idade desse fóssil, em anos, é
 </p>
-<p>
-O deslocamento observado na distância média revela o fenômeno da
-</p>
-
-<figure>
-  <!-- Ajuste o caminho/nome da imagem conforme você salvar -->
-  <img src="questao29_potencial.png"
-       alt="Curva de energia potencial de ligação em função da distância interatômica, com diferentes temperaturas T1 a T4 mostrando o deslocamento da distância média.">
-  <figcaption>Figura 1 – Energia potencial de ligação em função da distância interatômica para diferentes temperaturas.</figcaption>
-</figure>
 
 <h4>Solução (interativa):</h4>
 
-<p><strong>1) O que acontece com a distância média entre átomos quando a temperatura aumenta?</strong><br>
-À medida que a temperatura sobe, os átomos vibram em torno de posições
-<input onchange="checkWord(this,'mais afastadas|mais distantes|com maior distancia')">
-entre si; isto é, a distância média
-<input onchange="checkWord(this,'aumenta|cresce|fica maior')">.
+<p><strong>1) Atividade de um organismo vivo.</strong><br>
+Atividade máxima por grama: \(15\) emissões/min·g.<br>
+Para um organismo de 30&nbsp;g, em vida seria:
+\(A_\text{vivo} = 15 \times 30 =\)
+<input onchange="checkExpr(this,'15*30|450')"> emissões por minuto. <br>
+Em uma hora (60 min), isso corresponde a
+<input onchange="checkExpr(this,'450*60|27000')"> emissões por hora.
 </p>
 
-<p><strong>2) Como se chama o fenômeno macroscópico associado ao aumento da distância média entre átomos em um sólido?</strong><br>
-Esse aumento na distância média caracteriza a
-<input onchange="checkWord(this,'dilatacao termica|dilatação térmica|dilatacao')">
-do sólido.
+<p><strong>2) Comparando com a atividade medida no fóssil.</strong><br>
+Atividade medida: \(A_\text{fóssil} =\)
+<input onchange="checkExpr(this,'6750')"> emissões por hora. <br>
+A razão entre a atividade viva e a atual é
+\( \dfrac{A_\text{vivo}}{A_\text{fóssil}} = \)
+<input onchange="checkExpr(this,'27000/6750|4')">. <br>
+Logo, a atividade atual é
+<input onchange="checkWord(this,'um quarto|1/4')">
+da original.
 </p>
 
-<p><strong>3) Logo, o deslocamento observado na distância média revela o fenômeno de</strong><br>
-<input onchange="checkWord(this,'dilatacao|dilatacao termica|dilatação térmica')">.
+<p><strong>3) Ligando a fração restante ao número de meias-vidas.</strong><br>
+Sabe-se que depois de \(n\) meias-vidas resta \(1/2^n\) da atividade inicial.<br>
+Para restar \(1/4\), precisamos de
+<input onchange="checkExpr(this,'2')"> meias-vidas, pois \(1/2^2 = 1/4\).
+</p>
+
+<p><strong>4) Idade do fóssil.</strong><br>
+Cada meia-vida do <sup>14</sup>C é de
+<input onchange="checkExpr(this,'5730')"> anos. <br>
+Logo, a idade é
+<input onchange="checkExpr(this,'2*5730|11460')"> anos.
 </p>
 
 <p><strong>Assinale a alternativa correta:</strong></p>
 
 <div class="option" onclick="checkAnswer('A')">
   <span class="circle">A</span>
-  ionização.
+  450.
 </div>
 <div class="option" onclick="checkAnswer('B')">
   <span class="circle">B</span>
-  dilatação.
+  1&nbsp;433.
 </div>
 <div class="option" onclick="checkAnswer('C')">
   <span class="circle">C</span>
-  dissociação.
+  11&nbsp;460.
 </div>
 <div class="option" onclick="checkAnswer('D')">
   <span class="circle">D</span>
-  quebra de ligações covalentes.
+  17&nbsp;190.
 </div>
 <div class="option" onclick="checkAnswer('E')">
   <span class="circle">E</span>
-  formação de ligações metálicas.
+  27&nbsp;000.
 </div>
 
 <div id="message" class="feedback" aria-live="polite"></div>
@@ -139,7 +139,7 @@ do sólido.
 
   // gabarito apenas aqui
   function checkAnswer(letter){
-    const correct = 'B';
+    const correct = 'C';
     const message = document.getElementById('message');
     if (letter === correct){
       message.textContent = 'Correto!';

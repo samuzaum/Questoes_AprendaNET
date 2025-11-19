@@ -2,10 +2,10 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>Sistemas Numéricos - Lista 03 — Problema 29</title>
+  <title>Sistemas Numéricos - Lista 03 — Problema 31</title>
   <style>
     body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
-    input { width: 220px; text-align: center; margin: 0 4px; }
+    input { width: 260px; text-align: center; margin: 0 4px; }
     .option { display: block; margin: 10px 0; cursor: pointer; }
     .circle {
       width: 30px; height: 30px; background-color: #6c9ba4; color: white;
@@ -20,85 +20,74 @@
     a:hover { background-color: #55808d; }
     #message { font-weight: bold; margin-top: 20px; }
     small { color: #444; }
-    figure { text-align: center; margin: 20px auto; }
-    figure img { max-width: 100%; height: auto; }
-    figure figcaption { font-size: 0.9rem; color: #555; margin-top: 6px; }
   </style>
 </head>
 <body>
 
 <p>
-  <a href="questao28.html">🔹 Ir para Problema 28</a> |
-  <a href="questao30.html">🔹 Ir para Problema 30</a>
+  <a href="questao30.html">🔹 Ir para Problema 30</a> |
+  <a href="questao32.html">🔹 Ir para Problema 32</a>
 </p>
 
-<h3>Problema 29:</h3>
+<h3>Problema 31:</h3>
 
 <!-- ENUNCIADO -->
-<p><strong>118. (ENEM 2018)</strong></p>
+<p><strong>106. (ENEM 2018)</strong></p>
 <p>
-Alguns materiais sólidos são compostos por átomos que interagem entre si formando ligações que podem ser covalentes,
-iônicas ou metálicas. A figura apresenta a energia potencial de ligação em função da distância interatômica em um sólido
-cristalino.
+Na Idade Média, para elaborar preparados a partir de plantas produtoras de óleos essenciais, as coletas das espécies
+eram realizadas ao raiar do dia. Naquela época, essa prática era fundamentada misticamente pelo efeito mágico dos
+raios lunares, que seria anulado pela emissão dos raios solares. Com a evolução da ciência, foi comprovado que a
+coleta de algumas espécies ao raiar do dia garante a obtenção de material com maiores quantidades de óleos essenciais.
 </p>
 <p>
-Analisando essa figura, observa-se que, na temperatura de zero kelvin, a distância de equilíbrio da ligação entre os
-átomos (\(R_0\)) corresponde ao valor mínimo de energia potencial. Acima dessa temperatura, a energia térmica fornecida
-aos átomos aumenta sua energia cinética e faz com que eles oscilem em torno de uma posição de equilíbrio média
-(círculos cheios), que é diferente para cada temperatura. A distância de ligação pode variar sobre toda a extensão das
-linhas horizontais, identificadas com o valor da temperatura, de \(T_1\) a \(T_4\) (temperaturas crescentes).
+A explicação científica que justifica essa prática se baseia na
 </p>
-<p>
-O deslocamento observado na distância média revela o fenômeno da
-</p>
-
-<figure>
-  <!-- Ajuste o caminho/nome da imagem conforme você salvar -->
-  <img src="questao29_potencial.png"
-       alt="Curva de energia potencial de ligação em função da distância interatômica, com diferentes temperaturas T1 a T4 mostrando o deslocamento da distância média.">
-  <figcaption>Figura 1 – Energia potencial de ligação em função da distância interatômica para diferentes temperaturas.</figcaption>
-</figure>
 
 <h4>Solução (interativa):</h4>
 
-<p><strong>1) O que acontece com a distância média entre átomos quando a temperatura aumenta?</strong><br>
-À medida que a temperatura sobe, os átomos vibram em torno de posições
-<input onchange="checkWord(this,'mais afastadas|mais distantes|com maior distancia')">
-entre si; isto é, a distância média
-<input onchange="checkWord(this,'aumenta|cresce|fica maior')">.
+<p><strong>1) O que são óleos essenciais, do ponto de vista físico?</strong><br>
+Óleos essenciais são substâncias
+<input onchange="checkWord(this,'volateis|voláteis|facilmente evaporaveis|que evaporam facilmente')">
+que tendem a se perder por
+<input onchange="checkWord(this,'evaporacao|evaporação|volatilizacao|volatilização')">
+quando a temperatura aumenta.
 </p>
 
-<p><strong>2) Como se chama o fenômeno macroscópico associado ao aumento da distância média entre átomos em um sólido?</strong><br>
-Esse aumento na distância média caracteriza a
-<input onchange="checkWord(this,'dilatacao termica|dilatação térmica|dilatacao')">
-do sólido.
+<p><strong>2) Por que coletar as plantas ao raiar do dia?</strong><br>
+No início da manhã, a temperatura do ar é
+<input onchange="checkWord(this,'mais baixa|menor|reduzida')">
+o que
+<input onchange="checkWord(this,'diminui a evaporacao|reduz a volatilizacao|evita a perda por evaporar')">
+dos óleos, mantendo maior concentração dessas substâncias nas plantas.
 </p>
 
-<p><strong>3) Logo, o deslocamento observado na distância média revela o fenômeno de</strong><br>
-<input onchange="checkWord(this,'dilatacao|dilatacao termica|dilatação térmica')">.
+<p><strong>3) Assim, em que fenômeno físico se baseia a explicação científica?</strong><br>
+Na ideia de que a coleta ao amanhecer
+<input onchange="checkWord(this,'evita a perda dos compostos por volatilizacao|controla a volatilizacao das substancias de interesse')">
+dos óleos essenciais.
 </p>
 
 <p><strong>Assinale a alternativa correta:</strong></p>
 
 <div class="option" onclick="checkAnswer('A')">
   <span class="circle">A</span>
-  ionização.
+  volatilização das substâncias de interesse.
 </div>
 <div class="option" onclick="checkAnswer('B')">
   <span class="circle">B</span>
-  dilatação.
+  polimerização dos óleos catalisada pela radiação solar.
 </div>
 <div class="option" onclick="checkAnswer('C')">
   <span class="circle">C</span>
-  dissociação.
+  solubilização das substâncias de interesse pelo orvalho.
 </div>
 <div class="option" onclick="checkAnswer('D')">
   <span class="circle">D</span>
-  quebra de ligações covalentes.
+  oxidação do óleo pelo oxigênio produzido na fotossíntese.
 </div>
 <div class="option" onclick="checkAnswer('E')">
   <span class="circle">E</span>
-  formação de ligações metálicas.
+  liberação das moléculas de óleo durante o processo de fotossíntese.
 </div>
 
 <div id="message" class="feedback" aria-live="polite"></div>
@@ -139,7 +128,7 @@ do sólido.
 
   // gabarito apenas aqui
   function checkAnswer(letter){
-    const correct = 'B';
+    const correct = 'A';
     const message = document.getElementById('message');
     if (letter === correct){
       message.textContent = 'Correto!';

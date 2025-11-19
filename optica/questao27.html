@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>Sistemas Numéricos - Lista 03 — Problema 29</title>
+  <title>Sistemas Numéricos - Lista 03 — Problema 27</title>
   <style>
     body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
     input { width: 220px; text-align: center; margin: 0 4px; }
@@ -28,77 +28,78 @@
 <body>
 
 <p>
-  <a href="questao28.html">🔹 Ir para Problema 28</a> |
-  <a href="questao30.html">🔹 Ir para Problema 30</a>
+  <a href="questao26.html">🔹 Ir para Problema 26</a> |
+  <a href="questao28.html">🔹 Ir para Problema 28</a>
 </p>
 
-<h3>Problema 29:</h3>
+<h3>Problema 27:</h3>
 
 <!-- ENUNCIADO -->
-<p><strong>118. (ENEM 2018)</strong></p>
+<p><strong>(ENEM)</strong></p>
 <p>
-Alguns materiais sólidos são compostos por átomos que interagem entre si formando ligações que podem ser covalentes,
-iônicas ou metálicas. A figura apresenta a energia potencial de ligação em função da distância interatômica em um sólido
-cristalino.
+A figura mostra como é a emissão de radiação eletromagnética para cinco tipos de lâmpada:
+haleto metálico, tungstênio, mercúrio, xenônio e LED (diodo emissor de luz).
+As áreas marcadas em cinza são proporcionais à intensidade da energia liberada pela lâmpada.
+As linhas pontilhadas mostram a sensibilidade do olho humano aos diferentes comprimentos de onda.
+UV e IV são as regiões do ultravioleta e do infravermelho, respectivamente.
 </p>
 <p>
-Analisando essa figura, observa-se que, na temperatura de zero kelvin, a distância de equilíbrio da ligação entre os
-átomos (\(R_0\)) corresponde ao valor mínimo de energia potencial. Acima dessa temperatura, a energia térmica fornecida
-aos átomos aumenta sua energia cinética e faz com que eles oscilem em torno de uma posição de equilíbrio média
-(círculos cheios), que é diferente para cada temperatura. A distância de ligação pode variar sobre toda a extensão das
-linhas horizontais, identificadas com o valor da temperatura, de \(T_1\) a \(T_4\) (temperaturas crescentes).
-</p>
-<p>
-O deslocamento observado na distância média revela o fenômeno da
+Um arquiteto deseja iluminar uma sala usando uma lâmpada que produza boa iluminação, mas que não aqueça o ambiente.
 </p>
 
 <figure>
-  <!-- Ajuste o caminho/nome da imagem conforme você salvar -->
-  <img src="questao29_potencial.png"
-       alt="Curva de energia potencial de ligação em função da distância interatômica, com diferentes temperaturas T1 a T4 mostrando o deslocamento da distância média.">
-  <figcaption>Figura 1 – Energia potencial de ligação em função da distância interatômica para diferentes temperaturas.</figcaption>
+  <!-- ajuste o caminho/nome do arquivo da figura -->
+  <img src="questao27_lampadas.png"
+       alt="Gráficos de intensidade emitida em função do comprimento de onda para lâmpadas de haleto metálico, tungstênio, mercúrio, xenônio e LED, comparados com a sensibilidade do olho humano.">
+  <figcaption>Figura – Emissão espectral de diferentes tipos de lâmpadas e sensibilidade do olho humano.</figcaption>
 </figure>
+
+<p>
+Qual tipo de lâmpada melhor atende ao desejo do arquiteto?
+</p>
 
 <h4>Solução (interativa):</h4>
 
-<p><strong>1) O que acontece com a distância média entre átomos quando a temperatura aumenta?</strong><br>
-À medida que a temperatura sobe, os átomos vibram em torno de posições
-<input onchange="checkWord(this,'mais afastadas|mais distantes|com maior distancia')">
-entre si; isto é, a distância média
-<input onchange="checkWord(this,'aumenta|cresce|fica maior')">.
+<p><strong>1) Para iluminar bem, em que região do espectro a lâmpada deve emitir mais?</strong><br>
+Ela deve ter emissão concentrada na faixa
+<input onchange="checkWord(this,'visivel|visível|luz visivel')">
+onde a sensibilidade do olho humano é
+<input onchange="checkWord(this,'maior|maxima|mais alta')">.
 </p>
 
-<p><strong>2) Como se chama o fenômeno macroscópico associado ao aumento da distância média entre átomos em um sólido?</strong><br>
-Esse aumento na distância média caracteriza a
-<input onchange="checkWord(this,'dilatacao termica|dilatação térmica|dilatacao')">
-do sólido.
+<p><strong>2) Para não aquecer o ambiente, o que deve acontecer com a emissão no infravermelho?</strong><br>
+A lâmpada deve emitir
+<input onchange="checkWord(this,'pouca radiacao infravermelha|pouco infravermelho|baixa intensidade em iv')">
+pois a radiação IV está associada principalmente à
+<input onchange="checkWord(this,'sensacao de calor|aquecimento')">.
 </p>
 
-<p><strong>3) Logo, o deslocamento observado na distância média revela o fenômeno de</strong><br>
-<input onchange="checkWord(this,'dilatacao|dilatacao termica|dilatação térmica')">.
+<p><strong>3) Observando o gráfico, qual lâmpada concentra a energia na região visível com pouca emissão em IV?</strong><br>
+O espectro da lâmpada que exibe um “pico” forte no visível e pouca cauda no infravermelho é o da
+<input onchange="checkWord(this,'led')">.
 </p>
 
 <p><strong>Assinale a alternativa correta:</strong></p>
 
 <div class="option" onclick="checkAnswer('A')">
   <span class="circle">A</span>
-  ionização.
+  Haleto metálico.
 </div>
 <div class="option" onclick="checkAnswer('B')">
   <span class="circle">B</span>
-  dilatação.
+  Tungstênio.
 </div>
 <div class="option" onclick="checkAnswer('C')">
   <span class="circle">C</span>
-  dissociação.
+  Mercúrio.
 </div>
 <div class="option" onclick="checkAnswer('D')">
   <span class="circle">D</span>
-  quebra de ligações covalentes.
+  Xênon.
 </div>
 <div class="option" onclick="checkAnswer('E')">
   <span class="circle">E</span>
-  formação de ligações metálicas.
+  LED.
 </div>
 
 <div id="message" class="feedback" aria-live="polite"></div>
@@ -139,7 +140,7 @@ do sólido.
 
   // gabarito apenas aqui
   function checkAnswer(letter){
-    const correct = 'B';
+    const correct = 'E';
     const message = document.getElementById('message');
     if (letter === correct){
       message.textContent = 'Correto!';

@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>Sistemas Numéricos - Lista 03 — Problema 29</title>
+  <title>Sistemas Numéricos - Lista 03 — Problema 55</title>
   <style>
     body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
     input { width: 220px; text-align: center; margin: 0 4px; }
@@ -28,77 +28,75 @@
 <body>
 
 <p>
-  <a href="questao28.html">🔹 Ir para Problema 28</a> |
-  <a href="questao30.html">🔹 Ir para Problema 30</a>
+  <a href="questao54.html">🔹 Ir para Problema 54</a> |
+  <a href="questao56.html">🔹 Ir para Problema 56</a>
 </p>
 
-<h3>Problema 29:</h3>
+<h3>Problema 55:</h3>
 
 <!-- ENUNCIADO -->
-<p><strong>118. (ENEM 2018)</strong></p>
+<p><strong>93. (ENEM 2018)</strong></p>
 <p>
-Alguns materiais sólidos são compostos por átomos que interagem entre si formando ligações que podem ser covalentes,
-iônicas ou metálicas. A figura apresenta a energia potencial de ligação em função da distância interatômica em um sólido
-cristalino.
-</p>
-<p>
-Analisando essa figura, observa-se que, na temperatura de zero kelvin, a distância de equilíbrio da ligação entre os
-átomos (\(R_0\)) corresponde ao valor mínimo de energia potencial. Acima dessa temperatura, a energia térmica fornecida
-aos átomos aumenta sua energia cinética e faz com que eles oscilem em torno de uma posição de equilíbrio média
-(círculos cheios), que é diferente para cada temperatura. A distância de ligação pode variar sobre toda a extensão das
-linhas horizontais, identificadas com o valor da temperatura, de \(T_1\) a \(T_4\) (temperaturas crescentes).
-</p>
-<p>
-O deslocamento observado na distância média revela o fenômeno da
+Dispositivos eletrônicos que utilizam materiais de baixo custo, como polímeros semicondutores, têm sido desenvolvidos
+para monitorar a concentração de amônia (gás tóxico e incolor) em granjas avícolas. A polianilina é um polímero
+semicondutor cujo valor da resistência elétrica nominal quadruplica quando exposta a altas concentrações de amônia.
+Na ausência de amônia, a polianilina se comporta como um resistor ôhmico e sua resposta elétrica é mostrada no gráfico.
 </p>
 
 <figure>
-  <!-- Ajuste o caminho/nome da imagem conforme você salvar -->
-  <img src="questao29_potencial.png"
-       alt="Curva de energia potencial de ligação em função da distância interatômica, com diferentes temperaturas T1 a T4 mostrando o deslocamento da distância média.">
-  <figcaption>Figura 1 – Energia potencial de ligação em função da distância interatômica para diferentes temperaturas.</figcaption>
+  <!-- ajuste o caminho/nome do arquivo da figura -->
+  <img src="questao55_grafico.png"
+       alt="Gráfico corrente versus diferença de potencial para a polianilina, com reta passando pelos pontos (0,0) e (3 V, 6×10⁻⁶ A).">
+  <figcaption>Figura – Curva I × V da polianilina na ausência de amônia.</figcaption>
 </figure>
+
+<p>
+O valor da resistência elétrica da polianilina na presença de altas concentrações de amônia, em ohm, é igual a
+</p>
 
 <h4>Solução (interativa):</h4>
 
-<p><strong>1) O que acontece com a distância média entre átomos quando a temperatura aumenta?</strong><br>
-À medida que a temperatura sobe, os átomos vibram em torno de posições
-<input onchange="checkWord(this,'mais afastadas|mais distantes|com maior distancia')">
-entre si; isto é, a distância média
-<input onchange="checkWord(this,'aumenta|cresce|fica maior')">.
+<p><strong>1) Leitura de um ponto do gráfico.</strong><br>
+Da reta do gráfico, podemos ler o ponto
+\( V = \)
+<input onchange="checkExpr(this,'3')"> V e
+\( I = \)
+<input onchange="checkExpr(this,'6e-6|6×10^-6|6*10^-6')"> A.
 </p>
 
-<p><strong>2) Como se chama o fenômeno macroscópico associado ao aumento da distância média entre átomos em um sólido?</strong><br>
-Esse aumento na distância média caracteriza a
-<input onchange="checkWord(this,'dilatacao termica|dilatação térmica|dilatacao')">
-do sólido.
+<p><strong>2) Cálculo da resistência nominal (sem amônia).</strong><br>
+Usando \( R = \dfrac{V}{I} \):<br>
+\( R_0 = \dfrac{3}{6 \times 10^{-6}} \approx \)
+<input onchange="checkExpr(this,'3/(6e-6)|5e5|500000|0.5e6')"> Ω.
 </p>
 
-<p><strong>3) Logo, o deslocamento observado na distância média revela o fenômeno de</strong><br>
-<input onchange="checkWord(this,'dilatacao|dilatacao termica|dilatação térmica')">.
+<p><strong>3) Resistência na presença de amônia.</strong><br>
+O enunciado informa que a resistência quadruplica. Logo<br>
+\( R_\text{amônia} = 4 R_0 \approx \)
+<input onchange="checkExpr(this,'4*5e5|2e6|2000000')"> Ω.
 </p>
 
 <p><strong>Assinale a alternativa correta:</strong></p>
 
 <div class="option" onclick="checkAnswer('A')">
   <span class="circle">A</span>
-  ionização.
+  \(0{,}5 \times 10^{6}\).
 </div>
 <div class="option" onclick="checkAnswer('B')">
   <span class="circle">B</span>
-  dilatação.
+  \(2{,}0 \times 10^{5}\).
 </div>
 <div class="option" onclick="checkAnswer('C')">
   <span class="circle">C</span>
-  dissociação.
+  \(5{,}0 \times 10^{5}\).
 </div>
 <div class="option" onclick="checkAnswer('D')">
   <span class="circle">D</span>
-  quebra de ligações covalentes.
+  \(5{,}0 \times 10^{6}\).
 </div>
 <div class="option" onclick="checkAnswer('E')">
   <span class="circle">E</span>
-  formação de ligações metálicas.
+  \(2{,}0 \times 10^{6}\).
 </div>
 
 <div id="message" class="feedback" aria-live="polite"></div>
@@ -139,7 +137,7 @@ do sólido.
 
   // gabarito apenas aqui
   function checkAnswer(letter){
-    const correct = 'B';
+    const correct = 'E';
     const message = document.getElementById('message');
     if (letter === correct){
       message.textContent = 'Correto!';

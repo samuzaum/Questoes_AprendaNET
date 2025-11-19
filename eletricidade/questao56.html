@@ -2,10 +2,10 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>Sistemas Numéricos - Lista 03 — Problema 29</title>
+  <title>Sistemas Numéricos - Lista 03 — Problema 56</title>
   <style>
     body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
-    input { width: 220px; text-align: center; margin: 0 4px; }
+    input { width: 200px; text-align: center; margin: 0 4px; }
     .option { display: block; margin: 10px 0; cursor: pointer; }
     .circle {
       width: 30px; height: 30px; background-color: #6c9ba4; color: white;
@@ -28,77 +28,109 @@
 <body>
 
 <p>
-  <a href="questao28.html">🔹 Ir para Problema 28</a> |
-  <a href="questao30.html">🔹 Ir para Problema 30</a>
+  <a href="questao55.html">🔹 Ir para Problema 55</a> |
+  <a href="questao57.html">🔹 Ir para Problema 57</a>
 </p>
 
-<h3>Problema 29:</h3>
+<h3>Problema 56:</h3>
 
-<!-- ENUNCIADO -->
-<p><strong>118. (ENEM 2018)</strong></p>
+<p><strong>(ENEM – Fusível em circuito resistivo)</strong></p>
+
 <p>
-Alguns materiais sólidos são compostos por átomos que interagem entre si formando ligações que podem ser covalentes,
-iônicas ou metálicas. A figura apresenta a energia potencial de ligação em função da distância interatômica em um sólido
-cristalino.
-</p>
-<p>
-Analisando essa figura, observa-se que, na temperatura de zero kelvin, a distância de equilíbrio da ligação entre os
-átomos (\(R_0\)) corresponde ao valor mínimo de energia potencial. Acima dessa temperatura, a energia térmica fornecida
-aos átomos aumenta sua energia cinética e faz com que eles oscilem em torno de uma posição de equilíbrio média
-(círculos cheios), que é diferente para cada temperatura. A distância de ligação pode variar sobre toda a extensão das
-linhas horizontais, identificadas com o valor da temperatura, de \(T_1\) a \(T_4\) (temperaturas crescentes).
-</p>
-<p>
-O deslocamento observado na distância média revela o fenômeno da
+Fusível é um dispositivo de proteção contra sobrecorrente em circuitos. Quando a corrente que passa por esse
+componente é maior que sua corrente nominal, o fusível queima, interrompendo o circuito e protegendo os aparelhos.
+Suponha que o circuito elétrico mostrado a seguir seja alimentado por uma fonte de tensão U e que o fusível suporte
+uma corrente nominal de 500 mA (0,50 A).
 </p>
 
 <figure>
-  <!-- Ajuste o caminho/nome da imagem conforme você salvar -->
-  <img src="questao29_potencial.png"
-       alt="Curva de energia potencial de ligação em função da distância interatômica, com diferentes temperaturas T1 a T4 mostrando o deslocamento da distância média.">
-  <figcaption>Figura 1 – Energia potencial de ligação em função da distância interatômica para diferentes temperaturas.</figcaption>
+  <!-- imagem do circuito -->
+  <img src="questao56_circuito.png"
+       alt="Ponte de resistores com 60, 60, 80 e 40 ohms, um resistor de 120 ohms e um fusível no ramo inferior.">
+  <figcaption>Figura – Circuito com fusível no ramo de 120 Ω.</figcaption>
 </figure>
+
+<p>
+Qual é o máximo valor da tensão U para que o fusível não queime?
+</p>
 
 <h4>Solução (interativa):</h4>
 
-<p><strong>1) O que acontece com a distância média entre átomos quando a temperatura aumenta?</strong><br>
-À medida que a temperatura sobe, os átomos vibram em torno de posições
-<input onchange="checkWord(this,'mais afastadas|mais distantes|com maior distancia')">
-entre si; isto é, a distância média
-<input onchange="checkWord(this,'aumenta|cresce|fica maior')">.
+<p><strong>1) Ramo inferior e associação em paralelo.</strong><br>
+O fusível está em série com o resistor de 120 Ω, no ramo inferior do circuito. Nesse ramo há:
+um paralelo entre 120 Ω e 60 Ω, seguido de um resistor de 40 Ω em série.
+<br>
+A resistência equivalente do paralelo 120 Ω // 60 Ω é:
+<br>
+R<sub>paralelo</sub> =
+<input onchange="checkExpr(this,'40|120*60/(120+60)')"> Ω.
 </p>
 
-<p><strong>2) Como se chama o fenômeno macroscópico associado ao aumento da distância média entre átomos em um sólido?</strong><br>
-Esse aumento na distância média caracteriza a
-<input onchange="checkWord(this,'dilatacao termica|dilatação térmica|dilatacao')">
-do sólido.
+<p><strong>2) Resistência equivalente do ramo inferior.</strong><br>
+Somando o resistor em série de 40 Ω, a resistência do ramo inferior é:
+<br>
+R<sub>inferior</sub> =
+<input onchange="checkExpr(this,'80|40+40')"> Ω.
 </p>
 
-<p><strong>3) Logo, o deslocamento observado na distância média revela o fenômeno de</strong><br>
-<input onchange="checkWord(this,'dilatacao|dilatacao termica|dilatação térmica')">.
+<p><strong>3) Correntes no paralelo de 120 Ω e 60 Ω.</strong><br>
+A tensão nos dois resistores em paralelo é a mesma. Assim:
+<br>
+I<sub>60</sub> = V / 60 e I<sub>120</sub> = V / 120.
+<br>
+Logo, a relação entre as correntes é
+<input onchange="checkWord(this,'i60 = 2 i120|i60 = 2*i120|i60 é o dobro de i120|i60 = 2 vezes i120')">
+(ou seja, I<sub>60</sub> é o dobro de I<sub>120</sub>).
+</p>
+
+<p><strong>4) Corrente limite no resistor de 120 Ω.</strong><br>
+O fusível suporta no máximo 0,50 A e está no ramo do resistor de 120 Ω, então:
+<br>
+I<sub>120</sub> =
+<input onchange="checkExpr(this,'0.5|0,5')"> A.
+<br>
+Assim, a corrente no resistor de 60 Ω será:
+<br>
+I<sub>60</sub> =
+<input onchange="checkExpr(this,'1|2*0.5')"> A.
+<br>
+A corrente total no paralelo (ramo inferior antes do resistor de 40 Ω) é:
+<br>
+I<sub>paralelo</sub> = I<sub>120</sub> + I<sub>60</sub> =
+<input onchange="checkExpr(this,'1.5|0.5+1')"> A.
+</p>
+
+<p><strong>5) Tensão máxima da fonte.</strong><br>
+Como o ramo inferior tem resistência R<sub>inferior</sub> =
+<input onchange="checkExpr(this,'80')"> Ω e corrente
+I<sub>inferior</sub> =
+<input onchange="checkExpr(this,'1.5')"> A, pela Lei de Ohm:
+<br>
+U = R<sub>inferior</sub> · I<sub>inferior</sub> =
+<input onchange="checkExpr(this,'120|80*1.5')"> V.
 </p>
 
 <p><strong>Assinale a alternativa correta:</strong></p>
 
 <div class="option" onclick="checkAnswer('A')">
   <span class="circle">A</span>
-  ionização.
+  20 V
 </div>
 <div class="option" onclick="checkAnswer('B')">
   <span class="circle">B</span>
-  dilatação.
+  40 V
 </div>
 <div class="option" onclick="checkAnswer('C')">
   <span class="circle">C</span>
-  dissociação.
+  60 V
 </div>
 <div class="option" onclick="checkAnswer('D')">
   <span class="circle">D</span>
-  quebra de ligações covalentes.
+  120 V
 </div>
 <div class="option" onclick="checkAnswer('E')">
   <span class="circle">E</span>
-  formação de ligações metálicas.
+  185 V
 </div>
 
 <div id="message" class="feedback" aria-live="polite"></div>
@@ -139,7 +171,7 @@ do sólido.
 
   // gabarito apenas aqui
   function checkAnswer(letter){
-    const correct = 'B';
+    const correct = 'D';
     const message = document.getElementById('message');
     if (letter === correct){
       message.textContent = 'Correto!';

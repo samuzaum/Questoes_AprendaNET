@@ -2,10 +2,10 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>Sistemas Numéricos - Lista 03 — Problema 29</title>
+  <title>Sistemas Numéricos - Lista 03 — Problema 33</title>
   <style>
     body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
-    input { width: 220px; text-align: center; margin: 0 4px; }
+    input { width: 200px; text-align: center; margin: 0 4px; }
     .option { display: block; margin: 10px 0; cursor: pointer; }
     .circle {
       width: 30px; height: 30px; background-color: #6c9ba4; color: white;
@@ -28,77 +28,88 @@
 <body>
 
 <p>
-  <a href="questao28.html">🔹 Ir para Problema 28</a> |
-  <a href="questao30.html">🔹 Ir para Problema 30</a>
+  <a href="questao32.html">🔹 Ir para Problema 32</a> |
+  <a href="questao34.html">🔹 Ir para Problema 34</a>
 </p>
 
-<h3>Problema 29:</h3>
+<h3>Problema 33:</h3>
 
-<!-- ENUNCIADO -->
-<p><strong>118. (ENEM 2018)</strong></p>
+<p><strong>112. (ENEM – Trombone de Quincke)</strong></p>
+
 <p>
-Alguns materiais sólidos são compostos por átomos que interagem entre si formando ligações que podem ser covalentes,
-iônicas ou metálicas. A figura apresenta a energia potencial de ligação em função da distância interatômica em um sólido
-cristalino.
+O trombone de Quincke é um dispositivo experimental utilizado para demonstrar o fenômeno de interferência de ondas sonoras.
+Uma fonte emite ondas sonoras de determinada frequência na entrada do dispositivo. Essas ondas se dividem em dois caminhos
+(ADC e AEC) e se encontram novamente em um detector, na saída. O trecho ADC pode ter seu comprimento aumentado por
+deslocamento dessa parte do tubo. Com os dois caminhos com o mesmo comprimento, o som chega intenso ao detector.
 </p>
+
 <p>
-Analisando essa figura, observa-se que, na temperatura de zero kelvin, a distância de equilíbrio da ligação entre os
-átomos (\(R_0\)) corresponde ao valor mínimo de energia potencial. Acima dessa temperatura, a energia térmica fornecida
-aos átomos aumenta sua energia cinética e faz com que eles oscilem em torno de uma posição de equilíbrio média
-(círculos cheios), que é diferente para cada temperatura. A distância de ligação pode variar sobre toda a extensão das
-linhas horizontais, identificadas com o valor da temperatura, de \(T_1\) a \(T_4\) (temperaturas crescentes).
-</p>
-<p>
-O deslocamento observado na distância média revela o fenômeno da
+À medida que o comprimento de ADC é aumentado, a diferença de trajetos entre ADC e AEC cresce até que, para uma certa
+posição (como na figura), a intensidade sonora na saída fica praticamente nula, indicando interferência destrutiva.
+Sabendo que a velocidade do som no interior do tubo é de aproximadamente 320 m/s, determine a frequência do som produzido
+pela fonte.
 </p>
 
 <figure>
-  <!-- Ajuste o caminho/nome da imagem conforme você salvar -->
-  <img src="questao29_potencial.png"
-       alt="Curva de energia potencial de ligação em função da distância interatômica, com diferentes temperaturas T1 a T4 mostrando o deslocamento da distância média.">
-  <figcaption>Figura 1 – Energia potencial de ligação em função da distância interatômica para diferentes temperaturas.</figcaption>
+  <img src="questao33_quincke.png"
+       alt="Esquema do trombone de Quincke com dois caminhos para o som. Entre os pontos D e A o comprimento é de 40 cm e entre A e E é de 30 cm.">
+  <figcaption>Figura – Trombone de Quincke com caminhos ADC e AEC de comprimentos diferentes.</figcaption>
 </figure>
+
+<p>
+Pela figura, a diferença de comprimentos dos caminhos, entre D e E, é de 40 cm no ramo de cima e 30 cm no ramo de baixo.
+</p>
 
 <h4>Solução (interativa):</h4>
 
-<p><strong>1) O que acontece com a distância média entre átomos quando a temperatura aumenta?</strong><br>
-À medida que a temperatura sobe, os átomos vibram em torno de posições
-<input onchange="checkWord(this,'mais afastadas|mais distantes|com maior distancia')">
-entre si; isto é, a distância média
-<input onchange="checkWord(this,'aumenta|cresce|fica maior')">.
+<p><strong>1) Diferença de caminho para a primeira extinção.</strong><br>
+Para que ocorra a <em>primeira</em> extinção de som (interferência destrutiva máxima), a diferença de caminhos
+deve ser igual a metade do comprimento de onda:
+<br>
+ΔL =
+<input onchange="checkExpr(this,'0.10|0,10|0.4-0.3')"> m
+e isso vale
+<input onchange="checkWord(this,'meia onda|lambda/2|metade do comprimento de onda')">
+da onda.
 </p>
 
-<p><strong>2) Como se chama o fenômeno macroscópico associado ao aumento da distância média entre átomos em um sólido?</strong><br>
-Esse aumento na distância média caracteriza a
-<input onchange="checkWord(this,'dilatacao termica|dilatação térmica|dilatacao')">
-do sólido.
+<p><strong>2) Comprimento de onda do som.</strong><br>
+Se ΔL corresponde a metade do comprimento de onda,
+então o comprimento de onda λ é:
+<br>
+λ =
+<input onchange="checkExpr(this,'0.20|0,20|2*0.10')"> m.
 </p>
 
-<p><strong>3) Logo, o deslocamento observado na distância média revela o fenômeno de</strong><br>
-<input onchange="checkWord(this,'dilatacao|dilatacao termica|dilatação térmica')">.
+<p><strong>3) Cálculo da frequência.</strong><br>
+Sabendo que a velocidade do som no tubo é
+v = <input onchange="checkExpr(this,'320')"> m/s, a frequência é dada por
+<br>
+f = v / λ =
+<input onchange="checkExpr(this,'1600|320/0.2')"> Hz.
 </p>
 
 <p><strong>Assinale a alternativa correta:</strong></p>
 
 <div class="option" onclick="checkAnswer('A')">
   <span class="circle">A</span>
-  ionização.
+  3&nbsp;200
 </div>
 <div class="option" onclick="checkAnswer('B')">
   <span class="circle">B</span>
-  dilatação.
+  1&nbsp;600
 </div>
 <div class="option" onclick="checkAnswer('C')">
   <span class="circle">C</span>
-  dissociação.
+  800
 </div>
 <div class="option" onclick="checkAnswer('D')">
   <span class="circle">D</span>
-  quebra de ligações covalentes.
+  640
 </div>
 <div class="option" onclick="checkAnswer('E')">
   <span class="circle">E</span>
-  formação de ligações metálicas.
+  400
 </div>
 
 <div id="message" class="feedback" aria-live="polite"></div>

@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>Sistemas Numéricos - Lista 03 — Problema 29</title>
+  <title>Sistemas Numéricos - Lista 03 — Problema 21</title>
   <style>
     body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
     input { width: 220px; text-align: center; margin: 0 4px; }
@@ -28,77 +28,78 @@
 <body>
 
 <p>
-  <a href="questao28.html">🔹 Ir para Problema 28</a> |
-  <a href="questao30.html">🔹 Ir para Problema 30</a>
+  <a href="questao20.html">🔹 Ir para Problema 20</a> |
+  <a href="questao22.html">🔹 Ir para Problema 22</a>
 </p>
 
-<h3>Problema 29:</h3>
+<h3>Problema 21:</h3>
 
 <!-- ENUNCIADO -->
-<p><strong>118. (ENEM 2018)</strong></p>
+<p><strong>(ENEM – estação híbrida)</strong></p>
 <p>
-Alguns materiais sólidos são compostos por átomos que interagem entre si formando ligações que podem ser covalentes,
-iônicas ou metálicas. A figura apresenta a energia potencial de ligação em função da distância interatômica em um sólido
-cristalino.
-</p>
-<p>
-Analisando essa figura, observa-se que, na temperatura de zero kelvin, a distância de equilíbrio da ligação entre os
-átomos (\(R_0\)) corresponde ao valor mínimo de energia potencial. Acima dessa temperatura, a energia térmica fornecida
-aos átomos aumenta sua energia cinética e faz com que eles oscilem em torno de uma posição de equilíbrio média
-(círculos cheios), que é diferente para cada temperatura. A distância de ligação pode variar sobre toda a extensão das
-linhas horizontais, identificadas com o valor da temperatura, de \(T_1\) a \(T_4\) (temperaturas crescentes).
-</p>
-<p>
-O deslocamento observado na distância média revela o fenômeno da
+A figura mostra o funcionamento de uma estação híbrida de geração de eletricidade movida a energia eólica e biogás.
+Essa estação possibilita que a energia gerada no parque eólico seja armazenada na forma de gás hidrogênio, usado no
+fornecimento de energia para a rede elétrica comum e para abastecer células a combustível.
 </p>
 
 <figure>
-  <!-- Ajuste o caminho/nome da imagem conforme você salvar -->
-  <img src="questao29_potencial.png"
-       alt="Curva de energia potencial de ligação em função da distância interatômica, com diferentes temperaturas T1 a T4 mostrando o deslocamento da distância média.">
-  <figcaption>Figura 1 – Energia potencial de ligação em função da distância interatômica para diferentes temperaturas.</figcaption>
+  <!-- ajuste o caminho/nome do arquivo da figura -->
+  <img src="questao21_estacao.png"
+       alt="Esquema de estação híbrida com parque eólico, planta mista, produção e armazenamento de hidrogênio e reservatório de biogás.">
+  <figcaption>Figura – Esquema de estação híbrida eólica–biogás–hidrogênio.</figcaption>
 </figure>
+
+<p>
+Mesmo com ausência de ventos por curtos períodos, essa estação continua abastecendo a cidade onde está instalada, pois o(a)
+</p>
 
 <h4>Solução (interativa):</h4>
 
-<p><strong>1) O que acontece com a distância média entre átomos quando a temperatura aumenta?</strong><br>
-À medida que a temperatura sobe, os átomos vibram em torno de posições
-<input onchange="checkWord(this,'mais afastadas|mais distantes|com maior distancia')">
-entre si; isto é, a distância média
-<input onchange="checkWord(this,'aumenta|cresce|fica maior')">.
+<p><strong>1) O que se faz com o excedente de energia eólica?</strong><br>
+Quando o vento sopra com intensidade suficiente, parte da energia elétrica gerada é usada para realizar
+<input onchange="checkWord(this,'eletrolise|eletrólise')">
+da água, produzindo gás
+<input onchange="checkWord(this,'hidrogenio|hidrogênio')">,
+que é armazenado em reservatórios.
 </p>
 
-<p><strong>2) Como se chama o fenômeno macroscópico associado ao aumento da distância média entre átomos em um sólido?</strong><br>
-Esse aumento na distância média caracteriza a
-<input onchange="checkWord(this,'dilatacao termica|dilatação térmica|dilatacao')">
-do sólido.
+<p><strong>2) Papel do biogás na estação.</strong><br>
+Além da energia eólica, a estação possui um reservatório de
+<input onchange="checkWord(this,'biogas|biogás')">
+proveniente da digestão de resíduos orgânicos, que também pode ser
+<input onchange="checkWord(this,'queimado|combusto|usado como combustivel')">
+para gerar energia.
 </p>
 
-<p><strong>3) Logo, o deslocamento observado na distância média revela o fenômeno de</strong><br>
-<input onchange="checkWord(this,'dilatacao|dilatacao termica|dilatação térmica')">.
+<p><strong>3) Como a estação continua gerando eletricidade sem vento?</strong><br>
+Durante períodos sem vento, a energia é obtida pela combustão conjunta de
+<input onchange="checkWord(this,'biogas e hidrogenio|biogás e hidrogênio')">
+em uma planta mista, alimentando
+<input onchange="checkWord(this,'turbinas|turbinas a gas|celulas a combustivel')">
+que produzem eletricidade para a rede.
 </p>
 
 <p><strong>Assinale a alternativa correta:</strong></p>
 
 <div class="option" onclick="checkAnswer('A')">
   <span class="circle">A</span>
-  ionização.
+  planta mista de geração de energia realiza eletrólise para enviar energia diretamente à rede de distribuição elétrica.
 </div>
 <div class="option" onclick="checkAnswer('B')">
   <span class="circle">B</span>
-  dilatação.
+  hidrogênio produzido e armazenado é utilizado na combustão com o biogás para gerar energia elétrica.
 </div>
 <div class="option" onclick="checkAnswer('C')">
   <span class="circle">C</span>
-  dissociação.
+  conjunto de turbinas continua girando com a mesma velocidade, mantendo a eficiência anterior.
 </div>
 <div class="option" onclick="checkAnswer('D')">
   <span class="circle">D</span>
-  quebra de ligações covalentes.
+  combustão direta da mistura biogás–hidrogênio gera energia elétrica com eficiência maior que a da geração eólica.
 </div>
 <div class="option" onclick="checkAnswer('E')">
   <span class="circle">E</span>
-  formação de ligações metálicas.
+  planta mista de geração é capaz de utilizar todo o calor liberado na combustão para gerar exclusivamente eletricidade.
 </div>
 
 <div id="message" class="feedback" aria-live="polite"></div>

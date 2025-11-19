@@ -2,10 +2,10 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>Sistemas Numéricos - Lista 03 — Problema 29</title>
+  <title>Sistemas Numéricos - Lista 03 — Problema 22</title>
   <style>
     body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
-    input { width: 220px; text-align: center; margin: 0 4px; }
+    input { width: 260px; text-align: center; margin: 0 4px; }
     .option { display: block; margin: 10px 0; cursor: pointer; }
     .circle {
       width: 30px; height: 30px; background-color: #6c9ba4; color: white;
@@ -23,82 +23,97 @@
     figure { text-align: center; margin: 20px auto; }
     figure img { max-width: 100%; height: auto; }
     figure figcaption { font-size: 0.9rem; color: #555; margin-top: 6px; }
+    .option img { max-width: 260px; height: auto; margin-left: 8px; vertical-align: middle; }
   </style>
 </head>
 <body>
 
 <p>
-  <a href="questao28.html">🔹 Ir para Problema 28</a> |
-  <a href="questao30.html">🔹 Ir para Problema 30</a>
+  <a href="questao21.html">🔹 Ir para Problema 21</a> |
+  <a href="questao23.html">🔹 Ir para Problema 23</a>
 </p>
 
-<h3>Problema 29:</h3>
+<h3>Problema 22:</h3>
 
-<!-- ENUNCIADO -->
-<p><strong>118. (ENEM 2018)</strong></p>
+<p><strong>108. (ENEM – cama elástica)</strong></p>
+
 <p>
-Alguns materiais sólidos são compostos por átomos que interagem entre si formando ligações que podem ser covalentes,
-iônicas ou metálicas. A figura apresenta a energia potencial de ligação em função da distância interatômica em um sólido
-cristalino.
-</p>
-<p>
-Analisando essa figura, observa-se que, na temperatura de zero kelvin, a distância de equilíbrio da ligação entre os
-átomos (\(R_0\)) corresponde ao valor mínimo de energia potencial. Acima dessa temperatura, a energia térmica fornecida
-aos átomos aumenta sua energia cinética e faz com que eles oscilem em torno de uma posição de equilíbrio média
-(círculos cheios), que é diferente para cada temperatura. A distância de ligação pode variar sobre toda a extensão das
-linhas horizontais, identificadas com o valor da temperatura, de \(T_1\) a \(T_4\) (temperaturas crescentes).
-</p>
-<p>
-O deslocamento observado na distância média revela o fenômeno da
+O brinquedo pula-pula (cama elástica) é composto por uma lona circular flexível horizontal presa por molas à sua borda.
+As crianças brincam pulando sobre ela, alternando e transformando suas formas de energia. Ao pular verticalmente,
+desprezando o atrito com o ar e os movimentos de rotação do corpo, uma criança realiza um movimento periódico vertical
+em torno da posição de equilíbrio da lona (h = 0), passando pelos pontos de máxima e mínima alturas,
+h<sub>max</sub> e h<sub>min</sub>, respectivamente.
 </p>
 
-<figure>
-  <!-- Ajuste o caminho/nome da imagem conforme você salvar -->
-  <img src="questao29_potencial.png"
-       alt="Curva de energia potencial de ligação em função da distância interatômica, com diferentes temperaturas T1 a T4 mostrando o deslocamento da distância média.">
-  <figcaption>Figura 1 – Energia potencial de ligação em função da distância interatômica para diferentes temperaturas.</figcaption>
-</figure>
+<p>
+Esquematicamente, o esboço do gráfico da energia cinética da criança em função de sua posição vertical na situação
+descrita é:
+</p>
 
 <h4>Solução (interativa):</h4>
 
-<p><strong>1) O que acontece com a distância média entre átomos quando a temperatura aumenta?</strong><br>
-À medida que a temperatura sobe, os átomos vibram em torno de posições
-<input onchange="checkWord(this,'mais afastadas|mais distantes|com maior distancia')">
-entre si; isto é, a distância média
-<input onchange="checkWord(this,'aumenta|cresce|fica maior')">.
+<p><strong>1) Energia mecânica total.</strong><br>
+Desprezando perdas, a energia mecânica total do sistema é
+<input onchange="checkWord(this,'constante|conservada')">
+ao longo do movimento.
 </p>
 
-<p><strong>2) Como se chama o fenômeno macroscópico associado ao aumento da distância média entre átomos em um sólido?</strong><br>
-Esse aumento na distância média caracteriza a
-<input onchange="checkWord(this,'dilatacao termica|dilatação térmica|dilatacao')">
-do sólido.
+<p><strong>2) Velocidade e energia cinética no ponto de equilíbrio.</strong><br>
+Quando a criança passa pelo ponto de equilíbrio da lona (h = 0), sua velocidade é
+<input onchange="checkWord(this,'maxima|máxima')">
+e, portanto, a energia cinética é
+<input onchange="checkWord(this,'maxima|máxima')">.
 </p>
 
-<p><strong>3) Logo, o deslocamento observado na distância média revela o fenômeno de</strong><br>
-<input onchange="checkWord(this,'dilatacao|dilatacao termica|dilatação térmica')">.
+<p><strong>3) Situação nas alturas mínima e máxima.</strong><br>
+Nos pontos h<sub>min</sub> e h<sub>max</sub>, a criança inverte o sentido do movimento,
+logo sua velocidade é
+<input onchange="checkWord(this,'nula|zero')">
+e toda energia está na forma
+<input onchange="checkWord(this,'potencial elastica|potencial gravitacional|potencial')">.
+Assim, a energia cinética nesses pontos deve ser
+<input onchange="checkWord(this,'zero|nula')">.
+</p>
+
+<p><strong>4) Forma geral do gráfico Ec × h.</strong><br>
+O gráfico da energia cinética em função de h deve ter um
+<input onchange="checkWord(this,'maximo|pico')">
+em h = 0 e
+<input onchange="checkWord(this,'valores nulos nos extremos|zero em hmin e hmax')">
+, lembrando uma curva
+<input onchange="checkWord(this,'arqueada|concava para baixo|em forma de arco')">.
 </p>
 
 <p><strong>Assinale a alternativa correta:</strong></p>
 
 <div class="option" onclick="checkAnswer('A')">
   <span class="circle">A</span>
-  ionização.
+  <img src="questao22_A.png"
+       alt="Alternativa A: gráfico de energia cinética em função da altura, com reta crescente de hmin até hmax.">
 </div>
+
 <div class="option" onclick="checkAnswer('B')">
   <span class="circle">B</span>
-  dilatação.
+  <img src="questao22_B.png"
+       alt="Alternativa B: gráfico triangular com máximo em hmin e zero em hmax.">
 </div>
+
 <div class="option" onclick="checkAnswer('C')">
   <span class="circle">C</span>
-  dissociação.
+  <img src="questao22_C.png"
+       alt="Alternativa C: curva arqueada com energia cinética máxima em h = 0 e nula em hmin e hmax.">
 </div>
+
 <div class="option" onclick="checkAnswer('D')">
   <span class="circle">D</span>
-  quebra de ligações covalentes.
+  <img src="questao22_D.png"
+       alt="Alternativa D: curva com máximo em h = 0 e zero apenas em hmin.">
 </div>
+
 <div class="option" onclick="checkAnswer('E')">
   <span class="circle">E</span>
-  formação de ligações metálicas.
+  <img src="questao22_E.png"
+       alt="Alternativa E: curva crescente com energia cinética pequena em hmin e máxima em hmax.">
 </div>
 
 <div id="message" class="feedback" aria-live="polite"></div>
@@ -139,7 +154,7 @@ do sólido.
 
   // gabarito apenas aqui
   function checkAnswer(letter){
-    const correct = 'B';
+    const correct = 'C';
     const message = document.getElementById('message');
     if (letter === correct){
       message.textContent = 'Correto!';
