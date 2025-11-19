@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sistemas Numéricos - Lista 03 — Problema 29</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 220px; text-align: center; margin: 0 4px; }
+    .option { display: block; margin: 10px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+    small { color: #444; }
+    figure { text-align: center; margin: 20px auto; }
+    figure img { max-width: 100%; height: auto; }
+    figure figcaption { font-size: 0.9rem; color: #555; margin-top: 6px; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao28.html">🔹 Ir para Problema 28</a> |
+  <a href="questao30.html">🔹 Ir para Problema 30</a>
+</p>
+
+<h3>Problema 29:</h3>
+
+<!-- ENUNCIADO -->
+<p><strong>118. (ENEM 2018)</strong></p>
+<p>
+Alguns materiais sólidos são compostos por átomos que interagem entre si formando ligações que podem ser covalentes,
+iônicas ou metálicas. A figura apresenta a energia potencial de ligação em função da distância interatômica em um sólido
+cristalino.
+</p>
+<p>
+Analisando essa figura, observa-se que, na temperatura de zero kelvin, a distância de equilíbrio da ligação entre os
+átomos (\(R_0\)) corresponde ao valor mínimo de energia potencial. Acima dessa temperatura, a energia térmica fornecida
+aos átomos aumenta sua energia cinética e faz com que eles oscilem em torno de uma posição de equilíbrio média
+(círculos cheios), que é diferente para cada temperatura. A distância de ligação pode variar sobre toda a extensão das
+linhas horizontais, identificadas com o valor da temperatura, de \(T_1\) a \(T_4\) (temperaturas crescentes).
+</p>
+<p>
+O deslocamento observado na distância média revela o fenômeno da
+</p>
+
+<figure>
+  <!-- Ajuste o caminho/nome da imagem conforme você salvar -->
+  <img src="img/questao29_potencial.png"
+       alt="Curva de energia potencial de ligação em função da distância interatômica, com diferentes temperaturas T1 a T4 mostrando o deslocamento da distância média.">
+  <figcaption>Figura 1 – Energia potencial de ligação em função da distância interatômica para diferentes temperaturas.</figcaption>
+</figure>
+
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) O que acontece com a distância média entre átomos quando a temperatura aumenta?</strong><br>
+À medida que a temperatura sobe, os átomos vibram em torno de posições
+<input onchange="checkWord(this,'mais afastadas|mais distantes|com maior distancia')">
+entre si; isto é, a distância média
+<input onchange="checkWord(this,'aumenta|cresce|fica maior')">.
+</p>
+
+<p><strong>2) Como se chama o fenômeno macroscópico associado ao aumento da distância média entre átomos em um sólido?</strong><br>
+Esse aumento na distância média caracteriza a
+<input onchange="checkWord(this,'dilatacao termica|dilatação térmica|dilatacao')">
+do sólido.
+</p>
+
+<p><strong>3) Logo, o deslocamento observado na distância média revela o fenômeno de</strong><br>
+<input onchange="checkWord(this,'dilatacao|dilatacao termica|dilatação térmica')">.
+</p>
+
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')">
+  <span class="circle">A</span>
+  ionização.
+</div>
+<div class="option" onclick="checkAnswer('B')">
+  <span class="circle">B</span>
+  dilatação.
+</div>
+<div class="option" onclick="checkAnswer('C')">
+  <span class="circle">C</span>
+  dissociação.
+</div>
+<div class="option" onclick="checkAnswer('D')">
+  <span class="circle">D</span>
+  quebra de ligações covalentes.
+</div>
+<div class="option" onclick="checkAnswer('E')">
+  <span class="circle">E</span>
+  formação de ligações metálicas.
+</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // -------- helpers (aceita vírgula/ponto e expressões simples) --------
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+  function safeEval(expr){
+    const cleaned = String(expr).replace(/\s/g,'');
+    if(!/^[0-9eE+\-*/().,×^]+$/.test(cleaned)) return null;
+    const norm = cleaned.replace(/,/g,'.').replace(/×/g,'*').replace(/\^/g,'**');
+    try{
+      const v = Function('"use strict"; return ('+norm+');')();
+      return (typeof v === 'number' && Number.isFinite(v)) ? v : null;
+    }catch{ return null; }
+  }
+  function nearlyEqual(a,b,eps=1e-3){
+    return Math.abs(a-b) <= eps * Math.max(1, Math.abs(a), Math.abs(b));
+  }
+  function paint(input, ok){
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')){
+      input.nextElementSibling.remove();
+    }
+    input.style.backgroundColor = ok ? "#c6f6c6" : "#fdd";
+    input.insertAdjacentHTML("afterend", `<span class="feedback">${ok ? '✅' : '❌'}</span>`);
+  }
+  function checkWord(input, patterns){
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    paint(input, opts.some(p => text.includes(p)));
+  }
+  function checkExpr(input, expectedExprs){
+    const val = safeEval(input.value.trim());
+    const targets = expectedExprs.split('|').map(e => safeEval(e));
+    const ok = (val !== null) && targets.some(t => t !== null && nearlyEqual(val, t));
+    paint(input, ok);
+  }
+
+  // gabarito apenas aqui
+  function checkAnswer(letter){
+    const correct = 'B';
+    const message = document.getElementById('message');
+    if (letter === correct){
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

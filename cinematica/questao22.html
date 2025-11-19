@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sistemas Numéricos - Lista 03 — Problema 22</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 220px; text-align: center; margin: 0 4px; }
+    .option { display: block; margin: 10px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+    small { color: #444; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao21.html">🔹 Ir para Problema 21</a> |
+  <a href="questao23.html">🔹 Ir para Problema 23</a>
+</p>
+
+<h3>Problema 22:</h3>
+
+<!-- ENUNCIADO -->
+<p><strong>122. (ENEM 2018)</strong></p>
+<p>
+Visando à melhoria estética de um veículo, o vendedor de uma loja sugere ao consumidor que ele troque as rodas de seu
+automóvel de aro 15 polegadas para aro 17 polegadas, o que corresponde a um diâmetro maior do conjunto roda e pneu.
+Duas consequências provocadas por essa troca de aro são:
+</p>
+
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) O que acontece com a posição do centro de massa do veículo ao usar rodas de maior diâmetro?</strong><br>
+Como o carro fica mais alto, o centro de massa
+<input onchange="checkWord(this,'sobe|aumenta|fica mais alto|eleva')">
+em relação ao solo.
+</p>
+
+<p><strong>2) Um centro de massa mais alto torna o veículo mais estável ou mais instável?</strong><br>
+Com o centro de massa mais alto, o veículo fica
+<input onchange="checkWord(this,'mais instavel|menos estavel|mais instável')">
+em curvas e manobras bruscas.
+</p>
+
+<p><strong>3) O que acontece com a velocidade real do carro em relação à indicada no velocímetro?</strong><br>
+O velocímetro é calibrado para um certo diâmetro de roda. Se o diâmetro aumenta, para a mesma rotação das rodas a
+velocidade linear
+<input onchange="checkWord(this,'aumenta|fica maior|cresce')">,
+e assim a velocidade real fica
+<input onchange="checkWord(this,'maior que a indicada|acima da indicada|maior que a do velocimetro')">
+pelo velocímetro.
+</p>
+
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')">
+  <span class="circle">A</span>
+  Elevar a posição do centro de massa do veículo tornando-o mais instável e aumentar a velocidade do automóvel em
+  relação à indicada no velocímetro.
+</div>
+<div class="option" onclick="checkAnswer('B')">
+  <span class="circle">B</span>
+  Abaixar a posição do centro de massa do veículo tornando-o mais instável e diminuir a velocidade do automóvel em
+  relação à indicada no velocímetro.
+</div>
+<div class="option" onclick="checkAnswer('C')">
+  <span class="circle">C</span>
+  Elevar a posição do centro de massa do veículo tornando-o mais estável e aumentar a velocidade do automóvel em
+  relação à indicada no velocímetro.
+</div>
+<div class="option" onclick="checkAnswer('D')">
+  <span class="circle">D</span>
+  Abaixar a posição do centro de massa do veículo tornando-o mais estável e diminuir a velocidade do automóvel em
+  relação à indicada no velocímetro.
+</div>
+<div class="option" onclick="checkAnswer('E')">
+  <span class="circle">E</span>
+  Elevar a posição do centro de massa do veículo tornando-o mais estável e diminuir a velocidade do automóvel em
+  relação à indicada no velocímetro.
+</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // -------- helpers (aceita vírgula/ponto e expressões simples) --------
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+  function safeEval(expr){
+    const cleaned = String(expr).replace(/\s/g,'');
+    if(!/^[0-9eE+\-*/().,×^]+$/.test(cleaned)) return null;
+    const norm = cleaned.replace(/,/g,'.').replace(/×/g,'*').replace(/\^/g,'**');
+    try{
+      const v = Function('"use strict"; return ('+norm+');')();
+      return (typeof v === 'number' && Number.isFinite(v)) ? v : null;
+    }catch{ return null; }
+  }
+  function nearlyEqual(a,b,eps=1e-3){
+    return Math.abs(a-b) <= eps * Math.max(1, Math.abs(a), Math.abs(b));
+  }
+  function paint(input, ok){
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')){
+      input.nextElementSibling.remove();
+    }
+    input.style.backgroundColor = ok ? "#c6f6c6" : "#fdd";
+    input.insertAdjacentHTML("afterend", `<span class="feedback">${ok ? '✅' : '❌'}</span>`);
+  }
+  function checkWord(input, patterns){
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    paint(input, opts.some(p => text.includes(p)));
+  }
+  function checkExpr(input, expectedExprs){
+    const val = safeEval(input.value.trim());
+    const targets = expectedExprs.split('|').map(e => safeEval(e));
+    const ok = (val !== null) && targets.some(t => t !== null && nearlyEqual(val, t));
+    paint(input, ok);
+  }
+
+  // gabarito apenas aqui
+  function checkAnswer(letter){
+    const correct = 'A';
+    const message = document.getElementById('message');
+    if (letter === correct){
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

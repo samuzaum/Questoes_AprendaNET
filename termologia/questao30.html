@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sistemas Numéricos - Lista 03 — Problema 30</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 220px; text-align: center; margin: 0 4px; }
+    .option { display: block; margin: 10px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+    small { color: #444; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao29.html">🔹 Ir para Problema 29</a> |
+  <a href="questao31.html">🔹 Ir para Problema 31</a>
+</p>
+
+<h3>Problema 30:</h3>
+
+<!-- ENUNCIADO -->
+<p><strong>134. (ENEM 2018)</strong></p>
+<p>
+Talvez você já tenha bebido suco usando dois canudinhos iguais. Entretanto, pode-se verificar que, se colocar um canudo
+imerso no suco e outro do lado de fora do líquido, fazendo a sucção simultaneamente em ambos, você terá dificuldade em
+bebê-lo. Essa dificuldade ocorre porque o(a)
+</p>
+
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) Como se bebe normalmente com um único canudo?</strong><br>
+Ao sugar o canudo mergulhado no suco, a pressão dentro da boca fica
+<input onchange="checkWord(this,'menor que a pressao externa|menor que a pressao do ar|abaixo da pressao atmosferica')">
+do que a pressão atmosférica. Essa diferença de pressão é que
+<input onchange="checkWord(this,'empurra o suco para cima|faz o liquido subir|eleva o suco no canudo')">
+.
+</p>
+
+<p><strong>2) O que muda quando há outro canudo só no ar?</strong><br>
+Com um canudo no ar e outro no suco, o ar externo entra
+<input onchange="checkWord(this,'facilmente|livremente|sem resistencia')">
+pelo canudo que está fora do suco, fazendo a pressão na boca ficar
+<input onchange="checkWord(this,'quase igual a pressao atmosferica|praticamente igual a do ambiente|a mesma do ar externo')">
+.
+</p>
+
+<p><strong>3) Consequência para o suco.</strong><br>
+Como quase não há
+<input onchange="checkWord(this,'diferenca de pressao|desnivel de pressao|pressao resultante')">
+entre o suco e o interior da boca, torna-se
+<input onchange="checkWord(this,'dificil|quase impossivel')">
+empurrar o líquido para cima pelo canudo mergulhado.
+</p>
+
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')">
+  <span class="circle">A</span>
+  força necessária para a sucção do ar e do suco simultaneamente dobra de valor.
+</div>
+<div class="option" onclick="checkAnswer('B')">
+  <span class="circle">B</span>
+  densidade do ar é menor que a do suco, portanto, o volume de ar aspirado é muito maior que o volume de suco.
+</div>
+<div class="option" onclick="checkAnswer('C')">
+  <span class="circle">C</span>
+  velocidade com que o suco sobe deve ser constante nos dois canudos, o que é impossível com um dos canudos de fora.
+</div>
+<div class="option" onclick="checkAnswer('D')">
+  <span class="circle">D</span>
+  peso da coluna de suco é consideravelmente maior que o peso da coluna de ar, o que dificulta a sucção do líquido.
+</div>
+<div class="option" onclick="checkAnswer('E')">
+  <span class="circle">E</span>
+  pressão no interior da boca assume praticamente o mesmo valor daquela que atua sobre o suco.
+</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // -------- helpers (aceita vírgula/ponto e expressões simples) --------
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+  function safeEval(expr){
+    const cleaned = String(expr).replace(/\s/g,'');
+    if(!/^[0-9eE+\-*/().,×^]+$/.test(cleaned)) return null;
+    const norm = cleaned.replace(/,/g,'.').replace(/×/g,'*').replace(/\^/g,'**');
+    try{
+      const v = Function('"use strict"; return ('+norm+');')();
+      return (typeof v === 'number' && Number.isFinite(v)) ? v : null;
+    }catch{ return null; }
+  }
+  function nearlyEqual(a,b,eps=1e-3){
+    return Math.abs(a-b) <= eps * Math.max(1, Math.abs(a), Math.abs(b));
+  }
+  function paint(input, ok){
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')){
+      input.nextElementSibling.remove();
+    }
+    input.style.backgroundColor = ok ? "#c6f6c6" : "#fdd";
+    input.insertAdjacentHTML("afterend", `<span class="feedback">${ok ? '✅' : '❌'}</span>`);
+  }
+  function checkWord(input, patterns){
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    paint(input, opts.some(p => text.includes(p)));
+  }
+  function checkExpr(input, expectedExprs){
+    const val = safeEval(input.value.trim());
+    const targets = expectedExprs.split('|').map(e => safeEval(e));
+    const ok = (val !== null) && targets.some(t => t !== null && nearlyEqual(val, t));
+    paint(input, ok);
+  }
+
+  // gabarito apenas aqui
+  function checkAnswer(letter){
+    const correct = 'E';
+    const message = document.getElementById('message');
+    if (letter === correct){
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

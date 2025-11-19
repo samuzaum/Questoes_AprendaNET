@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sistemas Numéricos - Lista 03 — Problema 18</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 220px; text-align: center; margin: 0 4px; }
+    .option { display: block; margin: 10px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+    small { color: #444; }
+    table { border-collapse: collapse; margin: 10px 0; }
+    th, td {
+      border: 1px solid #999;
+      padding: 4px 8px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao17.html">🔹 Ir para Problema 17</a> |
+  <a href="questao19.html">🔹 Ir para Problema 19</a>
+</p>
+
+<h3>Problema 18:</h3>
+
+<!-- ENUNCIADO -->
+<p><strong>115. (ENEM 2018)</strong></p>
+<p>
+Alguns peixes, como o poraquê, a enguia-elétrica da Amazônia, podem produzir uma corrente elétrica quando se encontram
+em perigo. Um poraquê de 1 metro de comprimento, em perigo, produz uma corrente em torno de 2 ampères e uma voltagem
+de 600 volts.
+</p>
+<p>O quadro apresenta a potência aproximada de equipamentos elétricos.</p>
+
+<table>
+  <tr>
+    <th>Equipamento elétrico</th>
+    <th>Potência aproximada (W)</th>
+  </tr>
+  <tr>
+    <td>Exaustor</td>
+    <td>150</td>
+  </tr>
+  <tr>
+    <td>Computador</td>
+    <td>300</td>
+  </tr>
+  <tr>
+    <td>Aspirador de pó</td>
+    <td>600</td>
+  </tr>
+  <tr>
+    <td>Churrasqueira elétrica</td>
+    <td>1&nbsp;200</td>
+  </tr>
+  <tr>
+    <td>Secador de roupas</td>
+    <td>3&nbsp;600</td>
+  </tr>
+</table>
+
+<p>
+O equipamento elétrico que tem potência similar àquela produzida por esse peixe em perigo é o(a)
+</p>
+
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) Dados do peixe elétrico.</strong><br>
+Tensão: V ≈ <input onchange="checkExpr(this,'600')"> V.<br>
+Corrente: I ≈ <input onchange="checkExpr(this,'2')"> A.
+</p>
+
+<p><strong>2) Cálculo da potência elétrica.</strong><br>
+Use \( P = V \cdot I \). Assim:<br>
+P ≈ <input onchange="checkExpr(this,'600*2|1200|1.2e3')"> W
+(= <input onchange="checkExpr(this,'1200/1000|1.2')"> kW).
+</p>
+
+<p><strong>3) Comparação com a tabela.</strong><br>
+O aparelho cuja potência está mais próxima de 1&nbsp;200 W é a
+<input onchange="checkWord(this,'churrasqueira eletrica|churrasqueira elétrica')">.
+</p>
+
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')">
+  <span class="circle">A</span>
+  Exaustor.
+</div>
+<div class="option" onclick="checkAnswer('B')">
+  <span class="circle">B</span>
+  Computador.
+</div>
+<div class="option" onclick="checkAnswer('C')">
+  <span class="circle">C</span>
+  Aspirador de pó.
+</div>
+<div class="option" onclick="checkAnswer('D')">
+  <span class="circle">D</span>
+  Churrasqueira elétrica.
+</div>
+<div class="option" onclick="checkAnswer('E')">
+  <span class="circle">E</span>
+  Secador de roupas.
+</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // -------- helpers (aceita vírgula/ponto e expressões simples) --------
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+  function safeEval(expr){
+    const cleaned = String(expr).replace(/\s/g,'');
+    if(!/^[0-9eE+\-*/().,×^]+$/.test(cleaned)) return null;
+    const norm = cleaned.replace(/,/g,'.').replace(/×/g,'*').replace(/\^/g,'**');
+    try{
+      const v = Function('"use strict"; return ('+norm+');')();
+      return (typeof v === 'number' && Number.isFinite(v)) ? v : null;
+    }catch{ return null; }
+  }
+  function nearlyEqual(a,b,eps=1e-3){
+    return Math.abs(a-b) <= eps * Math.max(1, Math.abs(a), Math.abs(b));
+  }
+  function paint(input, ok){
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')){
+      input.nextElementSibling.remove();
+    }
+    input.style.backgroundColor = ok ? "#c6f6c6" : "#fdd";
+    input.insertAdjacentHTML("afterend", `<span class="feedback">${ok ? '✅' : '❌'}</span>`);
+  }
+  function checkWord(input, patterns){
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    paint(input, opts.some(p => text.includes(p)));
+  }
+  function checkExpr(input, expectedExprs){
+    const val = safeEval(input.value.trim());
+    const targets = expectedExprs.split('|').map(e => safeEval(e));
+    const ok = (val !== null) && targets.some(t => t !== null && nearlyEqual(val, t));
+    paint(input, ok);
+  }
+
+  // gabarito apenas aqui
+  function checkAnswer(letter){
+    const correct = 'D';
+    const message = document.getElementById('message');
+    if (letter === correct){
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>
