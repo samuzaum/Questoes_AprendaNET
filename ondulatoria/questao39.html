@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Problema 39</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+    }
+
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #222;
+      color: #fff;
+      padding: 10px 20px;
+    }
+
+    .top-nav a {
+      text-decoration: none;
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: 1px solid #fff;
+      font-size: 14px;
+    }
+
+    .top-nav a:hover {
+      background-color: #fff;
+      color: #222;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 20px auto;
+      background-color: #fff;
+      padding: 20px 25px 40px 25px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.08);
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-top: 0;
+      text-align: center;
+    }
+
+    .enunciado p {
+      text-align: justify;
+      line-height: 1.5;
+    }
+
+    .figura {
+      text-align: center;
+      margin: 15px 0;
+    }
+
+    .figura img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .options {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 10px;
+    }
+
+    .options li {
+      margin: 8px 0;
+    }
+
+    .option-btn {
+      width: 100%;
+      text-align: left;
+      padding: 10px 12px;
+      border-radius: 25px;
+      border: 1px solid #ccc;
+      background-color: #fafafa;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    .option-btn.correct {
+      background-color: #c8f7c5;
+      border-color: #27ae60;
+    }
+
+    .option-btn.incorrect {
+      background-color: #ffd6d6;
+      border-color: #e74c3c;
+    }
+
+    .feedback {
+      margin-top: 8px;
+      font-weight: bold;
+    }
+
+    .gap {
+      width: 140px;
+      padding: 3px 6px;
+      font-size: 14px;
+      border-radius: 4px;
+      border: 1px solid #aaa;
+      margin: 0 4px;
+    }
+
+    .gap.correct {
+      border-color: #27ae60;
+      background-color: #e8fbe8;
+    }
+
+    .gap.incorrect {
+      border-color: #e74c3c;
+      background-color: #ffecec;
+    }
+
+    .buttons-area {
+      margin-top: 15px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 8px 14px;
+      border-radius: 20px;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .btn-primary {
+      background-color: #3498db;
+      color: #fff;
+    }
+
+    .btn-secondary {
+      background-color: #bdc3c7;
+      color: #222;
+    }
+
+    .resolucao {
+      margin-top: 20px;
+      border-top: 1px solid #ddd;
+      padding-top: 15px;
+      display: none;
+    }
+
+    .resolucao p {
+      text-align: justify;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="top-nav">
+    <a href="questao38.html">&larr; Questão anterior</a>
+    <span>Problema 39</span>
+    <a href="questao40.html">Próxima questão &rarr;</a>
+  </div>
+
+  <div class="container">
+    <h1>Questão 39</h1>
+
+    <div class="enunciado">
+      <p>
+        O aquecimento de um material por irradiação com micro-ondas ocorre por causa da interação
+        da onda eletromagnética com o dipolo elétrico da molécula. Um importante atributo do
+        aquecimento por micro-ondas é a absorção direta da energia pelo material a ser aquecido.
+        Assim, esse aquecimento é seletivo e dependerá, principalmente, da constante dielétrica e
+        da frequência de relaxação do material.
+      </p>
+      <p>
+        O gráfico mostra a taxa de aquecimento de cinco solventes sob irradiação de micro-ondas.
+      </p>
+    </div>
+
+    <div class="figura">
+      <!-- ajuste o caminho da imagem conforme a sua pasta -->
+      <img src="imagens/questao39_grafico.png"
+           alt="Gráfico da taxa de aquecimento de cinco solventes sob irradiação de micro-ondas">
+    </div>
+
+    <div class="enunciado">
+      <p>
+        No gráfico, qual solvente apresenta taxa média de aquecimento mais próxima de zero,
+        no intervalo de 0 s a 40 s?
+      </p>
+    </div>
+
+    <ul class="options">
+      <li><button class="option-btn" data-correct="false">A) H<sub>2</sub>O</button></li>
+      <li><button class="option-btn" data-correct="false">B) CH<sub>3</sub>OH</button></li>
+      <li><button class="option-btn" data-correct="false">C) CH<sub>3</sub>CH<sub>2</sub>OH</button></li>
+      <li><button class="option-btn" data-correct="false">D) CH<sub>3</sub>CH<sub>2</sub>CH<sub>2</sub>OH</button></li>
+      <li><button class="option-btn" data-correct="true">E) CH<sub>3</sub>CH<sub>2</sub>CH<sub>2</sub>CH<sub>2</sub>CH<sub>2</sub>CH<sub>3</sub></button></li>
+    </ul>
+
+    <div class="feedback" id="feedback"></div>
+
+    <div class="buttons-area">
+      <button class="btn btn-primary" onclick="verificar()">Verificar resposta</button>
+      <button class="btn btn-secondary" onclick="mostrarResolucao()">Mostrar resolução</button>
+    </div>
+
+    <div class="resolucao" id="resolucao">
+      <h2>Resolução comentada</h2>
+      <p>
+        O aquecimento por micro-ondas é eficiente para substâncias
+        <input class="gap" data-answer="polares" placeholder="preencha" />
+        , que possuem dipolo elétrico permanente e frequências de relaxação
+        compatíveis com a frequência do forno. Entre os solventes citados, a água, o metanol,
+        o etanol e o propanol são moléculas polares e absorvem energia, elevando
+        significativamente a temperatura.
+      </p>
+      <p>
+        O
+        <input class="gap" data-answer="n-hexano" placeholder="preencha" />
+        é uma molécula apolar (constituída apenas de hidrocarbonetos)
+        e praticamente não interage com o campo eletromagnético das micro-ondas. Sua taxa de
+        aquecimento, portanto, é quase nula. Assim, o solvente com taxa média de aquecimento
+        mais próxima de zero é o n-hexano.
+      </p>
+      <p><strong>Alternativa correta: E.</strong></p>
+      <button class="btn btn-primary" onclick="corrigirGaps()">Conferir lacunas</button>
+    </div>
+  </div>
+
+  <script>
+    const botoes = document.querySelectorAll('.option-btn');
+    let escolha = null;
+
+    botoes.forEach(btn => {
+      btn.addEventListener('click', () => {
+        botoes.forEach(b => {
+          b.classList.remove('correct', 'incorrect');
+        });
+        escolha = btn;
+        btn.classList.add('selected');
+      });
+    });
+
+    function verificar() {
+      const feedback = document.getElementById('feedback');
+      if (!escolha) {
+        feedback.textContent = 'Escolha uma alternativa antes de verificar.';
+        feedback.style.color = '#e67e22';
+        return;
+      }
+      const correta = escolha.getAttribute('data-correct') === 'true';
+      if (correta) {
+        escolha.classList.add('correct');
+        feedback.textContent = 'Perfeito! O n-hexano praticamente não aquece no intervalo considerado.';
+        feedback.style.color = '#27ae60';
+      } else {
+        escolha.classList.add('incorrect');
+        feedback.textContent = 'Não é essa ainda. Observe qual curva fica quase horizontal entre 0 s e 40 s.';
+        feedback.style.color = '#e74c3c';
+      }
+    }
+
+    function mostrarResolucao() {
+      document.getElementById('resolucao').style.display = 'block';
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+
+    function corrigirGaps() {
+      const gaps = document.querySelectorAll('.gap');
+      gaps.forEach(gap => {
+        const resp = gap.dataset.answer.trim().toLowerCase();
+        const valor = gap.value.trim().toLowerCase();
+        gap.classList.remove('correct', 'incorrect');
+        if (!valor) return;
+        if (valor === resp) {
+          gap.classList.add('correct');
+        } else {
+          gap.classList.add('incorrect');
+        }
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sistemas Numéricos - Lista 03 — Problema 35</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 260px; text-align: center; margin: 0 4px; }
+    .option { display: block; margin: 10px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+    small { color: #444; }
+    figure { text-align: center; margin: 20px auto; }
+    figure img { max-width: 100%; height: auto; }
+    figure figcaption { font-size: 0.9rem; color: #555; margin-top: 6px; }
+    .option { display: flex; align-items: center; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao34.html">🔹 Ir para Problema 34</a> |
+  <a href="questao36.html">🔹 Ir para Problema 36</a>
+</p>
+
+<h3>Problema 35:</h3>
+
+<p><strong>55. (ENEM – resposta de frequência de um alto-falante)</strong></p>
+
+<p>
+A Figura 1 apresenta o gráfico da intensidade, em decibéis (dB), da onda sonora emitida por um
+alto-falante em repouso, medida por um microfone em função da frequência do som, para diferentes
+distâncias entre o microfone e o alto-falante (3 mm, 25 mm, 51 mm e 60 mm). A Figura 2 apresenta
+um diagrama com a indicação das diversas faixas do espectro de frequência sonora.
+</p>
+
+<figure>
+  <img src="questao35_enunciado.png"
+       alt="Gráficos de resposta em frequência de um alto-falante em diferentes distâncias e tabela com faixas de frequências sonoras." />
+  <figcaption>Figuras 1 e 2 – Resposta de frequência do alto-falante e faixas do espectro sonoro.</figcaption>
+</figure>
+
+<p>
+Relacionando as informações presentes nas figuras, como a intensidade sonora percebida é afetada
+pelo aumento da distância do microfone em relação ao alto-falante?
+</p>
+
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) Observe o que acontece nas baixas frequências.</strong><br>
+Comparando as curvas para distâncias maiores, vemos que elas ficam
+<input onchange="checkWord(this,'mais baixas|com menor intensidade|abaixo')">
+principalmente nas faixas
+<input onchange="checkWord(this,'subgrave|grave|subgrave e grave|baixas frequencias')">
+. Já nas frequências médias e altas, as curvas se mantêm
+<input onchange="checkWord(this,'quase iguais|muito parecidas|praticamente coincidentes')">.
+</p>
+
+<p><strong>2) Conclusão física.</strong><br>
+Isso mostra que as ondas de
+<input onchange="checkWord(this,'baixa frequencia|baixas frequencias|frequencias graves')">
+se atenuam mais com o aumento da distância do microfone, enquanto as frequências
+<input onchange="checkWord(this,'mais altas|agudas|medias e altas')">
+sofrem pouca alteração no intervalo mostrado.
+</p>
+
+<p>
+Portanto, quando afastamos o microfone, a intensidade sonora diminui
+<input onchange="checkWord(this,'sobretudo nas frequencias graves|principalmente nas baixas frequencias')">
+.</p>
+
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')">
+  <span class="circle">A</span>
+  Aumenta na faixa das frequências médias.
+</div>
+<div class="option" onclick="checkAnswer('B')">
+  <span class="circle">B</span>
+  Aumenta na faixa das frequências graves.
+</div>
+<div class="option" onclick="checkAnswer('C')">
+  <span class="circle">C</span>
+  Diminui na faixa das frequências graves.
+</div>
+<div class="option" onclick="checkAnswer('D')">
+  <span class="circle">D</span>
+  Diminui na faixa das frequências médias.
+</div>
+<div class="option" onclick="checkAnswer('E')">
+  <span class="circle">E</span>
+  Aumenta na faixa das frequências mais altas.
+</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // -------- helpers (aceita vírgula/ponto e expressões simples) --------
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+  function safeEval(expr){
+    const cleaned = String(expr).replace(/\s/g,'');
+    if(!/^[0-9eE+\-*/().,×^]+$/.test(cleaned)) return null;
+    const norm = cleaned.replace(/,/g,'.').replace(/×/g,'*').replace(/\^/g,'**');
+    try{
+      const v = Function('"use strict"; return ('+norm+');')();
+      return (typeof v === 'number' && Number.isFinite(v)) ? v : null;
+    }catch{ return null; }
+  }
+  function nearlyEqual(a,b,eps=1e-3){
+    return Math.abs(a-b) <= eps * Math.max(1, Math.abs(a), Math.abs(b));
+  }
+  function paint(input, ok){
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')){
+      input.nextElementSibling.remove();
+    }
+    input.style.backgroundColor = ok ? "#c6f6c6" : "#fdd";
+    input.insertAdjacentHTML("afterend", `<span class="feedback">${ok ? '✅' : '❌'}</span>`);
+  }
+  function checkWord(input, patterns){
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    paint(input, opts.some(p => text.includes(p)));
+  }
+  function checkExpr(input, expectedExprs){
+    const val = safeEval(input.value.trim());
+    const targets = expectedExprs.split('|').map(e => safeEval(e));
+    const ok = (val !== null) && targets.some(t => t !== null && nearlyEqual(val, t));
+    paint(input, ok);
+  }
+
+  // gabarito apenas aqui
+  function checkAnswer(letter){
+    const correct = 'C';
+    const message = document.getElementById('message');
+    if (letter === correct){
+      message.textContent = 'Correto! A intensidade diminui principalmente nas frequências graves quando a distância aumenta.';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Observe como as curvas se afastam mais nas baixas frequências.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sistemas Numéricos - Lista 03 — Problema 24</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 220px; text-align: center; margin: 0 4px; }
+    .option { display: flex; align-items: center; margin: 10px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px; flex-shrink: 0;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+    small { color: #444; }
+    table { border-collapse: collapse; margin: 16px 0; }
+    th, td { border: 1px solid #000; padding: 6px 10px; text-align: center; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao23.html">🔹 Ir para Problema 23</a> |
+  <a href="questao25.html">🔹 Ir para Problema 25</a>
+</p>
+
+<h3>Problema 24:</h3>
+
+<p><strong>(Engrenagens – relógio)</strong></p>
+
+<p>
+A invenção e o acoplamento entre engrenagens revolucionaram a ciência na época e propiciaram a
+invenção de várias tecnologias, como os relógios. Ao construir um pequeno cronômetro, um relojoeiro
+usa o sistema de engrenagens mostrado (não incluído aqui). De acordo com a figura, um motor é ligado
+ao eixo e movimenta as engrenagens, fazendo o ponteiro girar. A frequência do motor é de
+<strong>18 RPM</strong>, e o número de dentes de cada engrenagem está apresentado no quadro:
+</p>
+
+<table>
+  <tr>
+    <th>Engrenagem</th>
+    <th>Dentes</th>
+  </tr>
+  <tr><td>A</td><td>24</td></tr>
+  <tr><td>B</td><td>72</td></tr>
+  <tr><td>C</td><td>36</td></tr>
+  <tr><td>D</td><td>108</td></tr>
+</table>
+
+<p>
+A frequência de giro do ponteiro, em RPM, é:
+</p>
+
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) Relação entre frequências e dentes das engrenagens em contato.</strong><br>
+Quando duas engrenagens se acoplam, a velocidade linear dos dentes é a mesma. Assim, a frequência
+é inversamente proporcional ao número de dentes:
+<br>
+f<sub>saída</sub> = f<sub>entrada</sub> × (número de dentes da entrada / número de dentes da saída).
+</p>
+
+<p><strong>2) Engrenagens A e B.</strong><br>
+A engrenagem A (24 dentes) é acionada pelo motor: f<sub>A</sub> =
+<input onchange="checkExpr(this,'18')"> RPM.<br>
+Ela acopla com a engrenagem B (72 dentes). Então:
+<br>
+f<sub>B</sub> = f<sub>A</sub> × N<sub>A</sub>/N<sub>B</sub> =
+<input onchange="checkExpr(this,'18*24/72|6')"> RPM.
+</p>
+
+<p><strong>3) Engrenagens B e C.</strong><br>
+B e C estão no mesmo eixo, portanto giram com a mesma frequência:
+<br>
+f<sub>C</sub> =
+<input onchange="checkExpr(this,'6')"> RPM.
+</p>
+
+<p><strong>4) Engrenagens C e D.</strong><br>
+A engrenagem C (36 dentes) acopla com a D (108 dentes). Logo:
+<br>
+f<sub>D</sub> = f<sub>C</sub> × N<sub>C</sub>/N<sub>D</sub> =
+<input onchange="checkExpr(this,'6*36/108|2')"> RPM.
+</p>
+
+<p>
+Como o ponteiro está fixo no eixo da engrenagem D, a frequência de giro do ponteiro é
+<input onchange="checkExpr(this,'2')"> RPM.
+</p>
+
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')">
+  <span class="circle">A</span>
+  1
+</div>
+<div class="option" onclick="checkAnswer('B')">
+  <span class="circle">B</span>
+  2
+</div>
+<div class="option" onclick="checkAnswer('C')">
+  <span class="circle">C</span>
+  4
+</div>
+<div class="option" onclick="checkAnswer('D')">
+  <span class="circle">D</span>
+  81
+</div>
+<div class="option" onclick="checkAnswer('E')">
+  <span class="circle">E</span>
+  162
+</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // -------- helpers (aceita vírgula/ponto e expressões simples) --------
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+  function safeEval(expr){
+    const cleaned = String(expr).replace(/\s/g,'');
+    if(!/^[0-9eE+\-*/().,×^]+$/.test(cleaned)) return null;
+    const norm = cleaned.replace(/,/g,'.').replace(/×/g,'*').replace(/\^/g,'**');
+    try{
+      const v = Function('"use strict"; return ('+norm+');')();
+      return (typeof v === 'number' && Number.isFinite(v)) ? v : null;
+    }catch{ return null; }
+  }
+  function nearlyEqual(a,b,eps=1e-3){
+    return Math.abs(a-b) <= eps * Math.max(1, Math.abs(a), Math.abs(b));
+  }
+  function paint(input, ok){
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')){
+      input.nextElementSibling.remove();
+    }
+    input.style.backgroundColor = ok ? "#c6f6c6" : "#fdd";
+    input.insertAdjacentHTML("afterend", `<span class="feedback">${ok ? '✅' : '❌'}</span>`);
+  }
+  function checkWord(input, patterns){
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    paint(input, opts.some(p => text.includes(p)));
+  }
+  function checkExpr(input, expectedExprs){
+    const val = safeEval(input.value.trim());
+    const targets = expectedExprs.split('|').map(e => safeEval(e));
+    const ok = (val !== null) && targets.some(t => t !== null && nearlyEqual(val, t));
+    paint(input, ok);
+  }
+
+  // gabarito
+  function checkAnswer(letter){
+    const correct = 'B';
+    const message = document.getElementById('message');
+    if (letter === correct){
+      message.textContent = 'Correto! O ponteiro gira a 2 RPM.';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Lembre que a frequência é inversamente proporcional ao número de dentes em cada acoplamento.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

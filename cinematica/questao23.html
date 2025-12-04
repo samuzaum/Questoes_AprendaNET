@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sistemas Numéricos - Lista 03 — Problema 23</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 260px; text-align: center; margin: 0 4px; }
+    .option { display: flex; align-items: center; margin: 10px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px; flex-shrink: 0;
+    }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+    small { color: #444; }
+    figure { text-align: center; margin: 20px auto; }
+    figure img { max-width: 100%; height: auto; }
+    figure figcaption { font-size: 0.9rem; color: #555; margin-top: 6px; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao22.html">🔹 Ir para Problema 22</a> |
+  <a href="questao24.html">🔹 Ir para Problema 24</a>
+</p>
+
+<h3>Problema 23:</h3>
+
+<p><strong>61. (ENEM)</strong></p>
+
+<p>
+Um pesquisador investigou o papel da predação por peixes na densidade e no tamanho das presas,
+como possível controle de populações de espécies exóticas em costões rochosos. No experimento,
+uma área foi coberta por uma tela, impedindo o acesso dos peixes ao alimento, e uma área adjacente
+permaneceu sem tela, permitindo o acesso dos peixes. Após 15 dias, foram obtidos os resultados
+resumidos na tabela.
+</p>
+
+<figure>
+  <!-- ajuste o caminho da imagem conforme a pasta do seu projeto -->
+  <img src="questao23_enunciado.png"
+       alt="Tabela comparando densidade e tamanho médio de algas, cracas, mexilhões e ascídias em áreas com tela e sem tela." />
+  <figcaption>Tabela – Densidade (indivíduos/m²) e tamanho médio (cm) nas áreas com e sem tela.</figcaption>
+</figure>
+
+<p>
+O pesquisador concluiu corretamente que os peixes controlam a densidade dos(as):
+</p>
+
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) Onde os peixes têm acesso livre?</strong><br>
+Na área <input onchange="checkWord(this,'sem tela|sem a tela|sem-tela')">
+eles conseguem entrar e se alimentar. Na área
+<input onchange="checkWord(this,'com tela|coberta pela tela')">
+o acesso é bloqueado.
+</p>
+
+<p><strong>2) Quem tem densidade bem menor onde os peixes estão presentes?</strong><br>
+Complete usando os dados da tabela (densidade em indivíduos/m²):<br>
+Cracas: com tela =
+<input onchange="checkExpr(this,'300')"> ; sem tela =
+<input onchange="checkExpr(this,'150')">.<br>
+Mexilhões: com tela =
+<input onchange="checkExpr(this,'380')"> ; sem tela =
+<input onchange="checkExpr(this,'200')">.<br>
+As densidades caem bastante quando os peixes podem se alimentar, indicando que eles
+<input onchange="checkWord(this,'controlam|reduzem|predam')">
+essas populações.
+</p>
+
+<p><strong>3) Eles comem de preferência indivíduos pequenos ou grandes?</strong><br>
+Mexilhões: tamanho médio com tela =
+<input onchange="checkExpr(this,'3')"> cm;
+sem tela =
+<input onchange="checkExpr(this,'6')"> cm.
+<br>
+Ou seja, onde os peixes estão presentes ficam, em média, os indivíduos
+<input onchange="checkWord(this,'maiores|mais grandes')">
+, o que indica que os peixes removem preferencialmente os
+<input onchange="checkWord(this,'pequenos|menores')">
+.</p>
+
+<p>
+Assim, a conclusão correta é que os peixes controlam a densidade de
+<strong>mexilhões, predando especialmente animais pequenos</strong>.
+</p>
+
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')">
+  <span class="circle">A</span>
+  algas, estimulando seu crescimento.
+</div>
+<div class="option" onclick="checkAnswer('B')">
+  <span class="circle">B</span>
+  cracas, predando especialmente animais pequenos.
+</div>
+<div class="option" onclick="checkAnswer('C')">
+  <span class="circle">C</span>
+  mexilhões, predando especialmente animais pequenos.
+</div>
+<div class="option" onclick="checkAnswer('D')">
+  <span class="circle">D</span>
+  quatro espécies testadas, predando indivíduos pequenos.
+</div>
+<div class="option" onclick="checkAnswer('E')">
+  <span class="circle">E</span>
+  ascídias, apesar de não representarem os menores organismos.
+</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // -------- helpers (aceita vírgula/ponto e expressões simples) --------
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+  function safeEval(expr){
+    const cleaned = String(expr).replace(/\s/g,'');
+    if(!/^[0-9eE+\-*/().,×^]+$/.test(cleaned)) return null;
+    const norm = cleaned.replace(/,/g,'.').replace(/×/g,'*').replace(/\^/g,'**');
+    try{
+      const v = Function('"use strict"; return ('+norm+');')();
+      return (typeof v === 'number' && Number.isFinite(v)) ? v : null;
+    }catch{ return null; }
+  }
+  function nearlyEqual(a,b,eps=1e-3){
+    return Math.abs(a-b) <= eps * Math.max(1, Math.abs(a), Math.abs(b));
+  }
+  function paint(input, ok){
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')){
+      input.nextElementSibling.remove();
+    }
+    input.style.backgroundColor = ok ? "#c6f6c6" : "#fdd";
+    input.insertAdjacentHTML("afterend", `<span class="feedback">${ok ? '✅' : '❌'}</span>`);
+  }
+  function checkWord(input, patterns){
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    paint(input, opts.some(p => text.includes(p)));
+  }
+  function checkExpr(input, expectedExprs){
+    const val = safeEval(input.value.trim());
+    const targets = expectedExprs.split('|').map(e => safeEval(e));
+    const ok = (val !== null) && targets.some(t => t !== null && nearlyEqual(val, t));
+    paint(input, ok);
+  }
+
+  // gabarito
+  function checkAnswer(letter){
+    const correct = 'C';
+    const message = document.getElementById('message');
+    if (letter === correct){
+      message.textContent = 'Correto! Os dados mostram que os peixes reduzem a densidade de mexilhões, principalmente predando indivíduos pequenos.';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Compare densidade e tamanho médio com e sem tela: quem diminui e fica com indivíduos maiores são os mexilhões.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>

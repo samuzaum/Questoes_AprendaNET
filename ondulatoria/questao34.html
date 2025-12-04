@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sistemas Numéricos - Lista 03 — Problema 34</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    input { width: 260px; text-align: center; margin: 0 4px; }
+    .option { display: flex; align-items: center; margin: 10px 0; cursor: pointer; }
+    .circle {
+      width: 30px; height: 30px; background-color: #6c9ba4; color: white;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; margin-right: 8px; flex-shrink: 0;
+    }
+    .option img { max-width: 260px; height: auto; border: 1px solid #ccc; background: #fafafa; }
+    .feedback { font-weight: bold; margin-left: 6px; }
+    a {
+      text-decoration: none; background-color: #6c9ba4; color: white;
+      padding: 6px 12px; border-radius: 6px; margin: 4px; display: inline-block;
+    }
+    a:hover { background-color: #55808d; }
+    #message { font-weight: bold; margin-top: 20px; }
+    small { color: #444; }
+    figure { text-align: center; margin: 20px auto; }
+    figure img { max-width: 100%; height: auto; }
+    figure figcaption { font-size: 0.9rem; color: #555; margin-top: 6px; }
+  </style>
+</head>
+<body>
+
+<p>
+  <a href="questao33.html">🔹 Ir para Problema 33</a> |
+  <a href="questao35.html">🔹 Ir para Problema 35</a>
+</p>
+
+<h3>Problema 34:</h3>
+
+<p><strong>49. (ENEM – Efeito Doppler)</strong></p>
+
+<p>
+Uma ambulância A em movimento retilíneo e uniforme aproxima-se de um observador O, em repouso.
+A sirene emite um som de frequência constante f<sub>A</sub>. A figura mostra as frentes de onda do som
+emitido pela ambulância. O observador possui um detector que consegue registrar, em um gráfico,
+a frequência da onda sonora detectada em função do tempo f<sub>O</sub>(t), antes e depois da passagem
+da ambulância por ele.
+</p>
+
+<figure>
+  <!-- use o arquivo da figura do enunciado aqui -->
+  <img src="questao34_enunciado.png"
+       alt="Frentes de onda emitidas por uma ambulância se aproximando de um observador parado, ilustrando o efeito Doppler." />
+  <figcaption>Figura – Ambulância aproximando-se do observador O.</figcaption>
+</figure>
+
+<p>
+Qual esboço gráfico representa a frequência f<sub>O</sub>(t) detectada pelo observador?
+</p>
+
+<h4>Solução (interativa):</h4>
+
+<p><strong>1) Frequência percebida quando a fonte se aproxima.</strong><br>
+De acordo com o efeito Doppler, quando a fonte sonora se aproxima de um observador em repouso,
+a frequência percebida é
+<input onchange="checkWord(this,'maior|mais alta')">
+do que a frequência de emissão f<sub>A</sub>.
+</p>
+
+<p><strong>2) Frequência percebida quando a fonte se afasta.</strong><br>
+Depois que a ambulância passa e começa a se afastar, a frequência detectada se torna
+<input onchange="checkWord(this,'menor|mais baixa')">
+do que f<sub>A</sub>.
+</p>
+
+<p><strong>3) Comportamento de f<sub>O</sub>(t) no instante da passagem.</strong><br>
+Enquanto a ambulância se aproxima, f<sub>O</sub> deve ficar
+<input onchange="checkWord(this,'constante e acima de fa|acima de fa')">
+e, no instante em que ela passa pelo observador, ocorre um
+<input onchange="checkWord(this,'salto|mudanca brusca|pulo')">
+na frequência medida. Em seguida, f<sub>O</sub> fica
+<input onchange="checkWord(this,'constante e abaixo de fa|abaixo de fa')">
+enquanto a ambulância se afasta.
+</p>
+
+<p>
+Assim, o gráfico correto deve mostrar uma frequência constante acima de f<sub>A</sub> antes da passagem,
+um salto repentino no instante da passagem e, depois, uma frequência constante abaixo de f<sub>A</sub>.
+</p>
+
+<p><strong>Assinale a alternativa correta:</strong></p>
+
+<div class="option" onclick="checkAnswer('A')">
+  <span class="circle">A</span>
+  <img src="questao34A.png" alt="Gráfico da alternativa A, com frequência oscilando no tempo." />
+</div>
+
+<div class="option" onclick="checkAnswer('B')">
+  <span class="circle">B</span>
+  <img src="questao34B.png" alt="Gráfico da alternativa B, com frequência decrescendo continuamente até zero." />
+</div>
+
+<div class="option" onclick="checkAnswer('C')">
+  <span class="circle">C</span>
+  <img src="questao34C.png" alt="Gráfico da alternativa C, com frequência constante igual à frequência de emissão." />
+</div>
+
+<div class="option" onclick="checkAnswer('D')">
+  <span class="circle">D</span>
+  <img src="questao34D.png" alt="Gráfico da alternativa D, com frequência constante acima de fA antes da passagem e constante abaixo de fA depois." />
+</div>
+
+<div class="option" onclick="checkAnswer('E')">
+  <span class="circle">E</span>
+  <img src="questao34E.png" alt="Gráfico da alternativa E, com situação invertida em relação à alternativa D." />
+</div>
+
+<div id="message" class="feedback" aria-live="polite"></div>
+
+<script>
+  // -------- helpers (aceita vírgula/ponto e expressões simples) --------
+  function normalize(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+  function safeEval(expr){
+    const cleaned = String(expr).replace(/\s/g,'');
+    if(!/^[0-9eE+\-*/().,×^]+$/.test(cleaned)) return null;
+    const norm = cleaned.replace(/,/g,'.').replace(/×/g,'*').replace(/\^/g,'**');
+    try{
+      const v = Function('"use strict"; return ('+norm+');')();
+      return (typeof v === 'number' && Number.isFinite(v)) ? v : null;
+    }catch{ return null; }
+  }
+  function nearlyEqual(a,b,eps=1e-3){
+    return Math.abs(a-b) <= eps * Math.max(1, Math.abs(a), Math.abs(b));
+  }
+  function paint(input, ok){
+    if (input.nextElementSibling && input.nextElementSibling.classList.contains('feedback')){
+      input.nextElementSibling.remove();
+    }
+    input.style.backgroundColor = ok ? "#c6f6c6" : "#fdd";
+    input.insertAdjacentHTML("afterend", `<span class="feedback">${ok ? '✅' : '❌'}</span>`);
+  }
+  function checkWord(input, patterns){
+    const text = normalize(input.value.trim().toLowerCase());
+    const opts = patterns.split('|').map(s => normalize(s.trim().toLowerCase()));
+    paint(input, opts.some(p => text.includes(p)));
+  }
+  function checkExpr(input, expectedExprs){
+    const val = safeEval(input.value.trim());
+    const targets = expectedExprs.split('|').map(e => safeEval(e));
+    const ok = (val !== null) && targets.some(t => t !== null && nearlyEqual(val, t));
+    paint(input, ok);
+  }
+
+  // gabarito apenas aqui
+  function checkAnswer(letter){
+    const correct = 'D';
+    const message = document.getElementById('message');
+    if (letter === correct){
+      message.textContent = 'Correto!';
+      message.style.color = 'green';
+    } else {
+      message.textContent = 'Errado. Tente novamente.';
+      message.style.color = 'red';
+    }
+  }
+</script>
+
+</body>
+</html>
